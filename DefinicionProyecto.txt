@@ -1,10 +1,33 @@
 
 Caracteristicas basicas:
 
--
-
+-Logica básica del juego
+-Vista pájaro sobre el tablero sin movimiento, todo estático y fácil
+-Menu con{
+	Nuevo Juego
+	Creditos
+	Salir
+}
+-Nº de Minas en juego{
+	Relativo a las casillas que contiene el tablero con una +- variable aleatoria
+}
 
 
 Caracteristicas avanzadas:
 
--
+-Implementación dificultades{
+	Cambia nº de Minas en Juego
+}
+-Variación de la matriz NxN con la que se vaya a jugar
+-Posibilidad de rotar el tablero con el ratón
+-¿Posible Power-up?{
+	Solo se pueden encontrar en casillas vacías, símbolo de 1 martillo, si lo utilizas, descubres lo que esa casilla contiene
+	Dificultad Fácil: Descubre 3x3 casillas
+	Dificultad Normal: Descubre 1x1 casilla
+	Dificultad Difícil: Power-Up desaparece
+}
+-Menu después de nuevo juego donde...{
+	Posibilidad de cambiar el tamaño de la matriz NxN
+	Posibilidad de elegir dificultad
+	Botón de Empezar Juego
+}
