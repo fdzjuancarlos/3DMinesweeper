@@ -1,6 +1,8 @@
 
 Caracteristicas basicas:
 
+--
+
 -Logica básica del juego
 -Vista pájaro sobre el tablero sin movimiento, todo estático y fácil
 -Menu con{
