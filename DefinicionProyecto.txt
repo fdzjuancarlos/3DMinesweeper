@@ -33,3 +33,4 @@ Caracteristicas avanzadas:
 	Posibilidad de elegir dificultad
 	Botón de Empezar Juego
 }
+-Numero 3D siempre mire a la camara si esta rota
