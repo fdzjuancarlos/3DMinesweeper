@@ -6,6 +6,7 @@ Caracteristicas basicas:
 -Logica básica del juego
 -Vista pájaro sobre el tablero sin movimiento, todo estático y fácil
 -Añadir bandera y quitarla
+-Sistema de Records, de tiempo Puntuacion en funcion de: 1º criterio minas, 2º criterio Tiempo
 -Menu con{
 	Nuevo Juego
 	Creditos
