@@ -1,8 +1,12 @@
 
 Caracteristicas basicas:
 
+--
+
 -Logica básica del juego
 -Vista pájaro sobre el tablero sin movimiento, todo estático y fácil
+-Añadir bandera y quitarla
+-Sistema de Records, de tiempo Puntuacion en funcion de: 1º criterio minas, 2º criterio Tiempo
 -Menu con{
 	Nuevo Juego
 	Creditos
@@ -31,3 +35,5 @@ Caracteristicas avanzadas:
 	Posibilidad de elegir dificultad
 	Botón de Empezar Juego
 }
+-Numero 3D siempre mire a la camara si esta rota
+- 2º click tras bandera, poner interrogación para ayudar al jugador (Puede estar una mina en la casilla)
