@@ -51,7 +51,7 @@ int MyApp::start() {
   loadResources();
   createScene();
 
-  Ogre::SceneNode *node = _sceneManager->getSceneNode("SinbadNode");
+  Ogre::SceneNode *node = _sceneManager->getSceneNode("BoardNode");
   
   _framelistener = new MyFrameListener(window, cam, node);
   _root->addFrameListener(_framelistener);
@@ -80,21 +80,15 @@ void MyApp::loadResources() {
 }
 
 void MyApp::createScene() {
-  Ogre::Entity* ent1 = _sceneManager->createEntity("Sinbad.mesh");
-  Ogre::SceneNode* node1 = _sceneManager->createSceneNode("SinbadNode");
+  Ogre::Entity* ent1 = _sceneManager->createEntity("cube.mesh");
+  Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
   node1->attachObject(ent1);
   _sceneManager->getRootSceneNode()->addChild(node1);
+  node1->setScale(10,2,10);
+  node1->setPosition(0,-15,0);
 
-  Ogre::Plane plane1(Ogre::Vector3::UNIT_Y, -5);
-  Ogre::MeshManager::getSingleton().createPlane("plane1",
-	Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, plane1,
-	200,200,1,1,true,1,20,20,Ogre::Vector3::UNIT_Z);
 
-  Ogre::SceneNode* node2 = _sceneManager->createSceneNode("ground");
-  Ogre::Entity* groundEnt = _sceneManager->createEntity("planeEnt", "plane1");
-  groundEnt->setMaterialName("Ground");
-  node2->attachObject(groundEnt);
-
+  Ogre::SceneNode* node2 = _sceneManager->createSceneNode("light");
   _sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);	
   Ogre::Light* light = _sceneManager->createLight("Light1");
   light->setType(Ogre::Light::LT_DIRECTIONAL);
