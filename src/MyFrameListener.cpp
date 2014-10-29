@@ -54,8 +54,8 @@ bool MyFrameListener::frameStarted(const Ogre::FrameEvent& evt) {
   if(_keyboard->isKeyDown(OIS::KC_LEFT))  vt+=Ogre::Vector3(-1,0,0);
   if(_keyboard->isKeyDown(OIS::KC_RIGHT)) vt+=Ogre::Vector3(1,0,0);
   if(_keyboard->isKeyDown(OIS::KC_X)){
-  	Ogre::SceneNode *node = _sceneManager->getSceneNode("BoardNode");
-  	Ogre::Entity* boardEntity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
+  	Ogre::SceneNode *boardNode = _sceneManager->getSceneNode("BoardNode");
+  	Ogre::Entity* boardEntity = static_cast<Ogre::Entity*>(boardNode->getAttachedObject(0));
   	
   	Ogre::AxisAlignedBox charAABB = boardEntity->getWorldBoundingBox();
 	Ogre::Vector3 min = charAABB.getMinimum();
@@ -63,6 +63,9 @@ bool MyFrameListener::frameStarted(const Ogre::FrameEvent& evt) {
 	//Ogre::Vector3 center = charAABB.getCenter();
 	Ogre::Vector3 size( fabs( max.x - min.x), fabs( max.y - min.y), fabs( max.z - min.z ) );
   	std::cout << size[0] << " " << size[1] << " "<< size[2] <<std::endl;
+  	
+  	//Create square
+
   }
   _camera->moveRelative(vt * deltaT * tSpeed);
 

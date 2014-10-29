@@ -86,6 +86,37 @@ void MyApp::createScene() {
   _sceneManager->getRootSceneNode()->addChild(node1);
   node1->setScale(11,2,11);
   node1->setPosition(0,-15,0);
+  
+  	//firstSquare
+    Ogre::Entity* square1 = _sceneManager->createEntity("cube.mesh");
+	Ogre::SceneNode* n_square1 = _sceneManager->createSceneNode("Square1Node");
+	n_square1->attachObject(square1);
+	node1->addChild(n_square1);
+	//Lets supose we have a 8x8 board
+	//Lets supose that 0.2 of general width will be the "gap"
+	// 1/9 = 0.111
+	
+	float relativePos = 1 - (1.0/9.0) - (1.0/9.0);
+	
+	n_square1->setScale(0.111,1,0.111);
+	n_square1->setPosition(relativePos,1,relativePos);
+	
+	//secondSquare
+    Ogre::Entity* square2 = _sceneManager->createEntity("cube.mesh");
+	Ogre::SceneNode* n_square2 = _sceneManager->createSceneNode("Square2Node");
+	n_square2->attachObject(square2);
+	node1->addChild(n_square2);
+	//Lets supose we have a 8x8 board
+	//Lets supose that 0.2 of general width will be the "gap"
+	// 1/9 = 0.111
+	
+	float relativeXPos = 1 - (1.0/9.0) - (1.0/9.0);
+	float relativeZPos = 1 - (1.0/9.0)*4 - (1.0/9.0) ;
+	//+ (1.0/9.0);
+	
+	n_square2->setScale(0.111,1,0.111);
+	n_square2->setPosition(relativeXPos,1,relativeZPos);
+
 
 
   Ogre::SceneNode* node2 = _sceneManager->createSceneNode("light");
