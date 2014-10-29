@@ -16,11 +16,14 @@
 
 MyFrameListener::MyFrameListener(Ogre::RenderWindow* win, 
 				 Ogre::Camera* cam, 
-				 Ogre::SceneNode *node) {
+				 Ogre::SceneNode *node,
+				 Ogre::Root* root) {
   OIS::ParamList param;
   size_t windowHandle;  std::ostringstream wHandleStr;
 
-  _camera = cam;  _node = node;
+  _camera = cam;  _node = node; _root = root; 
+  
+  _sceneManager = _root->getSceneManager("PlayScene");
   
   win->getCustomAttribute("WINDOW", &windowHandle);
   wHandleStr << windowHandle;
@@ -50,6 +53,17 @@ bool MyFrameListener::frameStarted(const Ogre::FrameEvent& evt) {
   if(_keyboard->isKeyDown(OIS::KC_DOWN))  vt+=Ogre::Vector3(0,0,1);
   if(_keyboard->isKeyDown(OIS::KC_LEFT))  vt+=Ogre::Vector3(-1,0,0);
   if(_keyboard->isKeyDown(OIS::KC_RIGHT)) vt+=Ogre::Vector3(1,0,0);
+  if(_keyboard->isKeyDown(OIS::KC_X)){
+  	Ogre::SceneNode *node = _sceneManager->getSceneNode("BoardNode");
+  	Ogre::Entity* boardEntity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
+  	
+  	Ogre::AxisAlignedBox charAABB = boardEntity->getWorldBoundingBox();
+	Ogre::Vector3 min = charAABB.getMinimum();
+	Ogre::Vector3 max = charAABB.getMaximum();
+	//Ogre::Vector3 center = charAABB.getCenter();
+	Ogre::Vector3 size( fabs( max.x - min.x), fabs( max.y - min.y), fabs( max.z - min.z ) );
+  	std::cout << size[0] << " " << size[1] << " "<< size[2] <<std::endl;
+  }
   _camera->moveRelative(vt * deltaT * tSpeed);
 
   if(_keyboard->isKeyDown(OIS::KC_R)) r+=180;

@@ -34,7 +34,7 @@ int MyApp::start() {
   }
   
   Ogre::RenderWindow* window = _root->initialise(true,"MyApp Example");
-  _sceneManager = _root->createSceneManager(Ogre::ST_GENERIC);
+  _sceneManager = _root->createSceneManager(Ogre::ST_GENERIC, "PlayScene");
   
   Ogre::Camera* cam = _sceneManager->createCamera("MainCamera");
   cam->setPosition(Ogre::Vector3(5,20,20));
@@ -53,7 +53,7 @@ int MyApp::start() {
 
   Ogre::SceneNode *node = _sceneManager->getSceneNode("BoardNode");
   
-  _framelistener = new MyFrameListener(window, cam, node);
+  _framelistener = new MyFrameListener(window, cam, node, _root);
   _root->addFrameListener(_framelistener);
   
   _root->startRendering();
@@ -84,7 +84,7 @@ void MyApp::createScene() {
   Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
   node1->attachObject(ent1);
   _sceneManager->getRootSceneNode()->addChild(node1);
-  node1->setScale(10,2,10);
+  node1->setScale(11,2,11);
   node1->setPosition(0,-15,0);
 
 
