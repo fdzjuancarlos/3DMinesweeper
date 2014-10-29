@@ -8,6 +8,8 @@ private:
   Ogre::Root* _root;
   MyFrameListener* _framelistener;
   
+  void createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size);
+  
 public:
   MyApp();
   ~MyApp();  

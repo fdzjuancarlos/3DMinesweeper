@@ -15,6 +15,7 @@
 
 #include "MyApp.h" 
 
+
 MyApp::MyApp() {
   _sceneManager = NULL;
   _framelistener = NULL;
@@ -88,34 +89,8 @@ void MyApp::createScene() {
   node1->setPosition(0,-15,0);
   
   	//firstSquare
-    Ogre::Entity* square1 = _sceneManager->createEntity("cube.mesh");
-	Ogre::SceneNode* n_square1 = _sceneManager->createSceneNode("Square1Node");
-	n_square1->attachObject(square1);
-	node1->addChild(n_square1);
-	//Lets supose we have a 8x8 board
-	//Lets supose that 0.2 of general width will be the "gap"
-	// 1/9 = 0.111
-	
-	float relativePos = 1 - (1.0/9.0) - (1.0/9.0);
-	
-	n_square1->setScale(0.111,1,0.111);
-	n_square1->setPosition(relativePos,1,relativePos);
-	
-	//secondSquare
-    Ogre::Entity* square2 = _sceneManager->createEntity("cube.mesh");
-	Ogre::SceneNode* n_square2 = _sceneManager->createSceneNode("Square2Node");
-	n_square2->attachObject(square2);
-	node1->addChild(n_square2);
-	//Lets supose we have a 8x8 board
-	//Lets supose that 0.2 of general width will be the "gap"
-	// 1/9 = 0.111
-	
-	float relativeXPos = 1 - (1.0/9.0) - (1.0/9.0);
-	float relativeZPos = 1 - (1.0/9.0)*4 - (1.0/9.0) ;
-	//+ (1.0/9.0);
-	
-	n_square2->setScale(0.111,1,0.111);
-	n_square2->setPosition(relativeXPos,1,relativeZPos);
+  	createBoard(_sceneManager, node1, 10);
+    
 
 
 
@@ -127,4 +102,32 @@ void MyApp::createScene() {
   node2->attachObject(light);
 
   _sceneManager->getRootSceneNode()->addChild(node2);
+}
+
+void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){
+	
+	float relativeXPos;
+	float relativeZPos;
+	float relativeSize = 1.0/((float)(size+1));
+
+	for (unsigned int i = 0; i < size; i += 1){
+		for (unsigned int j = 0; j < size; j += 1){
+			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
+			std::ostringstream stringStream;
+			stringStream << "SquareNode_" << i << j;
+			std::string name = stringStream.str();
+			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
+			node->attachObject(cube);
+			board->addChild(node);
+			
+			
+			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);
+			
+			relativeXPos = 1 - (relativeSize)*(2*i) - (relativeSize*2);
+			relativeZPos = 1 - (relativeSize)*(2*j) - (relativeSize*2);
+			
+			node->setPosition(relativeXPos, 1, relativeZPos);
+		}
+	}
+	
 }
