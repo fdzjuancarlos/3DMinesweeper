@@ -79,11 +79,17 @@ void MyApp::loadResources() {
 }
 
 void MyApp::createScene() {
-  // Creamos la geometria estatica del escenario
-  StaticGeometry* stage = _sceneManager->createStaticGeometry("Stage");
-  Entity* ent1 = _sceneManager->createEntity("Escenario.mesh");
-  stage->addEntity(ent1, Vector3(0,0,0));
-  stage->build();  // Operacion para construir la geometria
+	
+	Ogre::Entity* ent1 = _sceneManager->createEntity("cube.mesh");
+  Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
+  node1->attachObject(ent1);
+  _sceneManager->getRootSceneNode()->addChild(node1);
+  node1->setScale(11,2,11);
+  node1->setPosition(0,-15,0);
+  
+  	//Main Board
+  	createBoard(_sceneManager, node1, 10);
+    
   
   // Objeto movable "suelo" para consultar al SceneManager
   SceneNode *nodecol = _sceneManager->createSceneNode("Col_Suelo");
@@ -124,4 +130,31 @@ void MyApp::createOverlay() {
   _overlayManager = OverlayManager::getSingletonPtr();
   Overlay *overlay = _overlayManager->getByName("Info");
   overlay->show();
+}
+
+void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){
+	
+	float relativeXPos;
+	float relativeZPos;
+	float relativeSize = 1.0/((float)(size+1));
+
+	for (unsigned int i = 0; i < size; i += 1){
+		for (unsigned int j = 0; j < size; j += 1){
+			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
+			std::ostringstream stringStream;
+			stringStream << "SquareNode_" << i << j;
+			std::string name = stringStream.str();
+			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
+			node->attachObject(cube);
+			board->addChild(node);
+			
+			
+			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);
+			
+			relativeXPos = 1 - (relativeSize)*(2*i) - (relativeSize*2);
+			relativeZPos = 1 - (relativeSize)*(2*j) - (relativeSize*2);
+			
+			node->setPosition(relativeXPos, 1, relativeZPos);
+		}
+	}
 }

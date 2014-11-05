@@ -9,6 +9,9 @@ private:
   MyFrameListener* _framelistener;
   OverlayManager* _overlayManager;
   
+  void createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size);
+
+  
 public:
   MyApp();
   ~MyApp();  
