@@ -4,11 +4,10 @@
 class MyApp {
   
 private:
-  Ogre::SceneManager* _sceneManager;
-  Ogre::Root* _root;
+  SceneManager* _sceneManager;
+  Root* _root;
   MyFrameListener* _framelistener;
-  
-  void createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size);
+  OverlayManager* _overlayManager;
   
 public:
   MyApp();
@@ -16,4 +15,5 @@ public:
   int start();
   void loadResources();
   void createScene();
+  void createOverlay();
 };

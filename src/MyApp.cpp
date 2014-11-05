@@ -15,7 +15,6 @@
 
 #include "MyApp.h" 
 
-
 MyApp::MyApp() {
   _sceneManager = NULL;
   _framelistener = NULL;
@@ -27,34 +26,33 @@ MyApp::~MyApp() {
 }
 
 int MyApp::start() {
-  _root = new Ogre::Root();
+  _root = new Root();
   
   if(!_root->restoreConfig()) {
     _root->showConfigDialog();
     _root->saveConfig();
   }
   
-  Ogre::RenderWindow* window = _root->initialise(true,"MyApp Example");
-  _sceneManager = _root->createSceneManager(Ogre::ST_GENERIC, "PlayScene");
+  RenderWindow* window = _root->initialise(true,"MyApp Example");
+  _sceneManager = _root->createSceneManager(ST_INTERIOR);
   
-  Ogre::Camera* cam = _sceneManager->createCamera("MainCamera");
-  cam->setPosition(Ogre::Vector3(5,20,20));
-  cam->lookAt(Ogre::Vector3(0,0,0));
-  cam->setNearClipDistance(5);
-  cam->setFarClipDistance(10000);
+  Camera* cam = _sceneManager->createCamera("MainCamera");
+  cam->setPosition(Vector3(5.98, 2.73, 7.09));
+  cam->lookAt(Vector3(-3.45,1.45,2.69));
+  cam->setNearClipDistance(0.1);
+  cam->setFarClipDistance(100);
   
-  Ogre::Viewport* viewport = window->addViewport(cam);
-  viewport->setBackgroundColour(Ogre::ColourValue(0.0,0.0,0.0));
+  Viewport* viewport = window->addViewport(cam);
+  viewport->setBackgroundColour(ColourValue(0.0,0.0,0.0));
   double width = viewport->getActualWidth();
   double height = viewport->getActualHeight();
   cam->setAspectRatio(width / height);
   
   loadResources();
   createScene();
+  createOverlay();
 
-  Ogre::SceneNode *node = _sceneManager->getSceneNode("BoardNode");
-  
-  _framelistener = new MyFrameListener(window, cam, node, _root);
+  _framelistener = new MyFrameListener(window, cam, _overlayManager, _sceneManager);
   _root->addFrameListener(_framelistener);
   
   _root->startRendering();
@@ -62,72 +60,68 @@ int MyApp::start() {
 }
 
 void MyApp::loadResources() {
-  Ogre::ConfigFile cf;
+  ConfigFile cf;
   cf.load("resources.cfg");
   
-  Ogre::ConfigFile::SectionIterator sI = cf.getSectionIterator();
-  Ogre::String sectionstr, typestr, datastr;
+  ConfigFile::SectionIterator sI = cf.getSectionIterator();
+  String sectionstr, typestr, datastr;
   while (sI.hasMoreElements()) {
     sectionstr = sI.peekNextKey();
-    Ogre::ConfigFile::SettingsMultiMap *settings = sI.getNext();
-    Ogre::ConfigFile::SettingsMultiMap::iterator i;
+    ConfigFile::SettingsMultiMap *settings = sI.getNext();
+    ConfigFile::SettingsMultiMap::iterator i;
     for (i = settings->begin(); i != settings->end(); ++i) {
       typestr = i->first;    datastr = i->second;
-      Ogre::ResourceGroupManager::getSingleton().addResourceLocation
+      ResourceGroupManager::getSingleton().addResourceLocation
             (datastr, typestr, sectionstr);	
     }
   }
-  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+  ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 void MyApp::createScene() {
-  Ogre::Entity* ent1 = _sceneManager->createEntity("cube.mesh");
-  Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
-  node1->attachObject(ent1);
-  _sceneManager->getRootSceneNode()->addChild(node1);
-  node1->setScale(11,2,11);
-  node1->setPosition(0,-15,0);
+  // Creamos la geometria estatica del escenario
+  StaticGeometry* stage = _sceneManager->createStaticGeometry("Stage");
+  Entity* ent1 = _sceneManager->createEntity("Escenario.mesh");
+  stage->addEntity(ent1, Vector3(0,0,0));
+  stage->build();  // Operacion para construir la geometria
   
-  	//firstSquare
-  	createBoard(_sceneManager, node1, 10);
-    
+  // Objeto movable "suelo" para consultar al SceneManager
+  SceneNode *nodecol = _sceneManager->createSceneNode("Col_Suelo");
+  Entity *entcol = _sceneManager->createEntity("Col_Suelo", "Col_Suelo.mesh");
+  entcol->setQueryFlags(STAGE);   // Usamos flags propios!
+  nodecol->attachObject(entcol);
+  nodecol->setVisible(false);     // Objeto oculto
+  _sceneManager->getRootSceneNode()->addChild(nodecol);
 
+  // Cajas del escenario (baja poligonalizacion) 
+  std::stringstream sauxnode, sauxmesh;
+  string s = "Col_Box";
+  for (int i=1; i<6; i++) {
+    sauxnode << s << i; sauxmesh << s << i << ".mesh";
+    SceneNode *nodebox = _sceneManager->createSceneNode(sauxnode.str());
+    Entity *entboxcol = _sceneManager->createEntity(sauxnode.str(), sauxmesh.str());
+    entboxcol->setQueryFlags(STAGE);    // Escenario
+    nodebox->attachObject(entboxcol);
+    nodebox->setVisible(false);
+    nodecol->addChild(nodebox);
+    sauxnode.str(""); sauxmesh.str(""); // Limpiamos el stream
+  }
 
-
-  Ogre::SceneNode* node2 = _sceneManager->createSceneNode("light");
-  _sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);	
-  Ogre::Light* light = _sceneManager->createLight("Light1");
-  light->setType(Ogre::Light::LT_DIRECTIONAL);
-  light->setDirection(Ogre::Vector3(1,-1,0));
+  SceneNode* node2 = _sceneManager->createSceneNode("Luces");
+  _sceneManager->setShadowTechnique(SHADOWTYPE_STENCIL_ADDITIVE);	
+  Light* light = _sceneManager->createLight("Light1");
+  light->setType(Light::LT_SPOTLIGHT);
+  light->setPosition(9,2,5);
+  light->setDirection(Vector3(3, -2, 0));
+  light->setSpotlightInnerAngle(Degree(5.0f));
+  light->setSpotlightOuterAngle(Degree(55.0f));
+  light->setSpotlightFalloff(0.0f);
   node2->attachObject(light);
-
   _sceneManager->getRootSceneNode()->addChild(node2);
 }
 
-void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){
-	
-	float relativeXPos;
-	float relativeZPos;
-	float relativeSize = 1.0/((float)(size+1));
-
-	for (unsigned int i = 0; i < size; i += 1){
-		for (unsigned int j = 0; j < size; j += 1){
-			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
-			std::ostringstream stringStream;
-			stringStream << "SquareNode_" << i << j;
-			std::string name = stringStream.str();
-			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
-			node->attachObject(cube);
-			board->addChild(node);
-			
-			
-			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);
-			
-			relativeXPos = 1 - (relativeSize)*(2*i) - (relativeSize*2);
-			relativeZPos = 1 - (relativeSize)*(2*j) - (relativeSize*2);
-			
-			node->setPosition(relativeXPos, 1, relativeZPos);
-		}
-	}
-	
+void MyApp::createOverlay() {
+  _overlayManager = OverlayManager::getSingletonPtr();
+  Overlay *overlay = _overlayManager->getByName("Info");
+  overlay->show();
 }
