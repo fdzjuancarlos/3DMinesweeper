@@ -1,0 +1,12 @@
+-----------------------------
+About: Escenario
+-----------------------------
+
+Textures & Modeling:
+	Reevan McKay
+	Randall Rickert
+	
+(c) "Blender Foundation, www.blender.org	
+    Under Creative Commons License
+    http://creativecommons.org/licenses/by/3.0/
+
