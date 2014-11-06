@@ -12,3 +12,17 @@ material panelInfoM
    }
  }
 }
+
+material matUCLM 
+{
+ technique 
+ {
+   pass 
+   {
+     texture_unit 
+     {
+       texture logouclm.jpg
+     }
+   }
+ }
+}

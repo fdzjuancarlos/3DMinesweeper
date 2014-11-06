@@ -121,7 +121,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 		for (unsigned int j = 0; j < size; j += 1){
 			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
 			std::ostringstream stringStream;
-			stringStream << "SquareNode_" << i << "_" << j;
+			stringStream << "SquareNode_" << i << j;
 			std::string name = stringStream.str();
 			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
 			node->attachObject(cube);

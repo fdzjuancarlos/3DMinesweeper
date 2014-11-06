@@ -116,7 +116,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       _selectedNode->showBoundingBox(false);  _selectedNode = NULL;  
     }
 
-    Ray r = setRayQuery(posx, posy, mask);
+//    Ray r = setRayQuery(posx, posy, mask);
     RaySceneQueryResult &result = _raySceneQuery->execute();
     RaySceneQueryResult::iterator it;
     it = result.begin();
