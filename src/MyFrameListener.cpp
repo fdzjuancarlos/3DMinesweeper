@@ -75,10 +75,12 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
     if(_keyboard->isKeyDown(OIS::KC_LSHIFT) ||    // Si pulsamos Shift
        _keyboard->isKeyDown(OIS::KC_RSHIFT))      // invertimos la
       deltaTaux *= -1;                            // operacion
-    if(_keyboard->isKeyDown(OIS::KC_S))   
-      _selectedNode->setScale(_selectedNode->getScale()+deltaTaux);
+    //if(_keyboard->isKeyDown(OIS::KC_S))   
+    //  _selectedNode->setScale(_selectedNode->getScale()+deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_R)) 
       _selectedNode->yaw(Degree(90)*deltaTaux);
+    if(_keyboard->isKeyDown(OIS::KC_E)) 
+      _selectedNode->yaw(Degree(-90)*deltaTaux);	
     if(_keyboard->isKeyDown(OIS::KC_DELETE)) { 
       _sceneManager->getRootSceneNode()->
 	removeAndDestroyChild(_selectedNode->getName());
