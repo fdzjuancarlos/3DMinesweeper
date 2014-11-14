@@ -1,6 +1,7 @@
 #include <Ogre.h>
 #include "MyFrameListener.h"
 
+
 class MyApp {
   
 private:

@@ -14,7 +14,7 @@
  *********************************************************************/
 
 #include "MyApp.h"
-#include "square.h"
+#include "Box.h"
 #include <stdlib.h>
 
 MyApp::MyApp() {
@@ -138,45 +138,5 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 			node->setPosition(relativeXPos, 1, relativeZPos);
 		}
 	}
-}
-
-//crear matriz
-void Square::Matrix(){
-	insertMine(createMatrix(10), 10, 5);
-	
-}
-
-Square Square::createMatrix(int size){
-	Square **s = new Square* [size];
-	for(int i=0; i<size; i++){
-		s[i] = new Square [size];
-	}
-
-	for (int j=0; j<size; j++){
-		for (int k=0; k<size; k++){
-			s[j][k].s_value=0;
-			s[j][k].s_state=0;		
-		}	
-	}
-	
-	return **s;
-}
-
-void Square::insertMine (Square s, int size, int mines){
-
-	for (int i=0; i<size; i++){
-		for (int j=0; j<size; j++){
-			if (s[i][j] -> s_value == 0){
-				srand(time(NULL));
-				int var=rand() %100;
-				if (var>=30 || var<=60){
-					s[i][j] -> s_value = -1;
-					mines--;
-				}
-			}
-		}
-	}
-	if(mines>0)
-		insertMine (*s, size, mines);
 }
 
