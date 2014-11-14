@@ -1,0 +1,41 @@
+#include "square.h"
+
+Square::Square(){
+	s_value = 0;
+	s_state = 0;
+}
+
+int Square::getValue(){
+	return s_value;
+}
+
+int Square::getState(){
+	return s_state;
+}
+
+void Square::setValue(int value){
+	s_value = value;
+}
+
+void Square::setState(int state){
+	s_state = state;
+}
+
+//crear matriz
+void Square::Matrix(){
+	createMatrix(10);
+}
+
+void Square::createMatrix(int size){
+	Square **s = new Square* [size];
+	for(int i=0; i<size; i++){
+		s[i] = new Square [size];
+	}
+
+	for (int j=0; j<size; j++){
+		for (int k=0; k<size; k++){
+			s[j][k].s_value=0;
+			s[j][k].s_state=0;		
+		}	
+	}
+}

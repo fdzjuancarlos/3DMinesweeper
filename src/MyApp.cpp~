@@ -13,7 +13,9 @@
  * General Public License for more details.  
  *********************************************************************/
 
-#include "MyApp.h" 
+#include "MyApp.h"
+#include "square.h"
+#include <stdlib.h>
 
 MyApp::MyApp() {
   _sceneManager = NULL;
@@ -88,9 +90,7 @@ void MyApp::createScene() {
   node1->setPosition(0,-15,0);
   
   	//Main Board
-  	createBoard(_sceneManager, node1, 10);
-    
-
+	createBoard(_sceneManager, node1, 10);
 
   SceneNode* node2 = _sceneManager->createSceneNode("Luces");
   _sceneManager->setShadowTechnique(SHADOWTYPE_STENCIL_ADDITIVE);	
@@ -119,9 +119,10 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 
 	for (unsigned int i = 0; i < size; i += 1){
 		for (unsigned int j = 0; j < size; j += 1){
+
 			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
 			std::ostringstream stringStream;
-			stringStream << "SquareNode_" << i << j;
+			stringStream << "SquareNode_" << i << "_" << j;
 			std::string name = stringStream.str();
 			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
 			node->attachObject(cube);
@@ -137,3 +138,46 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 		}
 	}
 }
+
+//crear matriz
+void Square::Matrix(){
+	Square **temp = new Square* [10];
+	temp = &&createMatrix(10);
+	insertMine(temp, 10, 5);
+	
+}
+
+Square Square::createMatrix(int size){
+	Square **s = new Square* [size];
+	for(int i=0; i<size; i++){
+		s[i] = new Square [size];
+	}
+
+	for (int j=0; j<size; j++){
+		for (int k=0; k<size; k++){
+			s[j][k].s_value=0;
+			s[j][k].s_state=0;		
+		}	
+	}
+	
+	return **s;
+}
+
+void Square::insertMine (Square **s, int size, int mines){
+
+	for (int i=0; i<size; i++){
+		for (int j=0; j<size; j++){
+			if (s[i][j] -> s_value == 0){
+				srand(time(NULL));
+				int var=rand() %100;
+				if (var>=30 || var<=60){
+					s[i][j] -> s_value = -1;
+					mines--;
+				}
+			}
+		}
+	}
+	if(mines>0)
+		insertMine (s, size, mines);
+}
+
