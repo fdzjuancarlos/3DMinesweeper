@@ -102,15 +102,15 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
     _camera->pitch(Radian(roty));
     cout << "Boton Medio" << endl;
   }
-  
+      uint32 mask;
   if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-    uint32 mask;
+
     if (mbleft) { // Variables y codigo especifico si es izquierdo
-      cout << "Boton Izquierdo" << endl;
+     // cout << "Boton Izquierdo" << endl;
       mask = STAGE | CUBE1 | CUBE2;  // Podemos elegir todo
     }
     if (mbright) { // Variables y codigo especifico si es derecho
-      cout << "Boton Derecho" << endl;
+      //cout << "Boton Derecho" << endl;
       mask = ~STAGE;   // Seleccionamos todo menos el escenario
     }
 
@@ -135,11 +135,34 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 //	  nodeaux->translate(r.getPoint(it->distance));
 //	  _sceneManager->getRootSceneNode()->addChild(nodeaux);
 //	}
+     
       }
+      //if es seleccionable
+	
       _selectedNode = it->movable->getParentSceneNode();
+      Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
+      mEntity->setMaterialName("cube_selected");
       _selectedNode->showBoundingBox(true);
+      cout << _selectedNode->getName() << endl;
+      
     }
   }
+  
+    Ray r = setRayQuery(posx, posy, mask);
+    RaySceneQueryResult &result = _raySceneQuery->execute();
+    RaySceneQueryResult::iterator it;
+    it = result.begin();
+
+    if (it != result.end()) {
+      _selectedNode = it->movable->getParentSceneNode();
+      Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
+      mEntity->setMaterialName("cube_selected");
+      _selectedNode->showBoundingBox(true);
+      cout << _selectedNode->getName() << endl;
+      
+    }
+  
+
   
   // Gestion del overlay ---------------------------------------------
   OverlayElement *oe;

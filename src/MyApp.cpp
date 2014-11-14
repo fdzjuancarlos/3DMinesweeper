@@ -127,6 +127,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
 			node->attachObject(cube);
 			board->addChild(node);
+			cube->setMaterialName("cube_2");
 			
 			
 			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);
