@@ -1,5 +1,6 @@
 #include <Ogre.h>
 #include <OIS/OIS.h>
+#include <string.h>
 
 #define STAGE 1 << 0  // Mascara para el escenario
 #define CUBE1 1 << 1  // Mascara para objetos de tipo 1
@@ -18,7 +19,10 @@ private:
   OverlayManager* _overlayManager;
   SceneManager* _sceneManager;
   RaySceneQuery *_raySceneQuery;
-  SceneNode *_selectedNode;
+  SceneNode *_selectedNode; 
+  
+  std::string *s_previousMaterial;
+  std::string *s_previousCube;
 
   Ray setRayQuery(int posx, int posy, uint32 mask);
 

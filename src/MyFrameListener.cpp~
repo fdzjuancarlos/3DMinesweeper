@@ -162,7 +162,6 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       cout << _selectedNode->getName() << endl;
       
       // FIXME como comparar strings?
-      std::cout << *s_previousCube << std::endl;
       if(!s_previousCube->compare(_selectedNode->getName())){
 			std::cout << "hahah" << std::endl;
 		  Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0)); //FIXME could fail *
