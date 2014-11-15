@@ -26,8 +26,8 @@ void Box::setState(int state){
 //crear matriz
 void Box::Matrix(){
 	Box **s = createMatrix(10);
-	insertMine(s, 10, 5);
-	insertNumber(s, 10);
+	insertMine(**s, 10, 5);
+	insertNumber(**s, 10);
 	
 }
 
