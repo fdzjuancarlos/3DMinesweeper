@@ -159,7 +159,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
     if (it != result.end()) {
       _selectedNode = it->movable->getParentSceneNode();
       Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
-      //_selectedNode->showBoundingBox(true);
+      _selectedNode->showBoundingBox(true);
       //cout << mEntity->getSubEntity(0)->getMaterialName();
       //cout << _selectedNode->getName() << endl;
       
