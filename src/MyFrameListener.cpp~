@@ -81,7 +81,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       _selectedNode->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_D)) 
       _selectedNode->yaw(Degree(-90)*deltaTaux);
-    if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
+    if(_keyboard->isKeyDown(OIS::KC_RIGTH)) 
       _selectedNode->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
       _selectedNode->yaw(Degree(-90)*deltaTaux);	

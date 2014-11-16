@@ -15,12 +15,12 @@ public:
 	int getState();	
 	void setValue(int value);
 	void setState(int state);
-	void Matrix();
+	void Matrix();	
 	
-	void insertNumber (Box **s, int size);	
-	void insertMine (Box** s, int size, int mines);
 	Box** createMatrix(int size);
-	
+	void insertMine (Box **s, int size, int mines);
+	void insertNumber (Box **s, int size);
+	void Box::openEmptyBox (Box **s, int row, int col, int size);
 	
 };
 

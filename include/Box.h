@@ -18,8 +18,9 @@ public:
 	void Matrix();	
 	
 	Box** createMatrix(int size);
-	void insertMine (Box** s, int size, int mines);
+	void insertMine (Box **s, int size, int mines);
 	void insertNumber (Box **s, int size);
+	void openEmptyBox (Box **s, int row, int col, int size);
 	
 };
 
