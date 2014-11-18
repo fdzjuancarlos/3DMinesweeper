@@ -15,7 +15,7 @@
 #include "MyFrameListener.h"
 
 MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, 
-				 OverlayManager *om,SceneManager *sm){
+				 OverlayManager *om,SceneManager *sm, mines::Box** n_board){
   OIS::ParamList param; size_t windowHandle;  ostringstream wHandleStr;
 
   _camera = cam;  _overlayManager = om;
@@ -38,6 +38,8 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam,
   _selectedNode = NULL;
   s_previousMaterial = new std::string("");
   s_previousCube = new std::string("");
+  executionBox = new mines::Box();
+  board=n_board;
 }
 
 MyFrameListener::~MyFrameListener() {
@@ -63,7 +65,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
-
+checkMatrix();
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
 
@@ -110,7 +112,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   }
       uint32 mask;
   if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-
+	checkMatrix();
     if (mbleft) { // Variables y codigo especifico si es izquierdo
      // cout << "Boton Izquierdo" << endl;
       mask = STAGE | CUBE1 | CUBE2;  // Podemos elegir todo
@@ -145,11 +147,12 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       }
       //if es seleccionable
 	
-      _selectedNode = it->movable->getParentSceneNode();
+      /*_selectedNode = it->movable->getParentSceneNode();
       Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
       mEntity->setMaterialName("cube_selected");
-      _selectedNode->showBoundingBox(true);
-      cout << _selectedNode->getName() << endl;
+      cout << _selectedNode->getName() << endl;*/
+      
+      
       
     }
   }
@@ -200,4 +203,29 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   oe->setLeft(posx);  oe->setTop(posy);
 
   return true;
+}
+
+void MyFrameListener::checkMatrix(){
+	
+	for ( int i = 0; i < 10; i += 1){
+		for ( int j = 0; j < 10; j += 1){
+		  	std::ostringstream stringStream;
+			stringStream << "SquareNode_" << i << "_" << j;
+			std::string name = stringStream.str();
+			Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
+			
+			std::ostringstream stringStream2;
+			if(board[i][j].getState() == 0){
+				stringStream2 << "undiscovered";
+			}else if(board[i][j].getValue() >=0){
+				stringStream2 << "cube_" << board[i][j].getValue();
+			}else{
+				stringStream2 << "mine";
+			}
+			std::string materialName = stringStream2.str();
+			entity->getSubEntity(0)->setMaterialName(materialName);
+		}
+		
+	}
+	
 }
