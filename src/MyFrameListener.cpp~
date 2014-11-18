@@ -81,7 +81,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       _selectedNode->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_D)) 
       _selectedNode->yaw(Degree(-90)*deltaTaux);
-    if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
+    if(_keyboard->isKeyDown(OIS::KC_RIGTH)) 
       _selectedNode->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
       _selectedNode->yaw(Degree(-90)*deltaTaux);	
@@ -153,36 +153,32 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       
     }
   }
-  	mask = STAGE | CUBE1 | CUBE2;
+  
     Ray r = setRayQuery(posx, posy, mask);
     RaySceneQueryResult &result = _raySceneQuery->execute();
     RaySceneQueryResult::iterator it;
     it = result.begin();
-    
 
     if (it != result.end()) {
       _selectedNode = it->movable->getParentSceneNode();
       Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
-      //_selectedNode->showBoundingBox(true);
-      //cout << mEntity->getSubEntity(0)->getMaterialName();
-      //cout << _selectedNode->getName() << endl;
+      mEntity->setMaterialName("cube_selected");
+      _selectedNode->showBoundingBox(true);
+      cout << mEntity->getSubEntity(0)->getMaterialName();
+      cout << _selectedNode->getName() << endl;
       
       // FIXME como comparar strings?
-     // std::cout << *s_previousCube << " igual a " << _selectedNode->getName() << std::endl;
-      if(s_previousCube->compare(_selectedNode->getName())){
-			//std::cout << "hahah" << std::endl;
-			if(s_previousCube->compare(std::string(""))){
-							std::cout << *s_previousMaterial << std::endl;
+      std::cout << *s_previousCube << std::endl;
+      if(!s_previousCube->compare(_selectedNode->getName())){
+			std::cout << "hahah" << std::endl;
 		  Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0)); //FIXME could fail *
 		  entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
-		  }
 		  delete s_previousCube;
 		  s_previousCube= new std::string(_selectedNode->getName());
 		  delete s_previousMaterial;
 		  s_previousMaterial = new std::string(mEntity->getSubEntity(0)->getMaterialName());
       }
-      
-      mEntity->setMaterialName("cube_selected");
+      //if(previousCube)
       
     }
   
