@@ -18,7 +18,8 @@
 int main() {
 	mines::Box example = mines::Box();
 	mines::Box** board = example.createMatrix(10);
-	example.insertMine(board,10,30);
+	example.insertMine(board,10,20);
+	example.insertNumber(board,10);
 	example.printMatrix(board,10);
   //MyApp app;
   //app.start();

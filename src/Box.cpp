@@ -51,9 +51,9 @@ Box** Box::createMatrix(int size){
 void Box::printMatrix(Box **s, int size){
 	for (int j=0; j<size; j++){
 		for (int k=0; k<size; k++){
-			if(s[j][k].getValue() == 0)
-				std::cout << " 0";
-			else
+			if(s[j][k].getValue() != -1){
+				std::cout << " " << s[j][k].getValue();
+			}else
 				std::cout << s[j][k].getValue()	;	
 		}	
 		std::cout << std::endl;
