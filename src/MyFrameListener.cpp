@@ -179,7 +179,6 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       }
       
       mEntity->setMaterialName("cube_selected");
-      //if(previousCube)
       
     }
   
