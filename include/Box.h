@@ -4,6 +4,7 @@
 
 #ifndef Square
 #define Square
+namespace mines{
 class Box{
 	
 int s_value;
@@ -22,7 +23,10 @@ public:
 	void insertNumber (Box **s, int size);
 	void openEmptyBox (Box **s, int row, int col, int size);
 	
+	void printMatrix(Box** s, int size);
+	
 };
+}
 
 /*
 class Square{

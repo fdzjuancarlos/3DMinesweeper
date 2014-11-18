@@ -1,6 +1,7 @@
 #include "Box.h"
+#include <iostream>
 
-
+namespace mines{
 Box::Box(){
 	s_value = 0;
 	s_state = 0;
@@ -47,22 +48,32 @@ Box** Box::createMatrix(int size){
 	return s;
 }
 
-void Box::insertMine (Box **s, int size, int mines){
-
-	for (int i=0; i<size; i++){
-		for (int j=0; j<size; j++){
-			if (s[i][j].getValue() == 0){
-				srand(time(NULL));
-				int var= (rand() %100);
-				if (var>=30 || var<=60){
-					s[i][j].setValue(-1);
-					mines--;
-				}
-			}
-		}
+void Box::printMatrix(Box **s, int size){
+	for (int j=0; j<size; j++){
+		for (int k=0; k<size; k++){
+			if(s[j][k].getValue() == 0)
+				std::cout << " 0";
+			else
+				std::cout << s[j][k].getValue()	;	
+		}	
+		std::cout << std::endl;
 	}
-	if(mines>0)
-		insertMine(s, size, mines);
+}
+
+void Box::insertMine (Box **s, int size, int mines){
+	int actualMines= mines;
+	srand(time(NULL));
+	int i, j;
+
+	while(actualMines>0){
+		i=(rand()%size);
+		j=(rand()%size);
+			if (s[i][j].getValue() == 0){
+				s[i][j].setValue(-1);
+				actualMines--;
+			}
+	}
+
 }
 
 void Box::insertNumber (Box **s, int size){
@@ -145,4 +156,5 @@ void Box::openEmptyBox (Box **s, int row, int col, int size){
 		if (s[row][col+1].getValue() == 0)
 			openEmptyBox(s, row, col+1, size);	
 	}
+}
 }
