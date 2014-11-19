@@ -13,6 +13,7 @@
  * General Public License for more details.  
  *********************************************************************/
 #include "MyFrameListener.h"
+#include <stdlib.h>
 
 MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, 
 				 OverlayManager *om,SceneManager *sm, mines::Box** n_board){
@@ -141,8 +142,29 @@ checkMatrix();
 //	  entaux->setQueryFlags(i?CUBE1:CUBE2);
 //	  nodeaux->attachObject(entaux);
 //	  nodeaux->translate(r.getPoint(it->distance));
-//	  _sceneManager->getRootSceneNode()->addChild(nodeaux);
+//	  _sceneManager->getRootSceneNode()->addChild(nodeaux)
 //	}
+		
+		//std::string str = _selectedNode->getName();
+		_selectedNode = it->movable->getParentSceneNode();
+		std::string str2 = _selectedNode->getName().substr(0,10);
+		//std::size_t found = str2.(str2);
+  		if (str2.compare("SquareNode")==0){
+    		//std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
+    		std::string stri = std::string(_selectedNode->getName().substr(11,2));
+    		std::string strj = std::string(_selectedNode->getName().substr(13,2));
+    		
+
+            int i = atoi(stri.c_str());
+    		int j = atoi(strj.c_str());
+    		//int i= std::stoi(stri);
+    		//int j= atoi(_selectedNode->getName()[13]);
+			std::cout << "Cube " << i << " " << j << std::endl;
+    		if(board[i][j].getState() == 0){
+    			//mine::Box exec = mine::Box();
+				executionBox->openEmptyBox(board, i, j, 10);
+				}
+    	}
      
       }
       //if es seleccionable

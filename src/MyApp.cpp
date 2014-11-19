@@ -56,7 +56,7 @@ int MyApp::start() {
   
   	mines::Box example = mines::Box();
 	mines::Box** board = example.createMatrix(10);
-	example.insertMine(board,10,20);
+	example.insertMine(board,10,15);
 	example.insertNumber(board,10);
 	//example.printMatrix(board,10);
 

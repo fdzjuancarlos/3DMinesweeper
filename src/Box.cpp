@@ -124,37 +124,72 @@ void Box::insertNumber (Box **s, int size){
 void Box::openEmptyBox (Box **s, int row, int col, int size){
 	
 	s[row][col].setState(-1);
+	std::cout << row << " y " << col << std::endl;
+	if(s[row][col].getValue() == 0){
 	if (row-1 >=0){
-		if (s[row-1][col].getValue() == 0)
-			openEmptyBox(s, row-1, col, size);
+		if (s[row-1][col].getState() == 0 && s[row-1][col].getValue() != -1){
+				if(s[row-1][col].getValue() == 0)
+					openEmptyBox(s, row-1, col, size);
+				else
+					s[row-1][col].setState(-1);
+					}
 		if (col-1 >= 0){
-			if (s[row-1][col-1].getValue() == 0)
-				openEmptyBox(s, row-1, col-1, size);	
+			if (s[row-1][col-1].getState() == 0 && s[row-1][col-1].getValue() != -1){
+				if(s[row-1][col-1].getValue() == 0)
+					openEmptyBox(s, row-1, col-1, size);
+				else
+					s[row-1][col-1].setState(-1);
+					}
 		}
 		if (col+1 < size){
-			if (s[row-1][col+1].getValue() == 0)
-				openEmptyBox(s, row-1, col+1, size);	
+			if (s[row-1][col+1].getState() == 0 && s[row-1][col+1].getValue() != -1){
+				if(s[row-1][col+1].getValue() == 0)
+					openEmptyBox(s, row-1, col+1, size);
+				else
+					s[row-1][col+1].setState(-1);
+					}
 		}
 	}
 	if (row+1 < size){
-		if (s[row+1][col].getValue() == 0)
-			openEmptyBox(s, row+1, col, size);
+		if (s[row+1][col].getState() == 0 && s[row+1][col].getValue() != -1){
+				if(s[row+1][col].getValue() == 0)
+					openEmptyBox(s, row+1, col, size);
+				else
+					s[row+1][col].setState(-1);
+					}
 		if (col-1 >= 0){
-			if (s[row+1][col-1].getValue() == 0)
-				openEmptyBox(s, row+1, col-1, size);	
+			if (s[row+1][col-1].getState() == 0 && s[row+1][col-1].getValue() != -1){
+				if(s[row+1][col-1].getValue() == 0)
+					openEmptyBox(s, row+1, col-1, size);
+				else
+					s[row+1][col-1].setState(-1);
+					}
 		}
 		if (col+1 < size){
-			if (s[row+1][col+1].getValue() == 0)
-				openEmptyBox(s, row+1, col+1, size);	
+			if (s[row+1][col+1].getState() == 0 && s[row+1][col+1].getValue() != -1){
+				if(s[row+1][col+1].getValue() == 0)
+					openEmptyBox(s, row+1, col+1, size);
+				else
+					s[row+1][col+1].setState(-1);
+					}
 		}
 	}
 	if (col-1 >= 0){
-		if (s[row][col-1].getValue() == 0)
-			openEmptyBox(s, row, col-1, size);	
+		if (s[row][col-1].getState() == 0 && s[row][col-1].getValue() == 0){
+				if(s[row][col-1].getValue() == 0)
+					openEmptyBox(s, row, col-1, size);
+				else
+					s[row][col-1].setState(-1);
+					}
 	}
 	if (col+1 < size){
-		if (s[row][col+1].getValue() == 0)
-			openEmptyBox(s, row, col+1, size);	
+		if (s[row][col+1].getState() == 0 && s[row][col+1].getValue() == 0){
+				if(s[row][col+1].getValue() == 0)
+					openEmptyBox(s, row, col+1, size);
+				else
+					s[row][col+1].setState(-1);
+					}
+	}
 	}
 }
 }
