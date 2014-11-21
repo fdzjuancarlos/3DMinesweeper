@@ -64,11 +64,17 @@ void Box::insertMine (Box **s, int size, int mines){
 	int actualMines= mines;
 	srand(time(NULL));
 	int i, j;
+	
+	
+	
+	if(i<size){
+		
+	}
 
 	while(actualMines>0){
 		i=(rand()%size);
 		j=(rand()%size);
-			if (s[i][j].getValue() == 0){
+			if (s[i][j].getValue() == 0 && s[i][j].getState() == 0){
 				s[i][j].setValue(-1);
 				actualMines--;
 			}
@@ -190,6 +196,42 @@ void Box::openEmptyBox (Box **s, int row, int col, int size){
 					s[row][col+1].setState(-1);
 					}
 	}
+	}
+}
+
+void Box::firstTouch (Box **s, int size ,int row, int col){
+	
+	s[row][col].setState(-1);
+	if (row-1 >=0){
+		//row-1
+		s[row-1][col].setState(-1);
+		if (col-1 >= 0){
+			//row-1 col-1
+			s[row-1][col-1].setState(-1);
+		}
+		if (col+1 < size){
+			//row-1 col+1
+			s[row-1][col+1].setState(-1);
+		}
+	}
+	if (row+1 < size){
+		//row+1
+		if (col-1 >= 0){
+			//row+1 col-1
+			s[row+1][col-1].setState(-1);
+		}
+		if (col+1 < size){
+			//row+1 col+1
+			s[row+1][col+1].setState(-1);
+		}
+	}
+	if (col-1 >= 0){
+		//row col-1
+		s[row][col-1].setState(-1);
+	}
+	if (col+1 < size){
+		//row col+1
+		s[row][col+1].setState(-1);
 	}
 }
 }

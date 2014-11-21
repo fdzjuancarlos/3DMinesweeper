@@ -29,6 +29,7 @@ private:
   SceneNode *_selectedNode; 
   mines::Box* executionBox;
   mines::Box** board;
+  bool initialized;
   
   std::string *s_previousMaterial;
   std::string *s_previousCube;

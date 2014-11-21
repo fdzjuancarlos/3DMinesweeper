@@ -40,6 +40,7 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam,
   s_previousMaterial = new std::string("");
   s_previousCube = new std::string("");
   executionBox = new mines::Box();
+  initialized=false;
   board=n_board;
 }
 
@@ -159,12 +160,37 @@ checkMatrix();
     		int j = atoi(strj.c_str());
     		//int i= std::stoi(stri);
     		//int j= atoi(_selectedNode->getName()[13]);
-			std::cout << "Cube " << i << " " << j << std::endl;
-    		if(board[i][j].getState() == 0){
+    		
+    		if(!initialized){
+    			initialized=true;
+    			executionBox->firstTouch(board, 10, i, j);
+    			executionBox->insertMine(board, 10, 15);
+    			executionBox->insertNumber(board,10);
+    			executionBox->openEmptyBox(board,i,j,10);
+    		} else if(board[i][j].getState() == 0){
     			//mine::Box exec = mine::Box();
 				executionBox->openEmptyBox(board, i, j, 10);
+				checkMatrix();
 				}
+				
+				
     	}
+    	
+    	//Cada uno de los habitantes tiene un animal una bebida y fuma un tipo de tabaco diferente
+    	//1.- el noruego vive en la primera casa
+    	//2.- la casa de al lado del noruego es azul
+    	//3.- el habitante de la tercera casa bebe leche
+    	//4.- el inglés vive en la casa roja
+    	//5.- el habitante de la casa verde bebe café
+    	//6.- el habitante de la casa amarilla fuma Kools
+    	//7.- La casa blanca se encuentra justo después de la verde
+    	//8.- el español tiene un
+    	//9.- el ucrariano tiene te
+    	//10.- el japones fuma Gravens
+    	//11.- el fumador de OldGolds es rarito y tiene un caracol
+    	//12.- el fumador de Gitanes bebe vino
+    	//13.- el vecino del fumador de Chesteerfields tiene un reno
+    	//14.- el vecino del fumador de Kools tiene un caballo
      
       }
       //if es seleccionable

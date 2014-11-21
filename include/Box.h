@@ -7,8 +7,9 @@
 namespace mines{
 class Box{
 	
-int s_value;
+	int s_value;
    int s_state;
+   bool bandera;
     	
 public:
 	Box();
@@ -24,6 +25,7 @@ public:
 	void openEmptyBox (Box **s, int row, int col, int size);
 	
 	void printMatrix(Box** s, int size);
+	void firstTouch (Box **s, int size ,int row, int col);
 	
 };
 }
