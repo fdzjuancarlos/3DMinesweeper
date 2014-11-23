@@ -89,6 +89,7 @@ void MyApp::loadResources() {
 void MyApp::createScene() {
 	
 	Ogre::Entity* ent1 = _sceneManager->createEntity("cube.mesh");
+	ent1->setQueryFlags(STAGE);
   Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
   node1->attachObject(ent1);
   _sceneManager->getRootSceneNode()->addChild(node1);
@@ -127,6 +128,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 		for (unsigned int j = 0; j < size; j += 1){
 
 			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
+			cube->setQueryFlags(i?CUBE1:CUBE2);
 			std::ostringstream stringStream;
 			stringStream << "SquareNode_" << i << "_" << j;
 			std::string name = stringStream.str();
@@ -134,6 +136,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 			node->attachObject(cube);
 			board->addChild(node);
 			cube->setMaterialName("cube_2");
+
 			
 			
 			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);

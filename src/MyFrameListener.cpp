@@ -167,6 +167,15 @@ checkMatrix();
     			executionBox->insertMine(board, 10, 15);
     			executionBox->insertNumber(board,10);
     			executionBox->openEmptyBox(board,i,j,10);
+    			executionBox->openEmptyBox(board,i-1,j-1,10);
+    			executionBox->openEmptyBox(board,i-1,j,10);
+    			executionBox->openEmptyBox(board,i-1,j+1,10);
+    			executionBox->openEmptyBox(board,i,j-1,10);
+    			executionBox->openEmptyBox(board,i,j+1,10);
+    			executionBox->openEmptyBox(board,i+1,j-1,10);
+    			executionBox->openEmptyBox(board,i+1,j,10);
+    			executionBox->openEmptyBox(board,i+1,j+1,10);
+    			
     		} else if(board[i][j].getState() == 0){
     			//mine::Box exec = mine::Box();
 				executionBox->openEmptyBox(board, i, j, 10);
@@ -204,7 +213,7 @@ checkMatrix();
       
     }
   }
-  	mask = STAGE | CUBE1 | CUBE2;
+  	mask = CUBE1 | CUBE2; //STAGE |
     Ray r = setRayQuery(posx, posy, mask);
     RaySceneQueryResult &result = _raySceneQuery->execute();
     RaySceneQueryResult::iterator it;
