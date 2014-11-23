@@ -42,6 +42,7 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam,
   executionBox = new mines::Box();
   initialized=false;
   board=n_board;
+  seconds=0;
 }
 
 MyFrameListener::~MyFrameListener() {
@@ -163,12 +164,17 @@ checkMatrix();
     			executionBox->openEmptyBox(board,i+1,j-1,10);
     			executionBox->openEmptyBox(board,i+1,j,10);
     			executionBox->openEmptyBox(board,i+1,j+1,10);
+    			timer = Ogre::Timer();
     			
     		} else if(board[i][j].getState() == 0){
     			//mine::Box exec = mine::Box();
 				executionBox->openEmptyBox(board, i, j, 10);
+				seconds = timer.getMilliseconds();
+				std::cout << seconds/1000 << std::endl ;
 				checkMatrix();
 				}
+				
+
 				
 				
     	}

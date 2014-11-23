@@ -29,6 +29,8 @@ private:
   SceneNode *_selectedNode; 
   mines::Box* executionBox;
   mines::Box** board;
+  Ogre::Timer timer;
+  unsigned long seconds;
   bool initialized;
   
   std::string *s_previousMaterial;
