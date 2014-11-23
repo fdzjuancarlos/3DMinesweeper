@@ -61,7 +61,7 @@ Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
 }
 
 bool MyFrameListener::frameStarted(const FrameEvent& evt) {
-  Vector3 vt(0,0,0);     Real tSpeed = 10.0;  
+  Vector3 vt(0,0,0);    
   Real deltaT = evt.timeSinceLastFrame;
   int fps = 1.0 / deltaT;
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
@@ -73,32 +73,21 @@ checkMatrix();
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
 
-  // Operaciones posibles con el nodo seleccionado -------------------
-  if (_selectedNode != NULL) {
+  // Operaciones de rotacion para Board -------------------
+	  	std::ostringstream stringStream;
+		stringStream << "BoardNode";
+		std::string name = stringStream.str();
+		SceneNode* boardEntity = _sceneManager->getSceneNode(name);
     Real deltaTaux = deltaT;
-    if(_keyboard->isKeyDown(OIS::KC_LSHIFT) ||    // Si pulsamos Shift
-       _keyboard->isKeyDown(OIS::KC_RSHIFT))      // invertimos la
-      deltaTaux *= -1;                            // operacion
-    //if(_keyboard->isKeyDown(OIS::KC_S))   
-    //  _selectedNode->setScale(_selectedNode->getScale()+deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_A)) 
-      _selectedNode->yaw(Degree(90)*deltaTaux);
+      boardEntity->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_D)) 
-      _selectedNode->yaw(Degree(-90)*deltaTaux);
+      boardEntity->yaw(Degree(-90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
-      _selectedNode->yaw(Degree(90)*deltaTaux);
+      boardEntity->yaw(Degree(90)*deltaTaux);
     if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
-      _selectedNode->yaw(Degree(-90)*deltaTaux);	
-    if(_keyboard->isKeyDown(OIS::KC_DELETE)) { 
-      _sceneManager->getRootSceneNode()->
-	removeAndDestroyChild(_selectedNode->getName());
-      _selectedNode = NULL;
-    }
-  }
+      boardEntity->yaw(Degree(-90)*deltaTaux);	
 
-  // Si usamos la rueda, desplazamos en Z la camara ------------------
-  vt+= Vector3(0,0,-10)*deltaT * _mouse->getMouseState().Z.rel;   
-  _camera->moveRelative(vt * deltaT * tSpeed);
 
   // Botones del raton pulsados? -------------------------------------
   mbleft = _mouse->getMouseState().buttonDown(OIS::MB_Left);
@@ -114,7 +103,6 @@ checkMatrix();
   }
       uint32 mask;
   if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-	checkMatrix();
     if (mbleft) { // Variables y codigo especifico si es izquierdo
      // cout << "Boton Izquierdo" << endl;
       mask = STAGE | CUBE1 | CUBE2;  // Podemos elegir todo
