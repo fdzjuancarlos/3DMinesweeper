@@ -15,6 +15,10 @@ int Box::getState(){
 	return s_state;
 }
 
+bool Box::getFlag(){
+	return s_flag;
+}
+
 void Box::setValue(int value){
 	s_value = value;
 }
@@ -23,6 +27,13 @@ void Box::setState(int state){
 	s_state = state;
 }
 
+void Box::setFlag(bool flag){
+//	if(s_flag == false)
+//		s_flag = true;
+//	else
+//		s_flag = false;
+	s_flag = flag;		
+}
 
 //crear matriz
 void Box::Matrix(){
@@ -41,7 +52,8 @@ Box** Box::createMatrix(int size){
 	for (int j=0; j<size; j++){
 		for (int k=0; k<size; k++){
 			s[j][k].setValue(0);
-			s[j][k].setState(0);		
+			s[j][k].setState(0);
+			s[j][k].setFlag(false);		
 		}	
 	}
 	
@@ -226,5 +238,13 @@ void Box::firstTouch (Box **s, int size ,int row, int col){
 		//row col+1
 		s[row][col+1].setState(-1);
 	}
+}
+
+void Box::putFlag (Box **s, int row, int col){
+
+	if(s[row][col].getFlag() == false){
+		s[row][col].setFlag(true);
+	}else
+		s[row][col].setFlag(false);
 }
 }

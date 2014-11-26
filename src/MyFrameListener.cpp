@@ -16,17 +16,17 @@
 #include <stdlib.h>
 
 MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, 
-				 OverlayManager *om,SceneManager *sm, mines::Box** n_board){
+OverlayManager *om,SceneManager *sm, mines::Box** n_board){
   OIS::ParamList param; size_t windowHandle;  ostringstream wHandleStr;
 
   _camera = cam;  _overlayManager = om;
   _sceneManager = sm; _win = win;
-  
+
   srand((unsigned)time(NULL));   // Semilla aleatorios
   _win->getCustomAttribute("WINDOW", &windowHandle);
   wHandleStr << windowHandle;
   param.insert(make_pair("WINDOW", wHandleStr.str()));
-  
+
   _inputManager = OIS::InputManager::createInputSystem(param);
   _keyboard = static_cast<OIS::Keyboard*>
     (_inputManager->createInputObject(OIS::OISKeyboard, false));
@@ -68,26 +68,26 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
-checkMatrix();
+  checkMatrix();
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
 
   // Operaciones de rotacion para Board -------------------
-	  	std::ostringstream stringStream;
-		stringStream << "BoardNode";
-		std::string name = stringStream.str();
-		SceneNode* boardEntity = _sceneManager->getSceneNode(name);
-    Real deltaTaux = deltaT;
-    if(_keyboard->isKeyDown(OIS::KC_A)) 
-      boardEntity->yaw(Degree(90)*deltaTaux);
-    if(_keyboard->isKeyDown(OIS::KC_D)) 
-      boardEntity->yaw(Degree(-90)*deltaTaux);
-    if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
-      boardEntity->yaw(Degree(90)*deltaTaux);
-    if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
-      boardEntity->yaw(Degree(-90)*deltaTaux);	
+	std::ostringstream stringStream;
+	stringStream << "BoardNode";
+	std::string name = stringStream.str();
+	SceneNode* boardEntity = _sceneManager->getSceneNode(name);
+  Real deltaTaux = deltaT;
+  if(_keyboard->isKeyDown(OIS::KC_A)) 
+    boardEntity->yaw(Degree(90)*deltaTaux);
+  if(_keyboard->isKeyDown(OIS::KC_D)) 
+    boardEntity->yaw(Degree(-90)*deltaTaux);
+  if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
+    boardEntity->yaw(Degree(90)*deltaTaux);
+  if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
+    boardEntity->yaw(Degree(-90)*deltaTaux);	
 
 
   // Botones del raton pulsados? -------------------------------------
@@ -102,15 +102,18 @@ checkMatrix();
     _camera->pitch(Radian(roty));
     cout << "Boton Medio" << endl;
   }
-      uint32 mask;
+  
+  uint32 mask;
+  
   if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
     if (mbleft) { // Variables y codigo especifico si es izquierdo
      // cout << "Boton Izquierdo" << endl;
-      mask = STAGE | CUBE1 | CUBE2;  // Podemos elegir todo
+      mask = CUBE1 | CUBE2;  // Podemos elegir todo
     }
     if (mbright) { // Variables y codigo especifico si es derecho
       //cout << "Boton Derecho" << endl;
-      mask = ~STAGE;   // Seleccionamos todo menos el escenario
+      //mask = ~STAGE;   // Seleccionamos todo menos el escenario
+      mask = CUBE1 | CUBE2;
     }
 
     if (_selectedNode != NULL) {  // Si habia alguno seleccionado...
@@ -135,112 +138,111 @@ checkMatrix();
 //	  _sceneManager->getRootSceneNode()->addChild(nodeaux)
 //	}
 		
-		//std::string str = _selectedNode->getName();
-		_selectedNode = it->movable->getParentSceneNode();
-		std::string str2 = _selectedNode->getName().substr(0,10);
-		//std::size_t found = str2.(str2);
-  		if (str2.compare("SquareNode")==0){
-    		//std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
-    		std::string stri = std::string(_selectedNode->getName().substr(11,2));
-    		std::string strj = std::string(_selectedNode->getName().substr(13,2));
-    		
+  		  //std::string str = _selectedNode->getName();
+  		  _selectedNode = it->movable->getParentSceneNode();
+  		  std::string str2 = _selectedNode->getName().substr(0,10);
+  		  //std::size_t found = str2.(str2);
+    		if (str2.compare("SquareNode")==0){
+      		//std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
+      		std::string stri = std::string(_selectedNode->getName().substr(11,2));
+      		std::string strj = std::string(_selectedNode->getName().substr(13,2));
+      		
 
-            int i = atoi(stri.c_str());
-    		int j = atoi(strj.c_str());
-    		//int i= std::stoi(stri);
-    		//int j= atoi(_selectedNode->getName()[13]);
-    		
-    		if(!initialized){
-    			initialized=true;
-    			executionBox->firstTouch(board, 10, i, j);
-    			executionBox->insertMine(board, 10, 15);
-    			executionBox->insertNumber(board,10);
-    			executionBox->openEmptyBox(board,i,j,10);
-    			executionBox->openEmptyBox(board,i-1,j-1,10);
-    			executionBox->openEmptyBox(board,i-1,j,10);
-    			executionBox->openEmptyBox(board,i-1,j+1,10);
-    			executionBox->openEmptyBox(board,i,j-1,10);
-    			executionBox->openEmptyBox(board,i,j+1,10);
-    			executionBox->openEmptyBox(board,i+1,j-1,10);
-    			executionBox->openEmptyBox(board,i+1,j,10);
-    			executionBox->openEmptyBox(board,i+1,j+1,10);
-    			timer = Ogre::Timer();
-    			
-    		} else if(board[i][j].getState() == 0){
-    			//mine::Box exec = mine::Box();
-				executionBox->openEmptyBox(board, i, j, 10);
-				seconds = timer.getMilliseconds();
-				std::cout << seconds/1000 << std::endl ;
-				checkMatrix();
-				}
-				
-
-				
-				
-    	}
-    	
-    	//Cada uno de los habitantes tiene un animal una bebida y fuma un tipo de tabaco diferente
-    	//1.- el noruego vive en la primera casa
-    	//2.- la casa de al lado del noruego es azul
-    	//3.- el habitante de la tercera casa bebe leche
-    	//4.- el inglés vive en la casa roja
-    	//5.- el habitante de la casa verde bebe café
-    	//6.- el habitante de la casa amarilla fuma Kools
-    	//7.- La casa blanca se encuentra justo después de la verde
-    	//8.- el español tiene un
-    	//9.- el ucrariano tiene te
-    	//10.- el japones fuma Gravens
-    	//11.- el fumador de OldGolds es rarito y tiene un caracol
-    	//12.- el fumador de Gitanes bebe vino
-    	//13.- el vecino del fumador de Chesteerfields tiene un reno
-    	//14.- el vecino del fumador de Kools tiene un caballo
-     
+          int i = atoi(stri.c_str());
+      		int j = atoi(strj.c_str());
+      		//int i= std::stoi(stri);
+      		//int j= atoi(_selectedNode->getName()[13]);
+      		
+      		if(!initialized){
+      			initialized=true;
+      			executionBox->firstTouch(board, 10, i, j);
+      			executionBox->insertMine(board, 10, 15);
+      			executionBox->insertNumber(board,10);
+      			executionBox->openEmptyBox(board,i,j,10);
+      			executionBox->openEmptyBox(board,i-1,j-1,10);
+      			executionBox->openEmptyBox(board,i-1,j,10);
+      			executionBox->openEmptyBox(board,i-1,j+1,10);
+      			executionBox->openEmptyBox(board,i,j-1,10);
+      			executionBox->openEmptyBox(board,i,j+1,10);
+      			executionBox->openEmptyBox(board,i+1,j-1,10);
+      			executionBox->openEmptyBox(board,i+1,j,10);
+      			executionBox->openEmptyBox(board,i+1,j+1,10);
+      			timer = Ogre::Timer();
+      			
+      		}else if(board[i][j].getState() == 0){
+      			//mine::Box exec = mine::Box();
+  				  executionBox->openEmptyBox(board, i, j, 10);
+  				  seconds = timer.getMilliseconds();
+  				  std::cout << seconds/1000 << std::endl ;
+  				  checkMatrix();
+  				}			
+      	}
       }
+      if (mbright) {
+          //std::string str = _selectedNode->getName();
+          _selectedNode = it->movable->getParentSceneNode();
+          std::string str2 = _selectedNode->getName().substr(0,10);
+          //std::size_t found = str2.(str2);
+          if (str2.compare("SquareNode")==0){
+            //std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
+            std::string stri = std::string(_selectedNode->getName().substr(11,2));
+            std::string strj = std::string(_selectedNode->getName().substr(13,2));
+        
+            int i = atoi(stri.c_str());
+            int j = atoi(strj.c_str());
+            //int i= std::stoi(stri);
+            //int j= atoi(_selectedNode->getName()[13]);
+            //std::cout << "Cube " << i << " " << j << std::endl;
+            if(board[i][j].getState() == 0){
+              //mine::Box exec = mine::Box();
+              executionBox->putFlag(board, i, j);
+              seconds = timer.getMilliseconds();
+              std::cout << seconds/1000 << std::endl ;
+              checkMatrix();
+            }
+          }     
+        } 
       //if es seleccionable
 	
       /*_selectedNode = it->movable->getParentSceneNode();
       Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
       mEntity->setMaterialName("cube_selected");
       cout << _selectedNode->getName() << endl;*/
-      
-      
-      
+       
     }
   }
-  	mask = CUBE1 | CUBE2; //STAGE |
-    Ray r = setRayQuery(posx, posy, mask);
-    RaySceneQueryResult &result = _raySceneQuery->execute();
-    RaySceneQueryResult::iterator it;
-    it = result.begin();
+
+  mask = CUBE1 | CUBE2; //STAGE |
+  Ray r = setRayQuery(posx, posy, mask);
+  RaySceneQueryResult &result = _raySceneQuery->execute();
+  RaySceneQueryResult::iterator it;
+  it = result.begin();
     
 
-    if (it != result.end()) {
-      _selectedNode = it->movable->getParentSceneNode();
-      Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
-      //_selectedNode->showBoundingBox(true);
-      //cout << mEntity->getSubEntity(0)->getMaterialName();
-      //cout << _selectedNode->getName() << endl;
-      
-      // FIXME como comparar strings?
-     // std::cout << *s_previousCube << " igual a " << _selectedNode->getName() << std::endl;
-      if(s_previousCube->compare(_selectedNode->getName())){
-			//std::cout << "hahah" << std::endl;
-			if(s_previousCube->compare(std::string(""))){
-							std::cout << *s_previousMaterial << std::endl;
-		  Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0)); //FIXME could fail *
-		  entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
-		  }
-		  delete s_previousCube;
-		  s_previousCube= new std::string(_selectedNode->getName());
-		  delete s_previousMaterial;
-		  s_previousMaterial = new std::string(mEntity->getSubEntity(0)->getMaterialName());
-      }
-      
-      mEntity->setMaterialName("cube_selected");
-      
+  if (it != result.end()) {
+    _selectedNode = it->movable->getParentSceneNode();
+    Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
+    //_selectedNode->showBoundingBox(true);
+    //cout << mEntity->getSubEntity(0)->getMaterialName();
+    //cout << _selectedNode->getName() << endl;
+    
+    // FIXME como comparar strings?
+   // std::cout << *s_previousCube << " igual a " << _selectedNode->getName() << std::endl;
+    if(s_previousCube->compare(_selectedNode->getName())){
+		  //std::cout << "hahah" << std::endl;
+		  if(s_previousCube->compare(std::string(""))){
+				std::cout << *s_previousMaterial << std::endl;
+	      Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0)); //FIXME could fail *
+	      entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
+	    }
+	    delete s_previousCube;
+	    s_previousCube= new std::string(_selectedNode->getName());
+	    delete s_previousMaterial;
+	    s_previousMaterial = new std::string(mEntity->getSubEntity(0)->getMaterialName());
     }
-  
-
+    
+    mEntity->setMaterialName("cube_selected");  
+  }
   
   // Gestion del overlay ---------------------------------------------
   OverlayElement *oe;
@@ -267,7 +269,11 @@ void MyFrameListener::checkMatrix(){
 			
 			std::ostringstream stringStream2;
 			if(board[i][j].getState() == 0){
-				stringStream2 << "undiscovered";
+			  if(board[i][j].getFlag() == true){
+          stringStream2 << "flag";
+        }else{
+          stringStream2 << "undiscovered";
+        }
 			}else if(board[i][j].getValue() >=0){
 				stringStream2 << "cube_" << board[i][j].getValue();
 			}else{
@@ -275,8 +281,6 @@ void MyFrameListener::checkMatrix(){
 			}
 			std::string materialName = stringStream2.str();
 			entity->getSubEntity(0)->setMaterialName(materialName);
-		}
-		
+		}	
 	}
-	
 }
