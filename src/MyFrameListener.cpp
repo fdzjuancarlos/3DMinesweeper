@@ -32,6 +32,9 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam,
     (_inputManager->createInputObject(OIS::OISKeyboard, false));
   _mouse = static_cast<OIS::Mouse*>
     (_inputManager->createInputObject(OIS::OISMouse, false));
+    
+      _keyboard->setEventCallback(this);
+  _mouse->setEventCallback(this);
   _mouse->getMouseState().width = _win->getWidth();
   _mouse->getMouseState().height = _win->getHeight();
 
@@ -43,13 +46,15 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam,
   initialized=false;
   board=n_board;
   seconds=0;
+  _quit = false;
+
 }
 
 MyFrameListener::~MyFrameListener() {
-  _inputManager->destroyInputObject(_keyboard);
-  _inputManager->destroyInputObject(_mouse);
-  _sceneManager->destroyQuery(_raySceneQuery);
-  OIS::InputManager::destroyInputSystem(_inputManager);
+//  _inputManager->destroyInputObject(_keyboard);
+//  _inputManager->destroyInputObject(_mouse);
+//  _sceneManager->destroyQuery(_raySceneQuery);
+//  OIS::InputManager::destroyInputSystem(_inputManager);
 }
 
 Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
@@ -66,11 +71,21 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   Real deltaT = evt.timeSinceLastFrame;
   int fps = 1.0 / deltaT;
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
+  
+  _timeSinceLastFrame = evt.timeSinceLastFrame;
+  
+  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
-checkMatrix();
+
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
+  
+  checkMatrix();
+  
+  //CEGUI Non-Callback
+  CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
+  //CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
 
@@ -279,4 +294,66 @@ void MyFrameListener::checkMatrix(){
 		
 	}
 	
+}
+
+bool MyFrameListener::keyPressed(const OIS::KeyEvent& evt)
+{
+  if(evt.key==OIS::KC_ESCAPE) _quit=true;
+ 
+  CEGUI::System::getSingleton().injectKeyDown(evt.key);
+  CEGUI::System::getSingleton().injectChar(evt.text);
+
+  return true;
+}
+
+bool MyFrameListener::keyReleased(const OIS::KeyEvent& evt)
+{
+  CEGUI::System::getSingleton().injectKeyUp(evt.key);
+  return true;
+}
+
+bool MyFrameListener::mouseMoved(const OIS::MouseEvent& evt)
+{
+	std::cout << "se llama" << std::endl;
+  CEGUI::System::getSingleton().injectMouseMove(evt.state.X.rel, evt.state.Y.rel);  
+  return true;
+}
+
+bool MyFrameListener::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
+{
+  CEGUI::System::getSingleton().injectMouseButtonDown(convertMouseButton(id));
+  return true;
+}
+
+bool MyFrameListener::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
+{
+  CEGUI::System::getSingleton().injectMouseButtonUp(convertMouseButton(id));
+  return true;
+}
+
+CEGUI::MouseButton MyFrameListener::convertMouseButton(OIS::MouseButtonID id)
+{
+  CEGUI::MouseButton ceguiId;
+  switch(id)
+    {
+    case OIS::MB_Left:
+      ceguiId = CEGUI::LeftButton;
+      break;
+    case OIS::MB_Right:
+      ceguiId = CEGUI::RightButton;
+      break;
+    case OIS::MB_Middle:
+      ceguiId = CEGUI::MiddleButton;
+      break;
+    default:
+      ceguiId = CEGUI::LeftButton;
+    }
+  return ceguiId;
+}
+
+
+bool MyFrameListener::quit(const CEGUI::EventArgs &e)
+{
+  _quit = true;
+  return true;
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" enconding="UTF-8"?>
+<GUILayout>
+  <Window Type="TaharezLook/FrameWindow" Name="ConfigWin">
+    <Property Name="Text" Value="Configuration Window"/>
+    <Property Name="TitlebarEnabled" Value="True"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.1,0},{0.5,300},{0.5,300}}"/>
+    <!-- Sound parameter -->
+    <Window Type="TaharezLook/StaticText" Name="ConfigWin/SoundText">
+      <Property Name="Text" Value="Sound Volume"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.32,0},{0.1,0},{0.9,0},{0.2,0}}"/>
+    </Window>
+    <Window Type="TaharezLook/Spinner" Name="ConfigWin/SoundVolume">
+      <Property Name="Text" Value="Sound Volume" />
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.1,0},{0.3,0},{0.2,0}}" />
+      <Property Name="MaximumValue" Value="100" />
+      <Property Name="MinimumValue" Value="0" />
+      <Property Name="CurrentValue" Value="75" />
+    </Window>
+    <!-- Fullscreen parameter -->
+    <Window Type="TaharezLook/StaticText" Name="ConfigWin/FullScreenText">
+      <Property Name="Text" Value="Fullscreen"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.32,0},{0.25,0},{0.9,0},{0.35,0}}"/>
+    </Window>
+    <Window Type="TaharezLook/Checkbox" Name="ConfigWin/FullscreenCheckbox">
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.25,0},{0.3,0},{0.35,0}}"/>
+    </Window>
+    <!-- Port parameter -->
+    <Window Type="TaharezLook/StaticText" Name="ConfigWin/PortText">
+      <Property Name="Text" Value="Port"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.32,0},{0.4,0},{0.9,0},{0.5,0}}"/>
+    </Window>
+    <Window Type="TaharezLook/Editbox" Name="ConfigWin/PortEditbox">
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.4,0},{0.3,0},{0.5,0}}"/>
+      <Property Name="Text" Value="1234"/>
+    </Window>
+    <!-- Resolution parameter -->
+    <Window Type="TaharezLook/StaticText" Name="ConfigWin/ResolutionText">
+      <Property Name="Text" Value="Resolution"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.32,0},{0.55,0},{0.9,0},{0.65,0}}"/>
+    </Window>
+    <Window Type="TaharezLook/ItemListbox" Name="ConfigWin/ResolutionListbox">
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.55,0},{0.3,0},{0.65,0}}"/>
+      <Window Type="TaharezLook/ListboxItem" Name="ConfigWin/ResolutionListBox/Item1">
+	<Property Name="Text" Value="1024x768"/>
+      </Window>
+      <Window Type="TaharezLook/ListboxItem" Name="ConfigWin/ResolutionListBox/Item2">
+	<Property Name="Text" Value="800x600"/>
+      </Window>
+    </Window>
+    <!-- Exit button -->
+    <Window Type="TaharezLook/Button" Name="ConfigWin/ExitButton">
+      <Property Name="Text" Value="Exit" />
+      <Property Name="UnifiedAreaRect" Value="{{0.8,0},{0.9,0},{0.95,0},{0.99,0}}" />
+    </Window>
+    <!-- Apply button -->
+    <Window Type="TaharezLook/Button" Name="ConfigWin/ApplyButton">
+      <Property Name="Text" Value="Apply" />
+      <Property Name="UnifiedAreaRect" Value="{{0.63,0},{0.9,0},{0.78,0},{0.99,0}}" />
+    </Window>
+  </Window>
+</GUILayout>

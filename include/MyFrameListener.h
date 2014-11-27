@@ -1,6 +1,7 @@
 #include <Ogre.h>
 #include <OIS/OIS.h>
 #include <string.h>
+#include <CEGUI.h>
 #include "Box.h"
 
 #define STAGE 1 << 0  // Mascara para el escenario
@@ -16,7 +17,9 @@ using namespace std;
 //	example.insertNumber(board,10);
 //	example.printMatrix(board,10);
 
-class MyFrameListener : public FrameListener {
+//, OIS::KeyListener, OIS::MouseListener
+
+class MyFrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseListener {
 private:
   OIS::InputManager* _inputManager;
   OIS::Keyboard* _keyboard;
@@ -37,6 +40,16 @@ private:
   std::string *s_previousCube;
 
   Ray setRayQuery(int posx, int posy, uint32 mask);
+  bool keyPressed(const OIS::KeyEvent& evt);
+  bool keyReleased(const OIS::KeyEvent& evt);
+  bool mouseMoved(const OIS::MouseEvent& evt);
+  bool mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
+  bool mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
+  
+  bool _quit;
+  float _timeSinceLastFrame;
+
+  CEGUI::MouseButton convertMouseButton(OIS::MouseButtonID id);
 
 public:
   MyFrameListener(RenderWindow* win, Camera* cam, 
@@ -44,4 +57,5 @@ public:
   ~MyFrameListener();
   bool frameStarted(const FrameEvent& evt);
   void checkMatrix();  
+  bool quit(const CEGUI::EventArgs &e);
 };

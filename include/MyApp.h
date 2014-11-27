@@ -1,6 +1,8 @@
 #include <Ogre.h>
 #include "MyFrameListener.h"
 #include "Box.h"
+#include <CEGUI.h>
+#include <RendererModules/Ogre/CEGUIOgreRenderer.h>
 
 //	mines::Box example = mines::Box();
 //	mines::Box** board = example.createMatrix(10);
@@ -15,6 +17,7 @@ private:
   Root* _root;
   MyFrameListener* _framelistener;
   OverlayManager* _overlayManager;
+  CEGUI::OgreRenderer* renderer; 
   
   void createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size);
 
@@ -26,4 +29,6 @@ public:
   void loadResources();
   void createScene();
   void createOverlay();
+  void createGUI();
+  void initUI();
 };
