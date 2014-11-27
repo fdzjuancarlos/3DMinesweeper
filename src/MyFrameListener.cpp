@@ -51,10 +51,10 @@ OverlayManager *om,SceneManager *sm, mines::Box** n_board){
 }
 
 MyFrameListener::~MyFrameListener() {
-//  _inputManager->destroyInputObject(_keyboard);
-//  _inputManager->destroyInputObject(_mouse);
-//  _sceneManager->destroyQuery(_raySceneQuery);
-//  OIS::InputManager::destroyInputSystem(_inputManager);
+  _inputManager->destroyInputObject(_keyboard);
+  _inputManager->destroyInputObject(_mouse);
+  _sceneManager->destroyQuery(_raySceneQuery);
+  OIS::InputManager::destroyInputSystem(_inputManager);
 }
 
 Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
@@ -74,21 +74,21 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   
   _timeSinceLastFrame = evt.timeSinceLastFrame;
   
-  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
+ // CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
-<<<<<<< HEAD
 
-=======
+
+
   checkMatrix();
->>>>>>> 030c2f3e971300278790f631d6d8da1ba16df6cc
+
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
   
   checkMatrix();
   
   //CEGUI Non-Callback
-  CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
+  //CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
   //CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
