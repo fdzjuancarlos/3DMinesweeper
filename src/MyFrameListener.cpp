@@ -43,10 +43,14 @@ OverlayManager *om,SceneManager *sm, mines::Box** n_board){
   s_previousMaterial = new std::string("");
   s_previousCube = new std::string("");
   executionBox = new mines::Box();
+
+  //Game Logic Variables
   initialized=false;
   board=n_board;
   seconds=0;
+  flags=0;
   _quit = false;
+  mines = 15;
 
 }
 
@@ -69,12 +73,11 @@ Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
 bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   Vector3 vt(0,0,0);    
   Real deltaT = evt.timeSinceLastFrame;
-  int fps = 1.0 / deltaT;
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
   
   _timeSinceLastFrame = evt.timeSinceLastFrame;
   
- // CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
+  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
 
@@ -86,6 +89,9 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
   
   checkMatrix();
+  
+  //Update Time
+	seconds = timer.getMilliseconds()/1000;
   
   //CEGUI Non-Callback
   //CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
@@ -175,7 +181,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       		if(!initialized){
       			initialized=true;
       			executionBox->firstTouch(board, 10, i, j);
-      			executionBox->insertMine(board, 10, 15);
+      			executionBox->insertMine(board, 10, mines);
       			executionBox->insertNumber(board,10);
       			executionBox->openEmptyBox(board,i,j,10);
       			executionBox->openEmptyBox(board,i-1,j-1,10);
@@ -192,12 +198,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       			//mine::Box exec = mine::Box();
             if(board[i][j].getValue() == -1){
               executionBox->gameOver(board, i, j, 10);
-              seconds = timer.getMilliseconds();
-              std::cout << seconds/1000 << std::endl ;
             }else{
   				    executionBox->openEmptyBox(board, i, j, 10);
-  				    seconds = timer.getMilliseconds();
-  				    std::cout << seconds/1000 << std::endl ;
             }
   				  checkMatrix();
   				}			
@@ -221,7 +223,10 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
             std::cout << "Cube " << i << " " << j << std::endl;
             if(board[i][j].getState() == 0){
               //mine::Box exec = mine::Box();
-              executionBox->putFlag(board, i, j);
+              if(!executionBox->putFlag(board, i, j))
+              	flags++;
+              else
+              	flags--;
               //seconds = timer.getMilliseconds();
               //std::cout << seconds/1000 << std::endl ;
               checkMatrix();
@@ -272,11 +277,19 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   
   // Gestion del overlay ---------------------------------------------
   OverlayElement *oe;
-  oe = _overlayManager->getOverlayElement("fpsInfo");
-  oe->setCaption(StringConverter::toString(fps));
-  oe = _overlayManager->getOverlayElement("objectInfo");
-  if (_selectedNode != NULL) oe->setCaption(_selectedNode->getName());
-  else oe->setCaption("");
+  oe = _overlayManager->getOverlayElement("segundos");
+  std::ostringstream string;
+  string << seconds;
+  oe->setCaption(string.str());
+  oe = _overlayManager->getOverlayElement("puntuacion");
+  std::ostringstream stringFlags;
+  stringFlags << flags;
+  oe->setCaption(stringFlags.str());
+  oe = _overlayManager->getOverlayElement("minas");
+  std::ostringstream stringMines;
+  stringMines << mines;
+  oe->setCaption(stringMines.str());
+
 
   oe = _overlayManager->getOverlayElement("cursor");
   oe->setLeft(posx);  oe->setTop(posy);

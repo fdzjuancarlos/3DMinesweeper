@@ -250,12 +250,14 @@ void Box::firstTouch (Box **s, int size ,int row, int col){
 	}
 }
 
-void Box::putFlag (Box **s, int row, int col){
+bool Box::putFlag (Box **s, int row, int col){
 
 	if(s[row][col].getFlag() == false){
 		s[row][col].setFlag(true);
 	}else
 		s[row][col].setFlag(false);
+		
+	return s[row][col].getFlag() == false;
 }
 
 void Box::gameOver (Box **s, int row, int col, int size){

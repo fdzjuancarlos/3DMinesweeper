@@ -28,7 +28,7 @@ public:
 	void insertMine (Box **s, int size, int mines);
 	void insertNumber (Box **s, int size);
 	void openEmptyBox (Box **s, int row, int col, int size);
-	void putFlag (Box **s, int row, int col);
+	bool putFlag (Box **s, int row, int col);
 	
 	void printMatrix(Box** s, int size);
 	void firstTouch (Box **s, int size ,int row, int col);

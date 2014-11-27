@@ -30,10 +30,14 @@ private:
   SceneManager* _sceneManager;
   RaySceneQuery *_raySceneQuery;
   SceneNode *_selectedNode; 
+  
+  //Game Logic
   mines::Box* executionBox;
   mines::Box** board;
   Ogre::Timer timer;
   unsigned long seconds;
+  int flags;
+  int mines;
   bool initialized;
   
   std::string *s_previousMaterial;
