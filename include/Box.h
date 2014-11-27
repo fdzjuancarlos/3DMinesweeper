@@ -10,15 +10,18 @@ class Box{
 	int s_value;
    	int s_state;
    	bool s_flag;
+	bool n_flag;
     	
 public:
 	Box();
 	int getValue();
 	int getState();
-	bool getFlag();	
+	bool getFlag();
+	bool getNoFlag();	
 	void setValue(int value);
 	void setState(int state);
-	void setFlag(bool flag);	
+	void setFlag(bool flag);
+	void setNoFlag(bool noFlag);	
 	void Matrix();	
 	
 	Box** createMatrix(int size);
@@ -29,6 +32,7 @@ public:
 	
 	void printMatrix(Box** s, int size);
 	void firstTouch (Box **s, int size ,int row, int col);
+	void gameOver (Box **s, int row, int col, int size);
 	
 };
 }

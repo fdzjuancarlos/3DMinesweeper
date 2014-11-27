@@ -171,9 +171,15 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
       			
       		}else if(board[i][j].getState() == 0){
       			//mine::Box exec = mine::Box();
-  				  executionBox->openEmptyBox(board, i, j, 10);
-  				  seconds = timer.getMilliseconds();
-  				  std::cout << seconds/1000 << std::endl ;
+            if(board[i][j].getValue() == -1){
+              executionBox->gameOver(board, i, j, 10);
+              seconds = timer.getMilliseconds();
+              std::cout << seconds/1000 << std::endl ;
+            }else{
+  				    executionBox->openEmptyBox(board, i, j, 10);
+  				    seconds = timer.getMilliseconds();
+  				    std::cout << seconds/1000 << std::endl ;
+            }
   				  checkMatrix();
   				}			
       	}
@@ -192,12 +198,12 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
             int j = atoi(strj.c_str());
             //int i= std::stoi(stri);
             //int j= atoi(_selectedNode->getName()[13]);
-            //std::cout << "Cube " << i << " " << j << std::endl;
+            std::cout << "Cube " << i << " " << j << std::endl;
             if(board[i][j].getState() == 0){
               //mine::Box exec = mine::Box();
               executionBox->putFlag(board, i, j);
-              seconds = timer.getMilliseconds();
-              std::cout << seconds/1000 << std::endl ;
+              //seconds = timer.getMilliseconds();
+              //std::cout << seconds/1000 << std::endl ;
               checkMatrix();
             }
           }     
@@ -268,7 +274,7 @@ void MyFrameListener::checkMatrix(){
 			Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
 			
 			std::ostringstream stringStream2;
-			if(board[i][j].getState() == 0){
+      if(board[i][j].getState() == 0){
 			  if(board[i][j].getFlag() == true){
           stringStream2 << "flag";
         }else{
@@ -276,9 +282,12 @@ void MyFrameListener::checkMatrix(){
         }
 			}else if(board[i][j].getValue() >=0){
 				stringStream2 << "cube_" << board[i][j].getValue();
-			}else{
+      }else{
 				stringStream2 << "mine";
 			}
+      if(board[i][j].getNoFlag() == true){
+        stringStream2 << "noflag";
+      }
 			std::string materialName = stringStream2.str();
 			entity->getSubEntity(0)->setMaterialName(materialName);
 		}	

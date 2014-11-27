@@ -5,6 +5,8 @@ namespace mines{
 Box::Box(){
 	s_value = 0;
 	s_state = 0;
+	s_flag = false;
+	n_flag = false;
 }
 
 int Box::getValue(){
@@ -17,6 +19,10 @@ int Box::getState(){
 
 bool Box::getFlag(){
 	return s_flag;
+}
+
+bool Box::getNoFlag(){
+	return n_flag;
 }
 
 void Box::setValue(int value){
@@ -33,6 +39,10 @@ void Box::setFlag(bool flag){
 //	else
 //		s_flag = false;
 	s_flag = flag;		
+}
+
+void Box::setNoFlag(bool noFlag){
+	n_flag = noFlag;
 }
 
 //crear matriz
@@ -53,7 +63,8 @@ Box** Box::createMatrix(int size){
 		for (int k=0; k<size; k++){
 			s[j][k].setValue(0);
 			s[j][k].setState(0);
-			s[j][k].setFlag(false);		
+			s[j][k].setFlag(false);
+			s[j][k].setNoFlag(false);
 		}	
 	}
 	
@@ -76,7 +87,6 @@ void Box::insertMine (Box **s, int size, int mines){
 	int actualMines= mines;
 	srand(time(NULL));
 	int i, j;
-	
 	
 	
 	if(i<size){
@@ -150,12 +160,12 @@ void Box::openEmptyBox (Box **s, int row, int col, int size){
 							openEmptyBox(s, row-1, col, size);
 						else
 							s[row-1][col].setState(-1);
-							}
+						}
 				if (col-1 >= 0){
 					if (s[row-1][col-1].getState() == 0 && s[row-1][col-1].getValue() != -1){
 						if(s[row-1][col-1].getValue() > 0)
 							s[row-1][col-1].setState(-1);
-							}
+					}
 				}
 				if (col+1 < size){
 					if (s[row-1][col+1].getState() == 0 && s[row-1][col+1].getValue() != -1){
@@ -181,16 +191,16 @@ void Box::openEmptyBox (Box **s, int row, int col, int size){
 					if (s[row+1][col+1].getState() == 0 && s[row+1][col+1].getValue() != -1){
 						if(s[row+1][col+1].getValue() > 0)
 							s[row+1][col+1].setState(-1);
-							}
+						}
+					}
 				}
-			}
 			if (col-1 >= 0){
 				if (s[row][col-1].getState() == 0 && s[row][col-1].getValue() == 0){
 						if(s[row][col-1].getValue() == 0)
 							openEmptyBox(s, row, col-1, size);
 						else
 							s[row][col-1].setState(-1);
-							}
+						}
 			}
 			if (col+1 < size){
 				if (s[row][col+1].getState() == 0 && s[row][col+1].getValue() == 0){
@@ -198,7 +208,7 @@ void Box::openEmptyBox (Box **s, int row, int col, int size){
 							openEmptyBox(s, row, col+1, size);
 						else
 							s[row][col+1].setState(-1);
-							}
+						}
 			}
 		}
 	}
@@ -246,5 +256,18 @@ void Box::putFlag (Box **s, int row, int col){
 		s[row][col].setFlag(true);
 	}else
 		s[row][col].setFlag(false);
+}
+
+void Box::gameOver (Box **s, int row, int col, int size){
+	if(s[row][col].getValue() == -1 && s[row][col].getFlag() == false){
+		for (int i=0; i<size; i++){
+			for (int j=0; j<size; j++){
+				if(s[i][j].getValue() != -1 && s[i][j].getFlag() == true){
+					s[i][j].setNoFlag(true);
+				}else if(s[i][j].getValue() == -1)
+					s[i][j].setState(-1);
+			}
+		}
+	}		
 }
 }

@@ -10,15 +10,18 @@ class Box{
 	int s_value;
    	int s_state;
    	bool s_flag;
+	bool n_flag;
     	
 public:
 	Box();
 	int getValue();
 	int getState();
-	bool getFlag();	
+	bool getFlag();
+	bool getNoFlag();	
 	void setValue(int value);
 	void setState(int state);
-	void setFlag(bool flag);	
+	void setFlag(bool flag);
+	void setNoFlag(bool noFlag);	
 	void Matrix();	
 	
 	Box** createMatrix(int size);
