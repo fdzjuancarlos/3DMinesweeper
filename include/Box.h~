@@ -32,7 +32,6 @@ public:
 	
 	void printMatrix(Box** s, int size);
 	void firstTouch (Box **s, int size ,int row, int col);
-	void gameOver (Box **s, int row, int col, int size);
 	
 };
 }
