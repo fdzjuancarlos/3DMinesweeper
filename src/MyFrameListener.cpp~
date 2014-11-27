@@ -208,7 +208,6 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
           _selectedNode = it->movable->getParentSceneNode();
           std::string str2 = _selectedNode->getName().substr(0,10);
           //std::size_t found = str2.(str2);
-          //force push
           if (str2.compare("SquareNode")==0){
             //std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
             std::string stri = std::string(_selectedNode->getName().substr(11,2));
