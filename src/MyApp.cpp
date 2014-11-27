@@ -151,8 +151,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 	}
 }
 
-void MyApp::createGUI()
-{
+void MyApp::createGUI(){
   //CEGUI
   
   renderer = &CEGUI::OgreRenderer::bootstrapSystem();
@@ -173,11 +172,11 @@ void MyApp::createGUI()
   CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("stringFormat.layout");
   
   //Setting Text!
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText("Este color es [colour='FFFF0000'] AZUL, mientras que [colour='FF00FF00'] este es ROJO [colour='FF0000FF'] y este VERDE!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text2")->setText("El tipo de letra puede [font='Batang-26']cambiar de un momento a otro, [font='fkp-16']y sin previo aviso!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text3")->setText("Si pulsas aqui [image-size='w:40 h:55'][image='set:TaharezLook image:CloseButtonNormal'] no pasará nada :(");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text4")->setText("[font='Batang-26'] Soy GRANDE,   [font='DejaVuSans-10'][vert-alignment='top'] puedo ir arriba,    [vert-alignment='bottom']o abajo,    [vert-alignment='centre']al centro... y para dentro!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text5")->setText("En un lugar de la [padding='l:20 t:15 r:20 b:15']Mancha[padding='l:0 t:0 r:0 b:0'], de cuyo nombre no quiero acordarme, no ha mucho...");
+  //CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText("Este color es [colour='FFFF0000'] AZUL, mientras que [colour='FF00FF00'] este es ROJO [colour='FF0000FF'] y este VERDE!");
+  //CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text2")->setText("El tipo de letra puede [font='Batang-26']cambiar de un momento a otro, [font='fkp-16']y sin previo aviso!");
+  //CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text3")->setText("Si pulsas aqui [image-size='w:40 h:55'][image='set:TaharezLook image:CloseButtonNormal'] no pasará nada :(");
+  //CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text4")->setText("[font='Batang-26'] Soy GRANDE,   [font='DejaVuSans-10'][vert-alignment='top'] puedo ir arriba,    [vert-alignment='bottom']o abajo,    [vert-alignment='centre']al centro... y para dentro!");
+  //CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text5")->setText("En un lugar de la [padding='l:20 t:15 r:20 b:15']Mancha[padding='l:0 t:0 r:0 b:0'], de cuyo nombre no quiero acordarme, no ha mucho...");
    
   //Exit Window
   CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");

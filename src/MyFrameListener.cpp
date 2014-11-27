@@ -78,8 +78,6 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
   _keyboard->capture();  _mouse->capture();   // Captura eventos
 
-
-
   checkMatrix();
 
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero

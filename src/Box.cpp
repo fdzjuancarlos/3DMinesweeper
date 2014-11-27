@@ -270,4 +270,5 @@ void Box::gameOver (Box **s, int row, int col, int size){
 		}
 	}		
 }
+
 }
