@@ -14,7 +14,7 @@ CXX := g++
 CXXFLAGS := -I $(DIRHEA) -Wall `pkg-config --cflags CEGUI` `pkg-config --cflags OGRE` $(CEGUI_CFLAGS) `pkg-config --cflags OIS`
 
 # Flags del linker ---------------------------------------------------
-LDFLAGS := `pkg-config --libs CEGUI` `pkg-config --libs CEGUI-OGRE` `pkg-config --libs OGRE` -lOIS -lGL -lstdc++ $(CEGUI_LDFLAGS) -lboost_system
+LDFLAGS := `pkg-config --libs CEGUI` `pkg-config --libs CEGUI-OGRE` `pkg-config --libs OGRE` -lOIS  -lstdc++ $(CEGUI_LDFLAGS) -lboost_system
 #LDLIBS := `pkg-config --libs-only-l OGRE` -lOIS -lboost_system -lstdc++
 
 # Modo de compilación (-mode=release -mode=debug) --------------------

@@ -51,6 +51,8 @@ OverlayManager *om,SceneManager *sm, mines::Box** n_board){
   flags=0;
   _quit = false;
   mines = 15;
+  boardSize=10;
+  emptyBoard=false;
 
 }
 
@@ -82,8 +84,6 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   _keyboard->capture();  _mouse->capture();   // Captura eventos
 
 
-
-  checkMatrix();
 
   int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
   int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
@@ -132,12 +132,9 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   
   if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
     if (mbleft) { // Variables y codigo especifico si es izquierdo
-     // cout << "Boton Izquierdo" << endl;
-      mask = CUBE1 | CUBE2;  // Podemos elegir todo
+      mask = CUBE1 | CUBE2;
     }
     if (mbright) { // Variables y codigo especifico si es derecho
-      //cout << "Boton Derecho" << endl;
-      //mask = ~STAGE;   // Seleccionamos todo menos el escenario
       mask = CUBE1 | CUBE2;
     }
 
@@ -151,94 +148,69 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
     it = result.begin();
 
     if (it != result.end()) {
-      if (mbleft) {
-//	if (it->movable->getParentSceneNode()->getName() == "Col_Suelo") {
-//	  SceneNode *nodeaux = _sceneManager->createSceneNode();
-//	  int i = rand()%2;   std::stringstream saux;
-//	  saux << "Cube" << i+1 << ".mesh";
-//	  Entity *entaux = _sceneManager->createEntity(saux.str());
-//	  entaux->setQueryFlags(i?CUBE1:CUBE2);
-//	  nodeaux->attachObject(entaux);
-//	  nodeaux->translate(r.getPoint(it->distance));
-//	  _sceneManager->getRootSceneNode()->addChild(nodeaux)
-//	}
-		
-  		  //std::string str = _selectedNode->getName();
+      if (mbleft && !emptyBoard) {
   		  _selectedNode = it->movable->getParentSceneNode();
   		  std::string str2 = _selectedNode->getName().substr(0,10);
-  		  //std::size_t found = str2.(str2);
+
     		if (str2.compare("SquareNode")==0){
-      		//std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
+
       		std::string stri = std::string(_selectedNode->getName().substr(11,2));
       		std::string strj = std::string(_selectedNode->getName().substr(13,2));
       		
 
-          int i = atoi(stri.c_str());
+         	int i = atoi(stri.c_str());
       		int j = atoi(strj.c_str());
-      		//int i= std::stoi(stri);
-      		//int j= atoi(_selectedNode->getName()[13]);
       		
       		if(!initialized){
       			initialized=true;
-      			executionBox->firstTouch(board, 10, i, j);
-      			executionBox->insertMine(board, 10, mines);
-      			executionBox->insertNumber(board,10);
-      			executionBox->openEmptyBox(board,i,j,10);
-      			executionBox->openEmptyBox(board,i-1,j-1,10);
-      			executionBox->openEmptyBox(board,i-1,j,10);
-      			executionBox->openEmptyBox(board,i-1,j+1,10);
-      			executionBox->openEmptyBox(board,i,j-1,10);
-      			executionBox->openEmptyBox(board,i,j+1,10);
-      			executionBox->openEmptyBox(board,i+1,j-1,10);
-      			executionBox->openEmptyBox(board,i+1,j,10);
-      			executionBox->openEmptyBox(board,i+1,j+1,10);
+      			executionBox->firstTouch(board, boardSize, i, j);
+      			executionBox->insertMine(board, boardSize, mines);
+      			executionBox->insertNumber(board,boardSize);
+      			executionBox->openEmptyBox(board,i,j,boardSize);
+      			executionBox->openEmptyBox(board,i-1,j-1,boardSize);
+      			executionBox->openEmptyBox(board,i-1,j,boardSize);
+      			executionBox->openEmptyBox(board,i-1,j+1,boardSize);
+      			executionBox->openEmptyBox(board,i,j-1,boardSize);
+      			executionBox->openEmptyBox(board,i,j+1,boardSize);
+      			executionBox->openEmptyBox(board,i+1,j-1,boardSize);
+      			executionBox->openEmptyBox(board,i+1,j,boardSize);
+      			executionBox->openEmptyBox(board,i+1,j+1,boardSize);
       			timer = Ogre::Timer();
       			
       		}else if(board[i][j].getState() == 0){
       			//mine::Box exec = mine::Box();
             if(board[i][j].getValue() == -1){
-              executionBox->gameOver(board, i, j, 10);
+              executionBox->gameOver(board, i, j, boardSize);
+              //restartGame();  //Descomentar para probar
             }else{
-  				    executionBox->openEmptyBox(board, i, j, 10);
+  				executionBox->openEmptyBox(board, i, j, boardSize);
             }
-  				  checkMatrix();
-  				}			
+  				checkMatrix();
+  			}			
       	}
       }
-      if (mbright) {
-          //std::string str = _selectedNode->getName();
+      if (mbright && !emptyBoard) {
           _selectedNode = it->movable->getParentSceneNode();
           std::string str2 = _selectedNode->getName().substr(0,10);
-          //std::size_t found = str2.(str2);
-          //force push
+          
           if (str2.compare("SquareNode")==0){
-            //std::cout << "Cube " << _selectedNode->getName()[11] << " " << _selectedNode->getName()[13] << std::endl;
+
             std::string stri = std::string(_selectedNode->getName().substr(11,2));
             std::string strj = std::string(_selectedNode->getName().substr(13,2));
         
             int i = atoi(stri.c_str());
             int j = atoi(strj.c_str());
-            //int i= std::stoi(stri);
-            //int j= atoi(_selectedNode->getName()[13]);
+
             std::cout << "Cube " << i << " " << j << std::endl;
             if(board[i][j].getState() == 0){
-              //mine::Box exec = mine::Box();
               if(!executionBox->putFlag(board, i, j))
               	flags++;
               else
               	flags--;
-              //seconds = timer.getMilliseconds();
-              //std::cout << seconds/1000 << std::endl ;
               checkMatrix();
             }
           }     
         } 
-      //if es seleccionable
-	
-      /*_selectedNode = it->movable->getParentSceneNode();
-      Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
-      mEntity->setMaterialName("cube_selected");
-      cout << _selectedNode->getName() << endl;*/
        
     }
   }
@@ -253,18 +225,13 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   if (it != result.end()) {
     _selectedNode = it->movable->getParentSceneNode();
     Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
-    //_selectedNode->showBoundingBox(true);
-    //cout << mEntity->getSubEntity(0)->getMaterialName();
-    //cout << _selectedNode->getName() << endl;
-    
-    // FIXME como comparar strings?
-   // std::cout << *s_previousCube << " igual a " << _selectedNode->getName() << std::endl;
+
     if(s_previousCube->compare(_selectedNode->getName())){
-		  //std::cout << "hahah" << std::endl;
-		  if(s_previousCube->compare(std::string(""))){
-				std::cout << *s_previousMaterial << std::endl;
-	      Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0)); //FIXME could fail *
-	      entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
+    	
+		if(s_previousCube->compare(std::string(""))){
+			std::cout << *s_previousMaterial << std::endl;
+	    	Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0));
+	    	entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
 	    }
 	    delete s_previousCube;
 	    s_previousCube= new std::string(_selectedNode->getName());
@@ -299,31 +266,97 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 void MyFrameListener::checkMatrix(){
 	
-	for ( int i = 0; i < 10; i += 1){
-		for ( int j = 0; j < 10; j += 1){
-		  	std::ostringstream stringStream;
-			stringStream << "SquareNode_" << i << "_" << j;
-			std::string name = stringStream.str();
-			Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
+	int matrixToWin = (boardSize*boardSize) - mines;
+	if(!emptyBoard){
+		for ( int i = 0; i < boardSize; i += 1){
+			for ( int j = 0; j < boardSize; j += 1){
+			  	std::ostringstream stringStream;
+				stringStream << "SquareNode_" << i << "_" << j;
+				std::string name = stringStream.str();
+				Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
 			
-			std::ostringstream stringStream2;
-      if(board[i][j].getState() == 0){
-			  if(board[i][j].getFlag() == true){
-          stringStream2 << "flag";
-        }else{
-          stringStream2 << "undiscovered";
-        }
+				std::ostringstream stringStream2;
+			if(board[i][j].getState() == 0){
+				if(board[i][j].getFlag() == true){
+					stringStream2 << "flag";
+		    	}else{
+		    		stringStream2 << "undiscovered";
+		    	}
 			}else if(board[i][j].getValue() >=0){
 				stringStream2 << "cube_" << board[i][j].getValue();
-      }else{
+				matrixToWin--;
+		  	}else{
 				stringStream2 << "mine";
 			}
-      if(board[i][j].getNoFlag() == true){
-        stringStream2 << "noflag";
-      }
+			if(board[i][j].getNoFlag() == true){
+		    	stringStream2 << "noflag";
+			}
 			std::string materialName = stringStream2.str();
 			entity->getSubEntity(0)->setMaterialName(materialName);
-		}	
+			}	
+		}
+	}
+	
+	if(matrixToWin == 0 )
+		std::cout << "tenemos ganador" << std::endl;
+		//FIXME condicion de victoria a implementar
+}
+
+void MyFrameListener::restartGame(){
+	
+	//Delete previous board
+	for ( int i = 0; i < boardSize; i += 1){
+		for ( int j = 0; j < boardSize; j += 1){
+			std::ostringstream stringStream;
+			stringStream << "SquareNode_" << i << "_" << j;
+			std::string name = stringStream.str();
+			std::cout << name << std::endl;
+			_sceneManager->destroySceneNode(name); 
+		}
+	}
+	std::ostringstream stringStream;
+	stringStream << "BoardNode";
+	std::string name = stringStream.str();
+	emptyBoard=true;
+	
+	_selectedNode=NULL;
+	
+	board = executionBox->createMatrix(boardSize);
+	createBoard(_sceneManager, 	_sceneManager->getSceneNode(name), boardSize);
+	initialized=false;
+	
+	emptyBoard=false;
+	
+}
+
+void MyFrameListener::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){
+	
+	float relativeXPos;
+	float relativeZPos;
+	float relativeSize = 1.0/((float)(size+1));
+
+	for (unsigned int i = 0; i < size; i += 1){
+		for (unsigned int j = 0; j < size; j += 1){
+
+			Ogre::Entity* cube = _sceneManager->createEntity("cube.mesh");
+			cube->setQueryFlags(i?CUBE1:CUBE2);
+			std::ostringstream stringStream;
+			stringStream << "SquareNode_" << i << "_" << j;
+			std::string name = stringStream.str();
+			Ogre::SceneNode* node = _sceneManager->createSceneNode(name);
+			node->attachObject(cube);
+			board->addChild(node);
+			cube->setMaterialName("cube_2");
+
+			
+			
+			node->setScale(relativeSize*0.8, 1 , relativeSize*0.8);
+			
+			relativeXPos = 1 - (relativeSize)*(2*i) - (relativeSize*2);
+			relativeZPos = 1 - (relativeSize)*(2*j) - (relativeSize*2);
+			
+			node->setPosition(relativeXPos, 1, relativeZPos);
+		}
 	}
 }
 

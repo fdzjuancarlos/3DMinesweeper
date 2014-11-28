@@ -29,16 +29,19 @@ private:
   OverlayManager* _overlayManager;
   SceneManager* _sceneManager;
   RaySceneQuery *_raySceneQuery;
-  SceneNode *_selectedNode; 
+
   
   //Game Logic
   mines::Box* executionBox;
   mines::Box** board;
   Ogre::Timer timer;
   unsigned long seconds;
+  int boardSize;
   int flags;
   int mines;
   bool initialized;
+  bool emptyBoard;
+  SceneNode *_selectedNode; 
   
   std::string *s_previousMaterial;
   std::string *s_previousCube;
@@ -49,6 +52,9 @@ private:
   bool mouseMoved(const OIS::MouseEvent& evt);
   bool mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
   bool mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id);
+  
+  void createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size);
+  void restartGame();
   
   bool _quit;
   float _timeSinceLastFrame;
