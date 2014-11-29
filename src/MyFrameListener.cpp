@@ -14,6 +14,8 @@
  *********************************************************************/
 #include "MyFrameListener.h"
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
 MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, 
 OverlayManager *om,SceneManager *sm, mines::Box** n_board){
@@ -52,6 +54,7 @@ OverlayManager *om,SceneManager *sm, mines::Box** n_board){
   _quit = false;
   mines = 15;
   boardSize=10;
+  boxesToWin=999;
   emptyBoard=false;
 
 }
@@ -98,7 +101,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   //CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
-
+  if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
   // Operaciones de rotacion para Board -------------------
 	std::ostringstream stringStream;
 	stringStream << "BoardNode";
@@ -300,6 +303,7 @@ void MyFrameListener::checkMatrix(){
 	if(matrixToWin == 0 )
 		std::cout << "tenemos ganador" << std::endl;
 		//FIXME condicion de victoria a implementar
+	boxesToWin=matrixToWin;
 }
 
 void MyFrameListener::restartGame(){
@@ -421,3 +425,36 @@ bool MyFrameListener::quit(const CEGUI::EventArgs &e)
   _quit = true;
   return true;
 }
+
+void MyFrameListener::keepRecord(int seconds, int discoveredBoxes){
+	
+	ofstream myfile ("records.txt", ios::app);
+	if (myfile.is_open()){
+		myfile << seconds << ":" << discoveredBoxes << std::endl;
+		myfile.close();
+	}
+	else cout << "Unable to open file";
+	
+}
+
+std::vector<std::string> MyFrameListener::getRecords(){
+	
+	std::vector<std::string> records;
+	
+	string line;
+	ifstream myfile ("records.txt");
+	if (myfile.is_open()){
+		while ( getline (myfile,line) ){
+			records.push_back(line);
+		}
+	myfile.close();
+	}
+
+	else cout << "Unable to open file"; 
+	
+	return records;
+	
+}
+
+
+
