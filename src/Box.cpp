@@ -89,9 +89,6 @@ void Box::insertMine (Box **s, int size, int mines){
 	int i, j;
 	
 	
-	if(i<size){
-		
-	}
 
 	while(actualMines>0){
 		i=(rand()%size);

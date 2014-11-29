@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GUILayout>
   <Window Type="TaharezLook/FrameWindow" Name="FormatWin">
-    <Property Name="Text" Value="Format String Window"/>
+    <Property Name="Text" Value=""/>
     <Property Name="TitlebarEnabled" Value="True"/>
-    <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.05,0},{0.55,0},{0.55,0}}"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.05,0},{0.95,0},{0.95,0}}"/>
     <!-- Static Text -->
     <Window Type="TaharezLook/StaticText" Name="FormatWin/Text1">
-      <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.05,0},{0.95,0},{0.15,0}}"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.05,0},{0.90,0},{0.30,0}}"/>
     </Window>
-    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text2">
-      <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.20,0},{0.95,0},{0.30,0}}"/>
+    <!-- Game Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/GameButton">
+      <Property Name="Text" Value="Jugar" />
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.35,0},{0.90,0},{0.45,0}}"/>
     </Window>
-    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text3">
-      <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.35,0},{0.95,0},{0.45,0}}"/>
+    <!-- Records Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/RecordButton">
+      <Property Name="Text" Value="Puntuaciones" />
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.50,0},{0.90,0},{0.60,0}}"/>
     </Window>
-    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text4">
-      <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.50,0},{0.95,0},{0.60,0}}"/>
-    </Window>
-    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text5">
-      <Property Name="UnifiedAreaRect" Value="{{0.05,0},{0.65,0},{0.95,0},{0.75,0}}"/>
+    <!-- Credit Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/CreditButton">
+      <Property Name="Text" Value="Creditos" />
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.65,0},{0.90,0},{0.75,0}}"/>
     </Window>
     <!-- Exit Button -->
     <Window Type="TaharezLook/Button" Name="FormatWin/ExitButton">
       <Property Name="Text" Value="Exit" />
-      <Property Name="UnifiedAreaRect" Value="{{0,0},{0.95,0},{1,0},{1,0}}"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.80,0},{0.90,0},{0.90,0}}"/>
     </Window>
   </Window>
 </GUILayout>

@@ -428,21 +428,17 @@ bool MyFrameListener::quit(const CEGUI::EventArgs &e)
   return true;
 }
 
-bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
+void MyFrameListener::startGame(const CEGUI::EventArgs &e)
 {
   restartGame();
-	_quit = true;
-  return true;
 }
 
-bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
+void MyFrameListener::watchScores(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+  
 }
 
-bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
+void MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+  
 }
