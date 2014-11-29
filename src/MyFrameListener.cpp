@@ -71,14 +71,15 @@ Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
 }
 
 bool MyFrameListener::frameStarted(const FrameEvent& evt) {
+
+  _timeSinceLastFrame = evt.timeSinceLastFrame;
+  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
+  
+
   Vector3 vt(0,0,0);    
   Real deltaT = evt.timeSinceLastFrame;
   bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
   
-  _timeSinceLastFrame = evt.timeSinceLastFrame;
-  
-  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
-
   _keyboard->capture();  _mouse->capture();   // Captura eventos
 
   checkMatrix();
@@ -291,6 +292,11 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
   oe = _overlayManager->getOverlayElement("cursor");
   oe->setLeft(posx);  oe->setTop(posy);
+
+  _mouse->capture();
+  _keyboard->capture();
+  
+  if(_quit) return false;
 
   return true;
 }
