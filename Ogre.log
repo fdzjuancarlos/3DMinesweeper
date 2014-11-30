@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 02:14:51: Creating resource group General
 02:14:51: Creating resource group Internal
 02:14:51: Creating resource group Autodetect
@@ -381,3 +382,380 @@
 02:15:15: Plugin successfully uninstalled
 02:15:15: Unloading library /usr/lib/x86_64-linux-gnu/OGRE-1.8.0/RenderSystem_GL
 02:15:15: Unregistering ResourceManager for type Material
+=======
+02:46:39: Creating resource group General
+02:46:39: Creating resource group Internal
+02:46:39: Creating resource group Autodetect
+02:46:39: SceneManagerFactory for type 'DefaultSceneManager' registered.
+02:46:39: Registering ResourceManager for type Material
+02:46:39: Registering ResourceManager for type Mesh
+02:46:39: Registering ResourceManager for type Skeleton
+02:46:39: MovableObjectFactory for type 'ParticleSystem' registered.
+02:46:39: OverlayElementFactory for type Panel registered.
+02:46:39: OverlayElementFactory for type BorderPanel registered.
+02:46:39: OverlayElementFactory for type TextArea registered.
+02:46:39: Registering ResourceManager for type Font
+02:46:39: ArchiveFactory for archive type FileSystem registered.
+02:46:39: ArchiveFactory for archive type Zip registered.
+02:46:39: ArchiveFactory for archive type EmbeddedZip registered.
+02:46:39: DDS codec registering
+02:46:39: FreeImage version: 3.15.4
+02:46:39: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+02:46:39: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic,3fr,arw,bay,bmq,cap,cine,cr2,crw,cs1,dc2,dcr,drf,dsc,dng,erf,fff,ia,iiq,k25,kc2,kdc,mdc,mef,mos,mrw,nef,nrw,orf,pef,ptx,pxn,qtk,raf,raw,rdc,rw2,rwl,rwz,sr2,srf,srw,sti
+02:46:39: Registering ResourceManager for type HighLevelGpuProgram
+02:46:39: Registering ResourceManager for type Compositor
+02:46:39: MovableObjectFactory for type 'Entity' registered.
+02:46:39: MovableObjectFactory for type 'Light' registered.
+02:46:39: MovableObjectFactory for type 'BillboardSet' registered.
+02:46:39: MovableObjectFactory for type 'ManualObject' registered.
+02:46:39: MovableObjectFactory for type 'BillboardChain' registered.
+02:46:39: MovableObjectFactory for type 'RibbonTrail' registered.
+02:46:39: Loading library /usr/lib/x86_64-linux-gnu/OGRE-1.8.0/RenderSystem_GL
+02:46:39: Installing plugin: GL RenderSystem
+02:46:39: OpenGL Rendering Subsystem created.
+02:46:39: Plugin successfully installed
+02:46:39: *-*-* OGRE Initialising
+02:46:39: *-*-* Version 1.8.1 (Byatis)
+02:46:39: CPU Identifier & Features
+02:46:39: -------------------------
+02:46:39:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i7-4650U CPU @ 1.70GHz
+02:46:39:  *      SSE: yes
+02:46:39:  *     SSE2: yes
+02:46:39:  *     SSE3: yes
+02:46:39:  *      MMX: yes
+02:46:39:  *   MMXEXT: yes
+02:46:39:  *    3DNOW: no
+02:46:39:  * 3DNOWEXT: no
+02:46:39:  *     CMOV: yes
+02:46:39:  *      TSC: yes
+02:46:39:  *      FPU: yes
+02:46:39:  *      PRO: yes
+02:46:39:  *       HT: no
+02:46:39: -------------------------
+02:46:39: ******************************
+*** Starting GLX Subsystem ***
+******************************
+02:46:39: Registering ResourceManager for type Texture
+02:46:39: GLRenderSystem::_createRenderWindow "MyApp Example", 1280x800 windowed  miscParams: FSAA=0 displayFrequency=50 MHz gamma=No vsync=No 
+02:46:39: GLXWindow::create used FBConfigID = 66
+02:46:39: GL_VERSION = 2.1 INTEL-8.26.34
+02:46:39: GL_VENDOR = Parallels and Intel Inc.
+02:46:39: GL_RENDERER = Parallels using Intel HD Graphics 5000 OpenGL Engine
+02:46:39: GL_EXTENSIONS = GL_EXT_texture3D GL_ARB_color_buffer_float GL_ARB_depth_texture GL_ARB_draw_buffers GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_framebuffer_object GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_shader_objects GL_ARB_shader_texture_lod GL_ARB_shading_language_100 GL_ARB_shadow GL_ARB_texture_border_clamp GL_ARB_texture_compression GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_float GL_ARB_texture_mirrored_repeat GL_ARB_texture_non_power_of_two GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_transpose_matrix GL_ARB_vertex_blend GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_window_pos GL_EXT_abgr GL_EXT_bgra GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_clip_volume_hint GL_EXT_draw_buffers2 GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_multi_draw_arrays GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_provoking_vertex GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_separate_specular_color GL_EXT_shadow_funcs GL_EXT_stencil_two_side GL_EXT_stencil_wrap GL_EXT_texture_array GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_s3tc GL_EXT_texture_env_add GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_lod_bias GL_EXT_texture_rectangle GL_EXT_texture_shared_exponent GL_EXT_texture_sRGB GL_EXT_vertex_array_bgra GL_ATI_separate_stencil GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_ATI_texture_mirror_once GL_NV_blend_square GL_NV_depth_clamp GL_NV_fog_distance GL_NV_light_max_exponent GL_NV_texgen_reflection GL_SGIS_generate_mipmap GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_EXT_texture_env_combine GL_NV_texture_rectangle GL_EXT_texture_edge_clamp GL_ARB_map_buffer_range
+02:46:39: Supported GLX extensions: GLX_ARB_get_proc_address GLX_SGIX_fbconfig GLX_EXT_texture_from_pixmap
+02:46:39: ***************************
+02:46:39: *** GL Renderer Started ***
+02:46:39: ***************************
+02:46:39: Registering ResourceManager for type GpuProgram
+02:46:39: GLSL support detected
+02:46:39: GL: Using GL_EXT_framebuffer_object for rendering to textures (best)
+02:46:39: FBO PF_UNKNOWN depth/stencil support: D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:39: FBO PF_R5G6B5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:39: FBO PF_B5G6R5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:39: FBO PF_A4R4G4B4 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:39: FBO PF_A1R5G5B5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:39: FBO PF_R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_B8G8R8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_A8R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_B8G8R8A8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_A2R10G10B10 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_A2B10G10R10 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_FLOAT16_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_FLOAT16_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_FLOAT32_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_FLOAT32_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_X8R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_X8B8G8R8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_SHORT_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_R3G3B2 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: FBO PF_SHORT_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+02:46:40: [GL] : Valid FBO targets PF_UNKNOWN PF_R5G6B5 PF_B5G6R5 PF_A4R4G4B4 PF_A1R5G5B5 PF_R8G8B8 PF_B8G8R8 PF_A8R8G8B8 PF_B8G8R8A8 PF_A2R10G10B10 PF_A2B10G10R10 PF_FLOAT16_RGB PF_FLOAT16_RGBA PF_FLOAT32_RGB PF_FLOAT32_RGBA PF_X8R8G8B8 PF_X8B8G8R8 PF_SHORT_RGBA PF_R3G3B2 PF_SHORT_RGB 
+02:46:40: RenderSystem capabilities
+02:46:40: -------------------------
+02:46:40: RenderSystem Name: OpenGL Rendering Subsystem
+02:46:40: GPU Vendor: intel
+02:46:40: Device Name: Parallels using Intel HD Graphics 5000 OpenGL Engine
+02:46:40: Driver Version: 2.1.0.0
+02:46:40:  * Fixed function pipeline: yes
+02:46:40:  * Hardware generation of mipmaps: no
+02:46:40:  * Texture blending: yes
+02:46:40:  * Anisotropic texture filtering: yes
+02:46:40:  * Dot product texture operation: yes
+02:46:40:  * Cube mapping: yes
+02:46:40:  * Hardware stencil buffer: yes
+02:46:40:    - Stencil depth: 8
+02:46:40:    - Two sided stencil support: yes
+02:46:40:    - Wrap stencil values: yes
+02:46:40:  * Hardware vertex / index buffers: yes
+02:46:40:  * Vertex programs: yes
+02:46:40:  * Number of floating-point constants for vertex programs: 1024
+02:46:40:  * Number of integer constants for vertex programs: 0
+02:46:40:  * Number of boolean constants for vertex programs: 0
+02:46:40:  * Fragment programs: yes
+02:46:40:  * Number of floating-point constants for fragment programs: 1024
+02:46:40:  * Number of integer constants for fragment programs: 0
+02:46:40:  * Number of boolean constants for fragment programs: 0
+02:46:40:  * Geometry programs: yes
+02:46:40:  * Number of floating-point constants for geometry programs: 4096
+02:46:40:  * Number of integer constants for geometry programs: 0
+02:46:40:  * Number of boolean constants for geometry programs: 0
+02:46:40:  * Supported Shader Profiles: arbfp1 arbvp1 glsl gp4gp gpu_gp nvgp4
+02:46:40:  * Texture Compression: yes
+02:46:40:    - DXT: yes
+02:46:40:    - VTC: no
+02:46:40:    - PVRTC: no
+02:46:40:  * Scissor Rectangle: yes
+02:46:40:  * Hardware Occlusion Query: yes
+02:46:40:  * User clip planes: yes
+02:46:40:  * VET_UBYTE4 vertex element type: yes
+02:46:40:  * Infinite far plane projection: yes
+02:46:40:  * Hardware render-to-texture: yes
+02:46:40:  * Floating point textures: yes
+02:46:40:  * Non-power-of-two textures: yes
+02:46:40:  * Volume textures: yes
+02:46:40:  * Multiple Render Targets: 8
+02:46:40:    - With different bit depths: yes
+02:46:40:  * Point Sprites: yes
+02:46:40:  * Extended point parameters: yes
+02:46:40:  * Max Point Size: 64
+02:46:40:  * Vertex texture fetch: yes
+02:46:40:  * Number of world matrices: 0
+02:46:40:  * Number of texture units: 16
+02:46:40:  * Stencil buffer depth: 8
+02:46:40:  * Number of vertex blend matrices: 0
+02:46:40:    - Max vertex textures: 16
+02:46:40:    - Vertex textures shared: yes
+02:46:40:  * Render to Vertex Buffer : no
+02:46:40:  * GL 1.5 without VBO workaround: no
+02:46:40:  * Frame Buffer objects: yes
+02:46:40:  * Frame Buffer objects (ARB extension): no
+02:46:40:  * Frame Buffer objects (ATI extension): no
+02:46:40:  * PBuffer support: yes
+02:46:40:  * GL 1.5 without HW-occlusion workaround: no
+02:46:40:  * Separate shader objects: no
+02:46:40: DefaultWorkQueue('Root') initialising on thread 7f4001df0840.
+02:46:40: DefaultWorkQueue('Root')::WorkerFunc - thread 7f3ff8d6a700 starting.
+02:46:40: DefaultWorkQueue('Root')::WorkerFunc - thread 7f3ff956b700 starting.
+02:46:40: Particle Renderer Type 'billboard' registered
+02:46:40: Creating resource group Fonts
+02:46:40: Added resource location 'media/fonts' of type 'FileSystem' to resource group 'Fonts'
+02:46:40: Added resource location 'media' of type 'FileSystem' to resource group 'General'
+02:46:40: Added resource location 'media/xml_schemas' of type 'FileSystem' to resource group 'General'
+02:46:40: Added resource location 'media/cube.zip' of type 'Zip' to resource group 'General'
+02:46:40: Added resource location 'media/colision.zip' of type 'Zip' to resource group 'General'
+02:46:40: Added resource location 'media/overlay.zip' of type 'Zip' to resource group 'General'
+02:46:40: Creating resource group Imagesets
+02:46:40: Added resource location 'media/imagesets' of type 'FileSystem' to resource group 'Imagesets'
+02:46:40: Creating resource group Layouts
+02:46:40: Added resource location 'media/layouts' of type 'FileSystem' to resource group 'Layouts'
+02:46:40: Creating resource group LookNFeel
+02:46:40: Added resource location 'media/looknfeel' of type 'FileSystem' to resource group 'LookNFeel'
+02:46:40: Creating resource group Schemes
+02:46:40: Added resource location 'media/schemes' of type 'FileSystem' to resource group 'Schemes'
+02:46:40: Parsing scripts for resource group Autodetect
+02:46:40: Finished parsing scripts for resource group Autodetect
+02:46:40: Creating resources for group Autodetect
+02:46:40: All done
+02:46:40: Parsing scripts for resource group Fonts
+02:46:40: Finished parsing scripts for resource group Fonts
+02:46:40: Creating resources for group Fonts
+02:46:40: All done
+02:46:40: Parsing scripts for resource group General
+02:46:40: Parsing script records.material
+02:46:40: Parsing script cube_1.material
+02:46:40: Parsing script Scene.material
+02:46:40: Parsing script Sinbad.material
+02:46:40: Parsing script Cube.material
+02:46:40: Parsing script panel.material
+02:46:40: Parsing script pointer.material
+02:46:40: Parsing script Blue.fontdef
+02:46:40: Parsing script records.overlay
+02:46:40: Texture: records.tga: Loading 1 faces(PF_A8R8G8B8,300x300x1) with 8 generated mipmaps from Image. Internal format is PF_A8R8G8B8,300x300x1.
+02:46:40: Parsing script info.overlay
+02:46:40: Texture: panel.tga: Loading 1 faces(PF_A8R8G8B8,250x75x1) with 7 generated mipmaps from Image. Internal format is PF_A8R8G8B8,250x75x1.
+02:46:40: Texture: cursor.png: Loading 1 faces(PF_A8R8G8B8,17x23x1) with 4 generated mipmaps from Image. Internal format is PF_A8R8G8B8,17x23x1.
+02:46:40: Finished parsing scripts for resource group General
+02:46:40: Creating resources for group General
+02:46:40: All done
+02:46:40: Parsing scripts for resource group Imagesets
+02:46:40: Finished parsing scripts for resource group Imagesets
+02:46:40: Creating resources for group Imagesets
+02:46:40: All done
+02:46:40: Parsing scripts for resource group Internal
+02:46:40: Finished parsing scripts for resource group Internal
+02:46:40: Creating resources for group Internal
+02:46:40: All done
+02:46:40: Parsing scripts for resource group Layouts
+02:46:40: Finished parsing scripts for resource group Layouts
+02:46:40: Creating resources for group Layouts
+02:46:40: All done
+02:46:40: Parsing scripts for resource group LookNFeel
+02:46:40: Finished parsing scripts for resource group LookNFeel
+02:46:40: Creating resources for group LookNFeel
+02:46:40: All done
+02:46:40: Parsing scripts for resource group Schemes
+02:46:40: Finished parsing scripts for resource group Schemes
+02:46:40: Creating resources for group Schemes
+02:46:40: All done
+02:46:40: Mesh: Loading cube.mesh.
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO1 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO2 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Texture: cube_2.jpg: Loading 1 faces(PF_R8G8B8,512x512x1) with 9 generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO3 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO4 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO5 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO6 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO7 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO8 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO9 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO10 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO11 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO12 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO13 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO14 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO15 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO16 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO17 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO18 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO19 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO20 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO21 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO22 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO23 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO24 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO25 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO26 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO27 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO28 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO29 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO30 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO31 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO32 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO33 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO34 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO35 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO36 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO37 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO38 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO39 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO40 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO41 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO42 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO43 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO44 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO45 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO46 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO47 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO48 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO49 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO50 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO51 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO52 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO53 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO54 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO55 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO56 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO57 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO58 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO59 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO60 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO61 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO62 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO63 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO64 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO65 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO66 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO67 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO68 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO69 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO70 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO71 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO72 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO73 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO74 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO75 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO76 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO77 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO78 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO79 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO80 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO81 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO82 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO83 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO84 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO85 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO86 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO87 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO88 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO89 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO90 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO91 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO92 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO93 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO94 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO95 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO96 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO97 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO98 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO99 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO100 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Can't assign material Material to SubEntity of Ogre/MO101 because this Material does not exist. Have you forgotten to define it in a .material script?
+02:46:40: Texture: _cegui_ogre_0: Loading 1 faces(PF_A8B8G8R8,256x256x1) with 0 generated mipmaps from Image. Internal format is PF_A8R8G8B8,256x256x1.
+02:46:41: Texture: _cegui_ogre_3: Loading 1 faces(PF_A8B8G8R8,256x256x1) with 0 generated mipmaps from Image. Internal format is PF_A8R8G8B8,256x256x1.
+02:46:41: Texture: Untitled.jpg: Loading 1 faces(PF_R8G8B8,512x512x1) with 9 generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+02:46:41: Texture: spot_shadow_fade.png: Loading 1 faces(PF_R8G8B8,128x128x1) with 7 generated mipmaps from Image. Internal format is PF_X8R8G8B8,128x128x1.
+02:46:41: Font Blue using texture size 512x512
+02:46:41: Info: Freetype returned null for character 127 in font Blue
+02:46:41: Info: Freetype returned null for character 128 in font Blue
+02:46:41: Info: Freetype returned null for character 129 in font Blue
+02:46:41: Info: Freetype returned null for character 130 in font Blue
+02:46:41: Info: Freetype returned null for character 131 in font Blue
+02:46:41: Info: Freetype returned null for character 132 in font Blue
+02:46:41: Info: Freetype returned null for character 133 in font Blue
+02:46:41: Info: Freetype returned null for character 134 in font Blue
+02:46:41: Info: Freetype returned null for character 135 in font Blue
+02:46:41: Info: Freetype returned null for character 136 in font Blue
+02:46:41: Info: Freetype returned null for character 137 in font Blue
+02:46:41: Info: Freetype returned null for character 138 in font Blue
+02:46:41: Info: Freetype returned null for character 139 in font Blue
+02:46:41: Info: Freetype returned null for character 140 in font Blue
+02:46:41: Info: Freetype returned null for character 141 in font Blue
+02:46:41: Info: Freetype returned null for character 142 in font Blue
+02:46:41: Info: Freetype returned null for character 143 in font Blue
+02:46:41: Info: Freetype returned null for character 144 in font Blue
+02:46:41: Info: Freetype returned null for character 145 in font Blue
+02:46:41: Info: Freetype returned null for character 146 in font Blue
+02:46:41: Info: Freetype returned null for character 147 in font Blue
+02:46:41: Info: Freetype returned null for character 148 in font Blue
+02:46:41: Info: Freetype returned null for character 149 in font Blue
+02:46:41: Info: Freetype returned null for character 150 in font Blue
+02:46:41: Info: Freetype returned null for character 151 in font Blue
+02:46:41: Info: Freetype returned null for character 152 in font Blue
+02:46:41: Info: Freetype returned null for character 153 in font Blue
+02:46:41: Info: Freetype returned null for character 154 in font Blue
+02:46:41: Info: Freetype returned null for character 155 in font Blue
+02:46:41: Info: Freetype returned null for character 156 in font Blue
+02:46:41: Info: Freetype returned null for character 157 in font Blue
+02:46:41: Info: Freetype returned null for character 158 in font Blue
+02:46:41: Info: Freetype returned null for character 159 in font Blue
+02:46:41: Info: Freetype returned null for character 160 in font Blue
+02:46:41: Texture: BlueTexture: Loading 1 faces(PF_BYTE_LA,512x512x1) with 0 generated mipmaps from Image. Internal format is PF_BYTE_LA,512x512x1.
+02:46:44: DefaultWorkQueue('Root') shutting down on thread 7f4001df0840.
+02:46:44: DefaultWorkQueue('Root')::WorkerFunc - thread 7f3ff8d6a700 stopped.
+02:46:44: DefaultWorkQueue('Root')::WorkerFunc - thread 7f3ff956b700 stopped.
+02:46:44: *-*-* OGRE Shutdown
+02:46:44: Unregistering ResourceManager for type Compositor
+02:46:44: Unregistering ResourceManager for type Font
+02:46:44: Unregistering ResourceManager for type Skeleton
+02:46:44: Unregistering ResourceManager for type Mesh
+02:46:44: Unregistering ResourceManager for type HighLevelGpuProgram
+02:46:44: Uninstalling plugin: GL RenderSystem
+02:46:44: Unregistering ResourceManager for type GpuProgram
+02:46:44: ******************************
+*** Stopping GLX Subsystem ***
+******************************
+02:46:44: Unregistering ResourceManager for type Texture
+02:46:44: Plugin successfully uninstalled
+02:46:44: Unloading library /usr/lib/x86_64-linux-gnu/OGRE-1.8.0/RenderSystem_GL
+02:46:44: Unregistering ResourceManager for type Material
+>>>>>>> 2e98129ba8c366938e71c390a4296fbdcce4d950
