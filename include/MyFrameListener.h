@@ -39,6 +39,7 @@ private:
   int boardSize;
   int flags;
   int mines;
+  int boxesToWin;
   bool initialized;
   bool emptyBoard;
   SceneNode *_selectedNode; 
@@ -60,7 +61,8 @@ private:
   float _timeSinceLastFrame;
 
   CEGUI::MouseButton convertMouseButton(OIS::MouseButtonID id);
-
+  void keepRecord(int seconds, int discoveredBoxes);
+  std::vector<std::string> getRecords();
 public:
   MyFrameListener(RenderWindow* win, Camera* cam, 
 		  OverlayManager* om, SceneManager* sm, mines::Box** n_board);

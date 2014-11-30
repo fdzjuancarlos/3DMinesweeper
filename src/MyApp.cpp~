@@ -18,103 +18,103 @@
 #include <stdlib.h>
 
 MyApp::MyApp() {
-  _sceneManager = NULL;
-  _framelistener = NULL;
+	_sceneManager = NULL;
+	_framelistener = NULL;
 }
 
 MyApp::~MyApp() {
-  delete _root;
-  delete _framelistener;
+	delete _root;
+	delete _framelistener;
 }
 
 int MyApp::start() {
-  _root = new Root();
-  
-  if(!_root->restoreConfig()) {
-    _root->showConfigDialog();
-    _root->saveConfig();
-  }
-  
-  RenderWindow* window = _root->initialise(true,"MyApp Example");
-  _sceneManager = _root->createSceneManager(ST_INTERIOR);
-  
-  Camera* cam = _sceneManager->createCamera("MainCamera");
-  cam->setPosition(Vector3(5.98, 8.73, -17.09));
-  cam->lookAt(Vector3(0, -15, 0));
-  cam->setNearClipDistance(0.1);
-  cam->setFarClipDistance(100);
-  
-  Viewport* viewport = window->addViewport(cam);
-  viewport->setBackgroundColour(ColourValue(0.0,0.0,0.0));
-  double width = viewport->getActualWidth();
-  double height = viewport->getActualHeight();
-  cam->setAspectRatio(width / height);
-  
-  loadResources();
-  createScene();
-  createOverlay();
-  
-  	mines::Box example = mines::Box();
+	_root = new Root();
+
+	if(!_root->restoreConfig()) {
+		_root->showConfigDialog();
+		_root->saveConfig();
+	}
+
+	RenderWindow* window = _root->initialise(true,"MyApp Example");
+	_sceneManager = _root->createSceneManager(ST_INTERIOR);
+
+	Camera* cam = _sceneManager->createCamera("MainCamera");
+	cam->setPosition(Vector3(5.98, 8.73, -17.09));
+	cam->lookAt(Vector3(0, -15, 0));
+	cam->setNearClipDistance(0.1);
+	cam->setFarClipDistance(100);
+
+	Viewport* viewport = window->addViewport(cam);
+	viewport->setBackgroundColour(ColourValue(0.0,0.0,0.0));
+	double width = viewport->getActualWidth();
+	double height = viewport->getActualHeight();
+	cam->setAspectRatio(width / height);
+
+	loadResources();
+	createScene();
+	createOverlay();
+
+	mines::Box example = mines::Box();
 	mines::Box** board = example.createMatrix(10);
 
-  _framelistener = new MyFrameListener(window, cam, _overlayManager, _sceneManager, board);
-  _root->addFrameListener(_framelistener);
-  
-   createGUI();
-  
-  _root->startRendering();
-  return 0;
+	_framelistener = new MyFrameListener(window, cam, _overlayManager, _sceneManager, board);
+	_root->addFrameListener(_framelistener);
+
+	createMenu();
+
+	_root->startRendering();
+	return 0;
 }
 
 void MyApp::loadResources() {
-  ConfigFile cf;
-  cf.load("resources.cfg");
-  
-  ConfigFile::SectionIterator sI = cf.getSectionIterator();
-  String sectionstr, typestr, datastr;
-  while (sI.hasMoreElements()) {
-    sectionstr = sI.peekNextKey();
-    ConfigFile::SettingsMultiMap *settings = sI.getNext();
-    ConfigFile::SettingsMultiMap::iterator i;
-    for (i = settings->begin(); i != settings->end(); ++i) {
-      typestr = i->first;    datastr = i->second;
-      ResourceGroupManager::getSingleton().addResourceLocation
-            (datastr, typestr, sectionstr);	
-    }
-  }
-  ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+	ConfigFile cf;
+	cf.load("resources.cfg");
+
+	ConfigFile::SectionIterator sI = cf.getSectionIterator();
+	String sectionstr, typestr, datastr;
+	while (sI.hasMoreElements()) {
+		sectionstr = sI.peekNextKey();
+		ConfigFile::SettingsMultiMap *settings = sI.getNext();
+		ConfigFile::SettingsMultiMap::iterator i;
+		for (i = settings->begin(); i != settings->end(); ++i) {
+			typestr = i->first;    datastr = i->second;
+			ResourceGroupManager::getSingleton().addResourceLocation
+	   		 (datastr, typestr, sectionstr);	
+		}
+	}
+	ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 void MyApp::createScene() {
 	
 	Ogre::Entity* ent1 = _sceneManager->createEntity("cube.mesh");
 	ent1->setQueryFlags(STAGE);
-  Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
-  node1->attachObject(ent1);
-  _sceneManager->getRootSceneNode()->addChild(node1);
-  node1->setScale(11,2,11);
-  node1->setPosition(0,-15,0);
-  
-  	//Main Board
+	Ogre::SceneNode* node1 = _sceneManager->createSceneNode("BoardNode");
+	node1->attachObject(ent1);
+	_sceneManager->getRootSceneNode()->addChild(node1);
+	node1->setScale(11,2,11);
+	node1->setPosition(0,-15,0);
+
+	//Main Board
 	createBoard(_sceneManager, node1, 10);
 
-  SceneNode* node2 = _sceneManager->createSceneNode("Luces");
-  _sceneManager->setShadowTechnique(SHADOWTYPE_STENCIL_ADDITIVE);	
-  Light* light = _sceneManager->createLight("Light1");
-  light->setType(Light::LT_SPOTLIGHT);
-  light->setPosition(9,2,5);
-  light->setDirection(Vector3(3, -2, 0));
-  light->setSpotlightInnerAngle(Degree(5.0f));
-  light->setSpotlightOuterAngle(Degree(55.0f));
-  light->setSpotlightFalloff(0.0f);
-  node2->attachObject(light);
-  _sceneManager->getRootSceneNode()->addChild(node2);
+	SceneNode* node2 = _sceneManager->createSceneNode("Luces");
+	_sceneManager->setShadowTechnique(SHADOWTYPE_STENCIL_ADDITIVE);	
+	Light* light = _sceneManager->createLight("Light1");
+	light->setType(Light::LT_SPOTLIGHT);
+	light->setPosition(9,2,5);
+	light->setDirection(Vector3(3, -2, 0));
+	light->setSpotlightInnerAngle(Degree(5.0f));
+	light->setSpotlightOuterAngle(Degree(55.0f));
+	light->setSpotlightFalloff(0.0f);
+	node2->attachObject(light);
+	_sceneManager->getRootSceneNode()->addChild(node2);
 }
 
 void MyApp::createOverlay() {
-  _overlayManager = OverlayManager::getSingletonPtr();
-  Overlay *overlay = _overlayManager->getByName("Info");
-  overlay->show();
+	_overlayManager = OverlayManager::getSingletonPtr();
+	Overlay *overlay = _overlayManager->getByName("Info");
+	overlay->show();
 }
 
 void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){
@@ -148,7 +148,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 	}
 }
 
-void MyApp::createGUI(){
+void MyApp::createMenu(){
 	//CEGUI
 
 	renderer = &CEGUI::OgreRenderer::bootstrapSystem();
@@ -173,15 +173,15 @@ void MyApp::createGUI(){
 
 	//Game Window
 	CEGUI::Window* gameButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/GameButton");
-	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame));
+	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame, _framelistener));
 
 	//Record Window
 	CEGUI::Window* recordButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/RecordButton");
-	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchScores));
+	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchScores, _framelistener));
 
 	//Credit Window
 	CEGUI::Window* creditButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/CreditButton");
-	creditButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchCredits));
+	creditButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchCredits, _framelistener));
 
 	//Exit Window
 	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
@@ -192,3 +192,42 @@ void MyApp::createGUI(){
 	CEGUI::System::getSingleton().setGUISheet(sheet);
 }
 
+void MyApp::createVictoryLayout(){
+	//CEGUI
+
+	renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
+	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+
+	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
+	CEGUI::System::getSingleton().setDefaultFont("DejaVuSans-10");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook","MouseArrow");
+
+	//Sheet
+	CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+
+	//Config Window
+	CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("stringFormat.layout");
+
+	//Setting Text!
+	CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']¡Enhorabuena, has ganado!");
+
+	//Game Window
+	CEGUI::Window* gameButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/GameButton");
+	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame, _framelistener));
+
+	//Record Window
+	CEGUI::Window* recordButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/RecordButton");
+	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchScores, _framelistener));
+
+	//Exit Window
+	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
+	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::quit, _framelistener));
+	
+	//Attaching buttons
+	sheet->addChildWindow(formatWin);
+	CEGUI::System::getSingleton().setGUISheet(sheet);
+}
