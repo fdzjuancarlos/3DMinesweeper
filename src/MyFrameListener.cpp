@@ -94,25 +94,15 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 	//Update Time
 	seconds = timer.getMilliseconds()/1000;
-<<<<<<< HEAD
 
 	//CEGUI Non-Callback
-	CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.abs, _mouse->getMouseState().Y.abs);
+	CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
 	//CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
 	if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
 	if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
 	// Operaciones de rotacion para Board -------------------
-=======
-  
-  //CEGUI Non-Callback
-  CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
-  //CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
-  if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
-  if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
-  // Operaciones de rotacion para Board -------------------
->>>>>>> 2e98129ba8c366938e71c390a4296fbdcce4d950
 	std::ostringstream stringStream;
 	stringStream << "BoardNode";
 	std::string name = stringStream.str();
@@ -444,9 +434,9 @@ bool MyFrameListener::quit(const CEGUI::EventArgs &e)
 
 bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
 {
-  restartGame();
+	restartGame();
 	_quit = true;
-  return true;
+	return true;
 }
 
 bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
