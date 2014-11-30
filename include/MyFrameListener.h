@@ -70,4 +70,7 @@ public:
   bool frameStarted(const FrameEvent& evt);
   void checkMatrix();  
   bool quit(const CEGUI::EventArgs &e);
+  bool startGame(const CEGUI::EventArgs &e);
+  bool watchScores(const CEGUI::EventArgs &e);
+  bool watchCredits(const CEGUI::EventArgs &e);
 };

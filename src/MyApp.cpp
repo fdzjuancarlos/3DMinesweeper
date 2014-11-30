@@ -148,41 +148,47 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 	}
 }
 
-void MyApp::createGUI()
-{
-  //CEGUI
-  
-  renderer = &CEGUI::OgreRenderer::bootstrapSystem();
-  CEGUI::Scheme::setDefaultResourceGroup("Schemes");
-  CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
-  CEGUI::Font::setDefaultResourceGroup("Fonts");
-  CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
-  CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+void MyApp::createGUI(){
+	//CEGUI
 
-  CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
-  CEGUI::System::getSingleton().setDefaultFont("DejaVuSans-10");
-  CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook","MouseArrow");
+	renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
+	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
 
-  //Sheet
-  CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
+	CEGUI::System::getSingleton().setDefaultFont("DejaVuSans-10");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook","MouseArrow");
 
-  //Config Window
-  CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("stringFormat.layout");
-  
-  //Setting Text!
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText("Este color es [colour='FFFF0000'] AZUL, mientras que [colour='FF00FF00'] este es ROJO [colour='FF0000FF'] y este VERDE!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text2")->setText("El tipo de letra puede [font='Batang-26']cambiar de un momento a otro, [font='fkp-16']y sin previo aviso!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text3")->setText("Si pulsas aqui [image-size='w:40 h:55'][image='set:TaharezLook image:CloseButtonNormal'] no pasará nada :(");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text4")->setText("[font='Batang-26'] Soy GRANDE,   [font='DejaVuSans-10'][vert-alignment='top'] puedo ir arriba,    [vert-alignment='bottom']o abajo,    [vert-alignment='centre']al centro... y para dentro!");
-  CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text5")->setText("En un lugar de la [padding='l:20 t:15 r:20 b:15']Mancha[padding='l:0 t:0 r:0 b:0'], de cuyo nombre no quiero acordarme, no ha mucho...");
-   
-  //Exit Window
-  CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
-  exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			     CEGUI::Event::Subscriber(&MyFrameListener::quit, 
-						      _framelistener));
-  //Attaching buttons
-  sheet->addChildWindow(formatWin);
-  CEGUI::System::getSingleton().setGUISheet(sheet);
+	//Sheet
+	CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+
+	//Config Window
+	CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("stringFormat.layout");
+
+	//Setting Text!
+	CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']Minesweeper 3D");
+
+	//Game Window
+	CEGUI::Window* gameButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/GameButton");
+	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame, _framelistener));
+
+	//Record Window
+	CEGUI::Window* recordButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/RecordButton");
+	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchScores, _framelistener));
+
+	//Credit Window
+	CEGUI::Window* creditButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/CreditButton");
+	creditButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchCredits, _framelistener));
+
+	//Exit Window
+	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
+	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::quit, _framelistener));
+	
+	//Attaching buttons
+	sheet->addChildWindow(formatWin);
+	CEGUI::System::getSingleton().setGUISheet(sheet);
 }
 
