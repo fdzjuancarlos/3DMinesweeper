@@ -196,7 +196,7 @@ void MyApp::createMenu(){
 	sheet->addChildWindow(formatWin);
 	CEGUI::System::getSingleton().setGUISheet(sheet);
 }
-/*
+
 void MyApp::createVictoryLayout(){
 	//CEGUI
 
@@ -271,4 +271,4 @@ void MyApp::createDefeatLayout(){
 	//Attaching buttons
 	sheet->addChildWindow(formatWin);
 	CEGUI::System::getSingleton().setGUISheet(sheet);
-}*/
+}
