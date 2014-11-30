@@ -96,7 +96,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	seconds = timer.getMilliseconds()/1000;
 
 	//CEGUI Non-Callback
-	//CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
+	CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.abs, _mouse->getMouseState().Y.abs);
 	//CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
 	if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!

@@ -30,5 +30,7 @@ public:
   void createScene();
   void createOverlay();
   void createMenu();
+  void createVictoryLayout();
+  void createDefeatLayout();
   void initUI();
 };

@@ -96,8 +96,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	seconds = timer.getMilliseconds()/1000;
 
 	//CEGUI Non-Callback
-	//CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
-	//CEGUI::System::getSingleton().injectKeyUp(evt.key); 
+	CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.abs, _mouse->getMouseState().Y.abs);
+	CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
 	if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
 	if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
@@ -370,84 +370,84 @@ void MyFrameListener::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneN
 
 bool MyFrameListener::keyPressed(const OIS::KeyEvent& evt)
 {
-  if(evt.key==OIS::KC_ESCAPE) _quit=true;
- 
-  CEGUI::System::getSingleton().injectKeyDown(evt.key);
-  CEGUI::System::getSingleton().injectChar(evt.text);
+	if(evt.key==OIS::KC_ESCAPE) _quit=true;
 
-  return true;
+	CEGUI::System::getSingleton().injectKeyDown(evt.key);
+	CEGUI::System::getSingleton().injectChar(evt.text);
+
+	return true;
 }
 
 bool MyFrameListener::keyReleased(const OIS::KeyEvent& evt)
 {
-  CEGUI::System::getSingleton().injectKeyUp(evt.key);
-  return true;
+	CEGUI::System::getSingleton().injectKeyUp(evt.key);
+	return true;
 }
 
 bool MyFrameListener::mouseMoved(const OIS::MouseEvent& evt)
 {
 	std::cout << "se llama" << std::endl;
-  CEGUI::System::getSingleton().injectMouseMove(evt.state.X.rel, evt.state.Y.rel);  
-  return true;
+	CEGUI::System::getSingleton().injectMouseMove(evt.state.X.rel, evt.state.Y.rel);  
+	return true;
 }
 
 bool MyFrameListener::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().injectMouseButtonDown(convertMouseButton(id));
-  return true;
+	CEGUI::System::getSingleton().injectMouseButtonDown(convertMouseButton(id));
+	return true;
 }
 
 bool MyFrameListener::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().injectMouseButtonUp(convertMouseButton(id));
-  return true;
+	CEGUI::System::getSingleton().injectMouseButtonUp(convertMouseButton(id));
+	return true;
 }
 
 CEGUI::MouseButton MyFrameListener::convertMouseButton(OIS::MouseButtonID id)
 {
-  CEGUI::MouseButton ceguiId;
-  switch(id)
-    {
-    case OIS::MB_Left:
-      ceguiId = CEGUI::LeftButton;
-      break;
-    case OIS::MB_Right:
-      ceguiId = CEGUI::RightButton;
-      break;
-    case OIS::MB_Middle:
-      ceguiId = CEGUI::MiddleButton;
-      break;
-    default:
-      ceguiId = CEGUI::LeftButton;
-    }
-  return ceguiId;
+	CEGUI::MouseButton ceguiId;
+	switch(id)
+	{
+		case OIS::MB_Left:
+			ceguiId = CEGUI::LeftButton;
+			break;
+		case OIS::MB_Right:
+			ceguiId = CEGUI::RightButton;
+			break;
+		case OIS::MB_Middle:
+			ceguiId = CEGUI::MiddleButton;
+			break;
+		default:
+			ceguiId = CEGUI::LeftButton;
+	}
+	return ceguiId;
 }
 
 
 bool MyFrameListener::quit(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+	_quit = true;
+	return true;
 }
 
 
 bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
 {
-  restartGame();
+	restartGame();
 	_quit = true;
-  return true;
+	return true;
 }
 
 bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+	_quit = true;
+	return true;
 }
 
 bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+	_quit = true;
+	return true;
 }
 
 void MyFrameListener::keepRecord(int seconds, int discoveredBoxes){
