@@ -447,7 +447,7 @@ bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
 	return true;
 }
 
-/*bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
+bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
 {
 	CEGUI::WindowManager::getSingletonPtr()->destroyAllWindows();
 
@@ -457,7 +457,7 @@ bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
   	roverlay->show();
 	
   	return true;
-}*/
+}
 
 bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
 {

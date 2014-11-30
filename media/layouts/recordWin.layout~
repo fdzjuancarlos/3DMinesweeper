@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUILayout>
+  <Window Type="TaharezLook/FrameWindow" Name="FormatWin">
+    <Property Name="Text" Value="Victoria"/>
+    <Property Name="TitlebarEnabled" Value="True"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.4,0},{0.05,0},{0.60,0},{0.80,0}}"/>
+    <!-- Static Text -->
+    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text1">
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.05,0},{0.90,0},{0.15,0}}"/>
+    </Window>
+    <!-- Exit Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/BackButton">
+      <Property Name="Text" Value="Atras" />
+      <Property Name="UnifiedAreaRect" Value="{{0.75,0},{0.85,0},{0.90,0},{0.90,0}}"/>
+    </Window>
+  </Window>
+</GUILayout>
