@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUILayout>
+  <Window Type="TaharezLook/FrameWindow" Name="FormatWin">
+    <Property Name="Text" Value="Victoria"/>
+    <Property Name="TitlebarEnabled" Value="True"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.40,0},{0.75,0},{0.60,0}}"/>
+    <!-- Static Text -->
+    <Window Type="TaharezLook/StaticText" Name="FormatWin/Text1">
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.05,0},{0.90,0},{0.15,0}}"/>
+    </Window>
+    <!-- Game Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/GameButton">
+      <Property Name="Text" Value="Juego Nuevo" />
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.25,0},{0.25,0},{0.40,0}}"/>
+    </Window>
+    <!-- Records Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/RecordButton">
+      <Property Name="Text" Value="Puntuaciones" />
+      <Property Name="UnifiedAreaRect" Value="{{0.30,0},{0.25,0},{0.60,0},{0.40,0}}"/>
+    </Window>
+    <!-- Exit Button -->
+    <Window Type="TaharezLook/Button" Name="FormatWin/ExitButton">
+      <Property Name="Text" Value="Cerrar" />
+      <Property Name="UnifiedAreaRect" Value="{{0.65,0},{0.25,0},{0.90,0},{0.40,0}}"/>
+    </Window>
+  </Window>
+</GUILayout>

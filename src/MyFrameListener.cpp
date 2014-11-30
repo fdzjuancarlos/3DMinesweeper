@@ -17,85 +17,84 @@
 #include <iostream>
 #include <fstream>
 
-MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, 
-OverlayManager *om,SceneManager *sm, mines::Box** n_board){
-  OIS::ParamList param; size_t windowHandle;  ostringstream wHandleStr;
+MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, OverlayManager *om,SceneManager *sm, mines::Box** n_board){
+	OIS::ParamList param; size_t windowHandle;  ostringstream wHandleStr;
 
-  _camera = cam;  _overlayManager = om;
-  _sceneManager = sm; _win = win;
+	_camera = cam;  _overlayManager = om;
+	_sceneManager = sm; _win = win;
 
-  srand((unsigned)time(NULL));   // Semilla aleatorios
-  _win->getCustomAttribute("WINDOW", &windowHandle);
-  wHandleStr << windowHandle;
-  param.insert(make_pair("WINDOW", wHandleStr.str()));
+	srand((unsigned)time(NULL));   // Semilla aleatorios
+	_win->getCustomAttribute("WINDOW", &windowHandle);
+	wHandleStr << windowHandle;
+	param.insert(make_pair("WINDOW", wHandleStr.str()));
 
-  _inputManager = OIS::InputManager::createInputSystem(param);
-  _keyboard = static_cast<OIS::Keyboard*>
-    (_inputManager->createInputObject(OIS::OISKeyboard, false));
-  _mouse = static_cast<OIS::Mouse*>
-    (_inputManager->createInputObject(OIS::OISMouse, false));
-    
-      _keyboard->setEventCallback(this);
-  _mouse->setEventCallback(this);
-  _mouse->getMouseState().width = _win->getWidth();
-  _mouse->getMouseState().height = _win->getHeight();
+	_inputManager = OIS::InputManager::createInputSystem(param);
+	_keyboard = static_cast<OIS::Keyboard*>
+	(_inputManager->createInputObject(OIS::OISKeyboard, false));
+	_mouse = static_cast<OIS::Mouse*>
+	(_inputManager->createInputObject(OIS::OISMouse, false));
 
-  _raySceneQuery = _sceneManager->createRayQuery(Ray());
-  _selectedNode = NULL;
-  s_previousMaterial = new std::string("");
-  s_previousCube = new std::string("");
-  executionBox = new mines::Box();
+	_keyboard->setEventCallback(this);
+	_mouse->setEventCallback(this);
+	_mouse->getMouseState().width = _win->getWidth();
+	_mouse->getMouseState().height = _win->getHeight();
 
-  //Game Logic Variables
-  initialized=false;
-  board=n_board;
-  seconds=0;
-  flags=0;
-  _quit = false;
-  mines = 15;
-  boardSize=10;
-  boxesToWin=999;
-  emptyBoard=false;
+	_raySceneQuery = _sceneManager->createRayQuery(Ray());
+	_selectedNode = NULL;
+	s_previousMaterial = new std::string("");
+	s_previousCube = new std::string("");
+	executionBox = new mines::Box();
 
+	//Game Logic Variables
+	initialized=false;
+	board=n_board;
+	seconds=0;
+	flags=0;
+	_quit = false;
+	mines = 15;
+	boardSize=10;
+	boxesToWin=999;
+	emptyBoard=false;
 }
 
 MyFrameListener::~MyFrameListener() {
-  _inputManager->destroyInputObject(_keyboard);
-  _inputManager->destroyInputObject(_mouse);
-  _sceneManager->destroyQuery(_raySceneQuery);
-  OIS::InputManager::destroyInputSystem(_inputManager);
+	_inputManager->destroyInputObject(_keyboard);
+	_inputManager->destroyInputObject(_mouse);
+	_sceneManager->destroyQuery(_raySceneQuery);
+	OIS::InputManager::destroyInputSystem(_inputManager);
 }
 
 Ray MyFrameListener::setRayQuery(int posx, int posy, uint32 mask) {
-  Ray rayMouse = _camera->getCameraToViewportRay
-    (posx/float(_win->getWidth()), posy/float(_win->getHeight()));
-  _raySceneQuery->setRay(rayMouse);
-  _raySceneQuery->setSortByDistance(true);
-  _raySceneQuery->setQueryMask(mask);
-  return (rayMouse);
+	Ray rayMouse = _camera->getCameraToViewportRay
+	(posx/float(_win->getWidth()), posy/float(_win->getHeight()));
+	_raySceneQuery->setRay(rayMouse);
+	_raySceneQuery->setSortByDistance(true);
+	_raySceneQuery->setQueryMask(mask);
+	return (rayMouse);
 }
 
 bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
-  _timeSinceLastFrame = evt.timeSinceLastFrame;
-  CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
-  
+	_timeSinceLastFrame = evt.timeSinceLastFrame;
+	CEGUI::System::getSingleton().injectTimePulse(_timeSinceLastFrame);
 
-  Vector3 vt(0,0,0);    
-  Real deltaT = evt.timeSinceLastFrame;
-  bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
-  
-  _keyboard->capture();  _mouse->capture();   // Captura eventos
 
-  checkMatrix();
+	Vector3 vt(0,0,0);    
+	Real deltaT = evt.timeSinceLastFrame;
+	bool mbleft, mbmiddle, mbright; // Botones del raton pulsados
 
-  int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
-  int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
-  
-  checkMatrix();
-  
-  //Update Time
+	_keyboard->capture();  _mouse->capture();   // Captura eventos
+
+	checkMatrix();
+
+	int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
+	int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
+
+	checkMatrix();
+
+	//Update Time
 	seconds = timer.getMilliseconds()/1000;
+<<<<<<< HEAD
   
   //CEGUI Non-Callback
   CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
@@ -104,173 +103,183 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
   if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
   // Operaciones de rotacion para Board -------------------
+=======
+
+	//CEGUI Non-Callback
+	//CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
+	//CEGUI::System::getSingleton().injectKeyUp(evt.key); 
+
+	if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
+	if(_keyboard->isKeyDown(OIS::KC_R)) std::cout << getRecords()[0] << std::endl;   // FIXME pruebas
+	// Operaciones de rotacion para Board -------------------
+>>>>>>> bcc872fd5bef8c2904ebc41d36b6f33a09e98d90
 	std::ostringstream stringStream;
 	stringStream << "BoardNode";
 	std::string name = stringStream.str();
 	SceneNode* boardEntity = _sceneManager->getSceneNode(name);
-  Real deltaTaux = deltaT;
-  if(_keyboard->isKeyDown(OIS::KC_A)) 
-    boardEntity->yaw(Degree(90)*deltaTaux);
-  if(_keyboard->isKeyDown(OIS::KC_D)) 
-    boardEntity->yaw(Degree(-90)*deltaTaux);
-  if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
-    boardEntity->yaw(Degree(90)*deltaTaux);
-  if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
-    boardEntity->yaw(Degree(-90)*deltaTaux);	
+	Real deltaTaux = deltaT;
+	if(_keyboard->isKeyDown(OIS::KC_A)) 
+		boardEntity->yaw(Degree(90)*deltaTaux);
+	if(_keyboard->isKeyDown(OIS::KC_D)) 
+		boardEntity->yaw(Degree(-90)*deltaTaux);
+	if(_keyboard->isKeyDown(OIS::KC_RIGHT)) 
+		boardEntity->yaw(Degree(90)*deltaTaux);
+	if(_keyboard->isKeyDown(OIS::KC_LEFT)) 
+		boardEntity->yaw(Degree(-90)*deltaTaux);	
 
 
-  // Botones del raton pulsados? -------------------------------------
-  mbleft = _mouse->getMouseState().buttonDown(OIS::MB_Left);
-  mbmiddle = _mouse->getMouseState().buttonDown(OIS::MB_Middle);
-  mbright = _mouse->getMouseState().buttonDown(OIS::MB_Right);
-  
-  if (mbmiddle) { // Con boton medio pulsado, rotamos camara ---------
-    float rotx = _mouse->getMouseState().X.rel * deltaT * -1;
-    float roty = _mouse->getMouseState().Y.rel * deltaT * -1;
-    _camera->yaw(Radian(rotx));
-    _camera->pitch(Radian(roty));
-    cout << "Boton Medio" << endl;
-  }
-  
-  uint32 mask;
-  
-  if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-    if (mbleft) { // Variables y codigo especifico si es izquierdo
-      mask = CUBE1 | CUBE2;
-    }
-    if (mbright) { // Variables y codigo especifico si es derecho
-      mask = CUBE1 | CUBE2;
-    }
+	// Botones del raton pulsados? -------------------------------------
+	mbleft = _mouse->getMouseState().buttonDown(OIS::MB_Left);
+	mbmiddle = _mouse->getMouseState().buttonDown(OIS::MB_Middle);
+	mbright = _mouse->getMouseState().buttonDown(OIS::MB_Right);
 
-    if (_selectedNode != NULL) {  // Si habia alguno seleccionado...
-      _selectedNode->showBoundingBox(false);  _selectedNode = NULL;  
-    }
+	if (mbmiddle) { // Con boton medio pulsado, rotamos camara ---------
+		float rotx = _mouse->getMouseState().X.rel * deltaT * -1;
+		float roty = _mouse->getMouseState().Y.rel * deltaT * -1;
+		_camera->yaw(Radian(rotx));
+		_camera->pitch(Radian(roty));
+		cout << "Boton Medio" << endl;
+	}
 
-    Ray r = setRayQuery(posx, posy, mask);
-    RaySceneQueryResult &result = _raySceneQuery->execute();
-    RaySceneQueryResult::iterator it;
-    it = result.begin();
+	uint32 mask;
 
-    if (it != result.end()) {
-      if (mbleft && !emptyBoard) {
-  		  _selectedNode = it->movable->getParentSceneNode();
-  		  std::string str2 = _selectedNode->getName().substr(0,10);
+	if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
+		if (mbleft) { // Variables y codigo especifico si es izquierdo
+			mask = CUBE1 | CUBE2;
+		}
+		if (mbright) { // Variables y codigo especifico si es derecho
+			mask = CUBE1 | CUBE2;
+		}
 
-    		if (str2.compare("SquareNode")==0){
+		if (_selectedNode != NULL) {  // Si habia alguno seleccionado...
+			_selectedNode->showBoundingBox(false);  _selectedNode = NULL;  
+		}
 
-      		std::string stri = std::string(_selectedNode->getName().substr(11,2));
-      		std::string strj = std::string(_selectedNode->getName().substr(13,2));
-      		
+		Ray r = setRayQuery(posx, posy, mask);
+		RaySceneQueryResult &result = _raySceneQuery->execute();
+		RaySceneQueryResult::iterator it;
+		it = result.begin();
 
-         	int i = atoi(stri.c_str());
-      		int j = atoi(strj.c_str());
-      		
-      		if(!initialized){
-      			initialized=true;
-      			executionBox->firstTouch(board, boardSize, i, j);
-      			executionBox->insertMine(board, boardSize, mines);
-      			executionBox->insertNumber(board,boardSize);
-      			executionBox->openEmptyBox(board,i,j,boardSize);
-      			executionBox->openEmptyBox(board,i-1,j-1,boardSize);
-      			executionBox->openEmptyBox(board,i-1,j,boardSize);
-      			executionBox->openEmptyBox(board,i-1,j+1,boardSize);
-      			executionBox->openEmptyBox(board,i,j-1,boardSize);
-      			executionBox->openEmptyBox(board,i,j+1,boardSize);
-      			executionBox->openEmptyBox(board,i+1,j-1,boardSize);
-      			executionBox->openEmptyBox(board,i+1,j,boardSize);
-      			executionBox->openEmptyBox(board,i+1,j+1,boardSize);
-      			timer = Ogre::Timer();
-      			
-      		}else if(board[i][j].getState() == 0){
-      			//mine::Box exec = mine::Box();
-            if(board[i][j].getValue() == -1){
-              executionBox->gameOver(board, i, j, boardSize);
-              //restartGame();  //Descomentar para probar
-            }else{
-  				executionBox->openEmptyBox(board, i, j, boardSize);
-            }
-  				checkMatrix();
-  			}			
-      	}
-      }
-      if (mbright && !emptyBoard) {
-          _selectedNode = it->movable->getParentSceneNode();
-          std::string str2 = _selectedNode->getName().substr(0,10);
-          
-          if (str2.compare("SquareNode")==0){
+		if (it != result.end()) {
+			if (mbleft && !emptyBoard) {
+				_selectedNode = it->movable->getParentSceneNode();
+				std::string str2 = _selectedNode->getName().substr(0,10);
 
-            std::string stri = std::string(_selectedNode->getName().substr(11,2));
-            std::string strj = std::string(_selectedNode->getName().substr(13,2));
-        
-            int i = atoi(stri.c_str());
-            int j = atoi(strj.c_str());
+				if (str2.compare("SquareNode")==0){
 
-            std::cout << "Cube " << i << " " << j << std::endl;
-            if(board[i][j].getState() == 0){
-              if(!executionBox->putFlag(board, i, j))
-              	flags++;
-              else
-              	flags--;
-              checkMatrix();
-            }
-          }     
-        } 
-       
-    }
-  }
+					std::string stri = std::string(_selectedNode->getName().substr(11,2));
+					std::string strj = std::string(_selectedNode->getName().substr(13,2));
+	
 
-  mask = CUBE1 | CUBE2; //STAGE |
-  Ray r = setRayQuery(posx, posy, mask);
-  RaySceneQueryResult &result = _raySceneQuery->execute();
-  RaySceneQueryResult::iterator it;
-  it = result.begin();
-    
+				 	int i = atoi(stri.c_str());
+					int j = atoi(strj.c_str());
+	
+					if(!initialized){
+						initialized=true;
+						executionBox->firstTouch(board, boardSize, i, j);
+						executionBox->insertMine(board, boardSize, mines);
+						executionBox->insertNumber(board,boardSize);
+						executionBox->openEmptyBox(board,i,j,boardSize);
+						executionBox->openEmptyBox(board,i-1,j-1,boardSize);
+						executionBox->openEmptyBox(board,i-1,j,boardSize);
+						executionBox->openEmptyBox(board,i-1,j+1,boardSize);
+						executionBox->openEmptyBox(board,i,j-1,boardSize);
+						executionBox->openEmptyBox(board,i,j+1,boardSize);
+						executionBox->openEmptyBox(board,i+1,j-1,boardSize);
+						executionBox->openEmptyBox(board,i+1,j,boardSize);
+						executionBox->openEmptyBox(board,i+1,j+1,boardSize);
+						timer = Ogre::Timer();
+		
+					}else if(board[i][j].getState() == 0){
+						//mine::Box exec = mine::Box();
+			    			if(board[i][j].getValue() == -1){
+			      				executionBox->gameOver(board, i, j, boardSize);
+			      				//restartGame();  //Descomentar para probar
+				    		}else{
+							executionBox->openEmptyBox(board, i, j, boardSize);
+				    		}
+						checkMatrix();
+					}			
+				}
+			}
+			if (mbright && !emptyBoard) {
+				_selectedNode = it->movable->getParentSceneNode();
+				std::string str2 = _selectedNode->getName().substr(0,10);
+		  
+		  		if (str2.compare("SquareNode")==0){
 
-  if (it != result.end()) {
-    _selectedNode = it->movable->getParentSceneNode();
-    Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
+		   			std::string stri = std::string(_selectedNode->getName().substr(11,2));
+		    			std::string strj = std::string(_selectedNode->getName().substr(13,2));
 
-    if(s_previousCube->compare(_selectedNode->getName())){
-    	
-		if(s_previousCube->compare(std::string(""))){
-			std::cout << *s_previousMaterial << std::endl;
-	    	Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0));
-	    	entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
-	    }
-	    delete s_previousCube;
-	    s_previousCube= new std::string(_selectedNode->getName());
-	    delete s_previousMaterial;
-	    s_previousMaterial = new std::string(mEntity->getSubEntity(0)->getMaterialName());
-    }
-    
-    mEntity->setMaterialName("cube_selected");  
-  }
-  
-  // Gestion del overlay ---------------------------------------------
-  OverlayElement *oe;
-  oe = _overlayManager->getOverlayElement("segundos");
-  std::ostringstream string;
-  string << seconds;
-  oe->setCaption(string.str());
-  oe = _overlayManager->getOverlayElement("puntuacion");
-  std::ostringstream stringFlags;
-  stringFlags << flags;
-  oe->setCaption(stringFlags.str());
-  oe = _overlayManager->getOverlayElement("minas");
-  std::ostringstream stringMines;
-  stringMines << mines;
-  oe->setCaption(stringMines.str());
+					int i = atoi(stri.c_str());
+					int j = atoi(strj.c_str());
+
+		    			std::cout << "Cube " << i << " " << j << std::endl;
+		    			if(board[i][j].getState() == 0){
+		      				if(!executionBox->putFlag(board, i, j))
+		      					flags++;
+		      				else
+		      					flags--;
+		      			checkMatrix();
+		    			}
+		  		}     
+			} 
+
+		}
+	}
+
+	mask = CUBE1 | CUBE2; //STAGE |
+	Ray r = setRayQuery(posx, posy, mask);
+	RaySceneQueryResult &result = _raySceneQuery->execute();
+	RaySceneQueryResult::iterator it;
+	it = result.begin();
 
 
-  oe = _overlayManager->getOverlayElement("cursor");
-  oe->setLeft(posx);  oe->setTop(posy);
+	if (it != result.end()) {
+		_selectedNode = it->movable->getParentSceneNode();
+		Entity* mEntity = static_cast<Entity*>(_selectedNode->getAttachedObject(0));
 
-  _mouse->capture();
-  _keyboard->capture();
-  
-  if(_quit) return false;
+		if(s_previousCube->compare(_selectedNode->getName())){
 
-  return true;
+			if(s_previousCube->compare(std::string(""))){
+				std::cout << *s_previousMaterial << std::endl;
+	    			Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(*s_previousCube)->getAttachedObject(0));
+	    			entity->getSubEntity(0)->setMaterialName(*s_previousMaterial);
+	  	 	 }
+	   		 delete s_previousCube;
+	    		s_previousCube= new std::string(_selectedNode->getName());
+	    		delete s_previousMaterial;
+	    		s_previousMaterial = new std::string(mEntity->getSubEntity(0)->getMaterialName());
+		}
+
+		mEntity->setMaterialName("cube_selected");  
+	}
+
+	// Gestion del overlay ---------------------------------------------
+	OverlayElement *oe;
+	oe = _overlayManager->getOverlayElement("segundos");
+	std::ostringstream string;
+	string << seconds;
+	oe->setCaption(string.str());
+	oe = _overlayManager->getOverlayElement("puntuacion");
+	std::ostringstream stringFlags;
+	stringFlags << flags;
+	oe->setCaption(stringFlags.str());
+	oe = _overlayManager->getOverlayElement("minas");
+	std::ostringstream stringMines;
+	stringMines << mines;
+	oe->setCaption(stringMines.str());
+
+
+	oe = _overlayManager->getOverlayElement("cursor");
+	oe->setLeft(posx);  oe->setTop(posy);
+
+	_mouse->capture();
+	_keyboard->capture();
+
+	if(_quit) return false;
+
+	return true;
 }
 
 void MyFrameListener::checkMatrix(){
@@ -372,66 +381,87 @@ void MyFrameListener::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneN
 
 bool MyFrameListener::keyPressed(const OIS::KeyEvent& evt)
 {
-  if(evt.key==OIS::KC_ESCAPE) _quit=true;
- 
-  CEGUI::System::getSingleton().injectKeyDown(evt.key);
-  CEGUI::System::getSingleton().injectChar(evt.text);
+	if(evt.key==OIS::KC_ESCAPE) _quit=true;
 
-  return true;
+	CEGUI::System::getSingleton().injectKeyDown(evt.key);
+	CEGUI::System::getSingleton().injectChar(evt.text);
+
+	return true;
 }
 
 bool MyFrameListener::keyReleased(const OIS::KeyEvent& evt)
 {
-  CEGUI::System::getSingleton().injectKeyUp(evt.key);
-  return true;
+	CEGUI::System::getSingleton().injectKeyUp(evt.key);
+	return true;
 }
 
 bool MyFrameListener::mouseMoved(const OIS::MouseEvent& evt)
 {
 	std::cout << "se llama" << std::endl;
-  CEGUI::System::getSingleton().injectMouseMove(evt.state.X.rel, evt.state.Y.rel);  
-  return true;
+	CEGUI::System::getSingleton().injectMouseMove(evt.state.X.rel, evt.state.Y.rel);  
+	return true;
 }
 
 bool MyFrameListener::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().injectMouseButtonDown(convertMouseButton(id));
-  return true;
+	CEGUI::System::getSingleton().injectMouseButtonDown(convertMouseButton(id));
+	return true;
 }
 
 bool MyFrameListener::mouseReleased(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().injectMouseButtonUp(convertMouseButton(id));
-  return true;
+	CEGUI::System::getSingleton().injectMouseButtonUp(convertMouseButton(id));
+	return true;
 }
 
 CEGUI::MouseButton MyFrameListener::convertMouseButton(OIS::MouseButtonID id)
 {
-  CEGUI::MouseButton ceguiId;
-  switch(id)
-    {
-    case OIS::MB_Left:
-      ceguiId = CEGUI::LeftButton;
-      break;
-    case OIS::MB_Right:
-      ceguiId = CEGUI::RightButton;
-      break;
-    case OIS::MB_Middle:
-      ceguiId = CEGUI::MiddleButton;
-      break;
-    default:
-      ceguiId = CEGUI::LeftButton;
-    }
-  return ceguiId;
+	CEGUI::MouseButton ceguiId;
+	switch(id)
+	{
+		case OIS::MB_Left:
+			ceguiId = CEGUI::LeftButton;
+			break;
+		case OIS::MB_Right:
+			ceguiId = CEGUI::RightButton;
+			break;
+		case OIS::MB_Middle:
+			ceguiId = CEGUI::MiddleButton;
+			break;
+		default:
+			ceguiId = CEGUI::LeftButton;
+	}
+	return ceguiId;
 }
 
 
 bool MyFrameListener::quit(const CEGUI::EventArgs &e)
 {
-  _quit = true;
-  return true;
+	_quit = true;
+	return true;
 }
 
+
+bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
+{
+	restartGame();
+	_quit = true;
+	return true;
+}
+
+bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
+{
+	_quit = true;
+	return true;
+}
+
+bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
+{
+	_quit = true;
+	return true;
+}
+
+<<<<<<< HEAD
 bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
 {
   restartGame();
@@ -452,6 +482,8 @@ bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
 }
 
 
+=======
+>>>>>>> bcc872fd5bef8c2904ebc41d36b6f33a09e98d90
 void MyFrameListener::keepRecord(int seconds, int discoveredBoxes){
 	
 	ofstream myfile ("records.txt", ios::app);
@@ -511,6 +543,7 @@ std::vector<std::string> MyFrameListener::getRecords(){
 	
 }
 
+<<<<<<< HEAD
 std::vector<std::string> &MyFrameListener::split(const std::string &s, char delim, std::vector<std::string> &elems) {
     std::stringstream ss(s);
     std::string item;
@@ -526,4 +559,6 @@ std::vector<std::string> MyFrameListener::split(const std::string &s, char delim
     split(s, delim, elems);
     return elems;
 }
+=======
+>>>>>>> bcc872fd5bef8c2904ebc41d36b6f33a09e98d90
 

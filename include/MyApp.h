@@ -29,6 +29,6 @@ public:
   void loadResources();
   void createScene();
   void createOverlay();
-  void createGUI();
+  void createMenu();
   void initUI();
 };
