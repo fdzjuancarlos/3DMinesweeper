@@ -136,6 +136,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
 		if (mbleft) { // Variables y codigo especifico si es izquierdo
 			mask = CUBE1 | CUBE2;
+			CEGUI::System::getSingleton().injectMouseButtonDown(CEGUI::LeftButton);
+			CEGUI::System::getSingleton().injectMouseButtonUp(CEGUI::LeftButton);
 		}
 		if (mbright) { // Variables y codigo especifico si es derecho
 			mask = CUBE1 | CUBE2;
@@ -152,6 +154,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 		if (it != result.end()) {
 			if (mbleft && !emptyBoard) {
+
 				_selectedNode = it->movable->getParentSceneNode();
 				std::string str2 = _selectedNode->getName().substr(0,10);
 
@@ -217,6 +220,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 		}
 	}
+	
+
 
 	mask = CUBE1 | CUBE2; //STAGE |
 	Ray r = setRayQuery(posx, posy, mask);
