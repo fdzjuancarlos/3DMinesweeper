@@ -1,0 +1,43 @@
+template element TextArea(MyTemplates/Textt)
+{
+    font_name Blue
+		metrics_mode pixels
+		char_height 15
+		colour 1.0 1.0 1.0    
+}
+
+
+Records
+{
+    zorder 500
+
+    container Panel(recordInfo) 
+    {
+ 		    metrics_mode pixels
+        left 400
+        top 85
+        width 500
+        height 500
+        vert_align top
+        material recordsM
+
+		    element TextArea(r0_records) : MyTemplates/Textt
+		    {
+				  top 98
+				  left 105 
+		    }
+
+		    element TextArea(r1_records) : MyTemplates/Textt
+		    {
+				  top 168
+				  left 105
+		    }
+		    
+		    element TextArea(r2_records) : MyTemplates/Textt
+		    {
+				  top 238
+				  left 105
+		    }
+	  } 
+
+}

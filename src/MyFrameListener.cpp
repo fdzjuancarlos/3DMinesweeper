@@ -98,7 +98,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	seconds = timer.getMilliseconds()/1000;
   
   //CEGUI Non-Callback
-  //CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
+  CEGUI::System::getSingleton().injectMouseMove(_mouse->getMouseState().X.rel, _mouse->getMouseState().Y.rel);
   //CEGUI::System::getSingleton().injectKeyUp(evt.key); 
 
   if(_keyboard->isKeyDown(OIS::KC_ESCAPE)) return false;   // Exit!
@@ -451,6 +451,7 @@ bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
   return true;
 }
 
+
 void MyFrameListener::keepRecord(int seconds, int discoveredBoxes){
 	
 	ofstream myfile ("records.txt", ios::app);
@@ -474,12 +475,55 @@ std::vector<std::string> MyFrameListener::getRecords(){
 		}
 	myfile.close();
 	}
+	
+	int bestRecord=999, indexRecord=-1;
+	std::vector<std::string> top;
+	for(int j=0; j<3 && !records.empty(); j++){
+		for(unsigned int i=0; i<records.size(); i++){
+			int boxes= atoi((split(records.at(i),':')[1]).c_str());
+			if(boxes<bestRecord && boxes != 999){
+				bestRecord=boxes;
+				indexRecord=i;
+			}
+				
+		}
+		if(indexRecord != -1){
+			top.push_back(records.at(indexRecord));
 
-	else cout << "Unable to open file"; 
+			OverlayElement *oe;
+			
+			std::ostringstream string;
+			string << "r" << j << "_records";
+			
+			oe = _overlayManager->getOverlayElement(string.str());
+			std::ostringstream r_string;
+			r_string << bestRecord << " cajas por abrir en " << (split(records.at(indexRecord),':')[0]) << " segundos";
+			oe->setCaption(r_string.str());
+			
+			records[indexRecord] = "0:999";
+			indexRecord=-1;
+			bestRecord=999;
+		}
+	}
+
 	
 	return records;
 	
 }
 
+std::vector<std::string> &MyFrameListener::split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
 
+
+std::vector<std::string> MyFrameListener::split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, elems);
+    return elems;
+}
 

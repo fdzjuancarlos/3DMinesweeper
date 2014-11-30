@@ -115,6 +115,9 @@ void MyApp::createOverlay() {
   _overlayManager = OverlayManager::getSingletonPtr();
   Overlay *overlay = _overlayManager->getByName("Info");
   overlay->show();
+  
+  Overlay *roverlay = _overlayManager->getByName("Records");
+  roverlay->show();
 }
 
 void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board, unsigned int size){

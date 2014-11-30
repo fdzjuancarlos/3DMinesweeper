@@ -59,6 +59,10 @@ private:
   
   bool _quit;
   float _timeSinceLastFrame;
+  
+  //string utils
+  std::vector<std::string> split(const std::string &s, char delim);
+  std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 
   CEGUI::MouseButton convertMouseButton(OIS::MouseButtonID id);
   void keepRecord(int seconds, int discoveredBoxes);
