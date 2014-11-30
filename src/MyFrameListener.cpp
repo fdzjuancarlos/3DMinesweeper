@@ -87,8 +87,14 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 	checkMatrix();
 
-	int posx = _mouse->getMouseState().X.abs;   // Posicion del puntero
-	int posy = _mouse->getMouseState().Y.abs;   //  en pixeles.
+	CEGUI::Point mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+	
+	
+//	int posx = _mouse->getMouseState().X.rel;   // Posicion del puntero
+//	int posy = _mouse->getMouseState().Y.rel;   //  en pixeles.
+	
+	int posx = mousePos.d_x;   // Posicion del puntero
+	int posy = mousePos.d_y;   //  en pixeles.
 
 	checkMatrix();
 
@@ -266,8 +272,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	oe->setCaption(stringMines.str());
 
 
-	oe = _overlayManager->getOverlayElement("cursor");
-	oe->setLeft(posx);  oe->setTop(posy);
+//	oe = _overlayManager->getOverlayElement("cursor");
+//	oe->setLeft(posx);  oe->setTop(posy);
 
 	_mouse->capture();
 	_keyboard->capture();
