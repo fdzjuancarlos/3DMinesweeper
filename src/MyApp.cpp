@@ -228,6 +228,7 @@ bool MyApp::createRecordLayout(const CEGUI::EventArgs &e){
 	//View Overlay
 	_overlayManager = OverlayManager::getSingletonPtr();
 	Overlay *roverlay = _overlayManager->getByName("Records");
+	_framelistener->getRecords();
   	roverlay->show();
 
 	return true;
