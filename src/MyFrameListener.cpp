@@ -336,6 +336,7 @@ void MyFrameListener::checkMatrix(){
 void MyFrameListener::restartGame(){
 
 	flags=0;
+	seconds=0;
 	
 	//Delete previous board
 	for ( int i = 0; i < boardSize; i += 1){

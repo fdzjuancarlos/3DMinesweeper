@@ -268,14 +268,6 @@ bool MyApp::watchCredit(const CEGUI::EventArgs &e){
 	sheet->addChildWindow(formatWin);
 	CEGUI::System::getSingleton().setGUISheet(sheet);
 
-
-	//View Overlay
-	//_overlayManager = OverlayManager::getSingletonPtr();
-	//Overlay *roverlay = _overlayManager->getByName("Records");
-	//_framelistener->getRecords();
-  	//roverlay->show();
-
-
 	return true;
 }
 

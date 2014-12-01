@@ -149,7 +149,7 @@ void Box::insertNumber (Box **s, int size){
 void Box::openEmptyBox (Box **s, int row, int col, int size){
 	
 	if(row>=0 && row < size && col>=0 && col < size){
-		if(s[row][col].getFlag() == false){
+		if(s[row][col].getFlag() == true){
 			s[row][col].setState(-1);
 			if(s[row][col].getValue() == 0){
 				if (row-1 >=0){
