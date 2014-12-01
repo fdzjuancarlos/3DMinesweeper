@@ -32,7 +32,7 @@ public:
   void createMenu();
   void createVictoryLayout();
   void createDefeatLayout();
-  bool RecordLayout(const CEGUI::EventArgs &e);
-  void createRecordLayout();
+   
+  bool createRecordLayout(const CEGUI::EventArgs &e);
   void initUI();
 };

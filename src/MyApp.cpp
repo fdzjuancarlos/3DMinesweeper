@@ -60,6 +60,7 @@ int MyApp::start() {
 	_framelistener = new MyFrameListener(window, cam, _overlayManager, _sceneManager, board);
 	_root->addFrameListener(_framelistener);
 
+	renderer = &CEGUI::OgreRenderer::bootstrapSystem();
 	createMenu();
 
 	_root->startRendering();
@@ -153,7 +154,7 @@ void MyApp::createBoard(Ogre::SceneManager* _sceneManager,Ogre::SceneNode* board
 void MyApp::createMenu(){
 	//CEGUI
 
-	renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	//renderer = &CEGUI::OgreRenderer::bootstrapSystem();
 	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
 	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
 	CEGUI::Font::setDefaultResourceGroup("Fonts");
@@ -193,7 +194,7 @@ void MyApp::createMenu(){
 	sheet->addChildWindow(formatWin);
 	CEGUI::System::getSingleton().setGUISheet(sheet);
 }
-/*
+
 void MyApp::createVictoryLayout(){
 	//CEGUI
 
@@ -223,7 +224,7 @@ void MyApp::createVictoryLayout(){
 
 	//Record Window
 	CEGUI::Window* recordButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/RecordButton");
-	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::watchScores, _framelistener));
+	recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyApp::createRecordLayout, this));
 
 	//Exit Window
 	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
@@ -268,7 +269,7 @@ void MyApp::createDefeatLayout(){
 	//Attaching buttons
 	sheet->addChildWindow(formatWin);
 	CEGUI::System::getSingleton().setGUISheet(sheet);
-}*/
+}
 
 bool MyApp::createRecordLayout(const CEGUI::EventArgs &e){
 	//CEGUI
@@ -293,11 +294,11 @@ bool MyApp::createRecordLayout(const CEGUI::EventArgs &e){
 	CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("recordWin.layout");
 
 	//Setting Text!
-	CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']Puntuaciones");
+	//CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']Puntuaciones");
 
 	//Back Window
 	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/BackButton");
-	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::back, _framelistener));
+	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyApp::back, this));
 	
 	//Attaching buttons
 	sheet->addChildWindow(formatWin);
@@ -309,4 +310,18 @@ bool MyApp::createRecordLayout(const CEGUI::EventArgs &e){
   	roverlay->show();
 
 	return true;
+}
+
+bool MyApp::back(const CEGUI::EventArgs &e)
+{
+	CEGUI::WindowManager::getSingletonPtr()->destroyAllWindows();
+
+	_overlayManager = OverlayManager::getSingletonPtr();
+	Overlay *roverlay = _overlayManager->getByName("Records");
+	roverlay->hide();
+	
+	//renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	createMenu();
+		
+  	return true;
 }

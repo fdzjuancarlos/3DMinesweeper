@@ -75,7 +75,5 @@ public:
   void checkMatrix();  
   bool quit(const CEGUI::EventArgs &e);
   bool startGame(const CEGUI::EventArgs &e);
-  bool watchScores(const CEGUI::EventArgs &e);
   bool watchCredits(const CEGUI::EventArgs &e);
-  bool back(const CEGUI::EventArgs &e);
 };

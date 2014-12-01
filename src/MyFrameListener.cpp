@@ -193,6 +193,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 						//mine::Box exec = mine::Box();
 			    			if(board[i][j].getValue() == -1){
 			      				executionBox->gameOver(board, i, j, boardSize);
+							
 			      				//restartGame();  //Descomentar para probar
 				    		}else{
 							executionBox->openEmptyBox(board, i, j, boardSize);
@@ -292,21 +293,21 @@ void MyFrameListener::checkMatrix(){
 				Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
 			
 				std::ostringstream stringStream2;
-			if(board[i][j].getState() == 0){
-				if(board[i][j].getFlag() == true){
-					stringStream2 << "flag";
-		    		}else{
-		    			stringStream2 << "undiscovered";
-		    		}
-			}else if(board[i][j].getValue() >=0){
-				stringStream2 << "cube_" << board[i][j].getValue();
-				matrixToWin--;
-		  	}else{
-				stringStream2 << "mine";
-			}
-			if(board[i][j].getNoFlag() == true){
-		    		stringStream2 << "noflag";
-			}
+				if(board[i][j].getState() == 0){
+					if(board[i][j].getFlag() == true){
+						stringStream2 << "flag";
+			    		}else{
+			    			stringStream2 << "undiscovered";
+			    		}
+				}else if(board[i][j].getValue() >=0){
+					stringStream2 << "cube_" << board[i][j].getValue();
+					matrixToWin--;
+			  	}else{
+					stringStream2 << "mine";
+				}
+				if(board[i][j].getNoFlag() == true){
+			    		stringStream2 << "noflag";
+				}
 			std::string materialName = stringStream2.str();
 			entity->getSubEntity(0)->setMaterialName(materialName);
 			}	
@@ -447,30 +448,12 @@ bool MyFrameListener::startGame(const CEGUI::EventArgs &e)
 	return true;
 }
 
-/*bool MyFrameListener::watchScores(const CEGUI::EventArgs &e)
-{
-	CEGUI::WindowManager::getSingletonPtr()->destroyAllWindows();
-
-	//View Overlay
-	_overlayManager = OverlayManager::getSingletonPtr();
-	Overlay *roverlay = _overlayManager->getByName("Records");
-  	roverlay->show();
-	
-  	return true;
-}*/
 
 bool MyFrameListener::watchCredits(const CEGUI::EventArgs &e)
 {
 
   	return true;
 }
-
-bool MyFrameListener::back(const CEGUI::EventArgs &e)
-{
-	
-  	return true;
-}
-
 
 
 void MyFrameListener::keepRecord(int seconds, int discoveredBoxes){

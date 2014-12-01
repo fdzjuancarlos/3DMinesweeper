@@ -34,5 +34,6 @@ public:
   void createDefeatLayout();
    
   bool createRecordLayout(const CEGUI::EventArgs &e);
+  bool back(const CEGUI::EventArgs &e);
   void initUI();
 };
