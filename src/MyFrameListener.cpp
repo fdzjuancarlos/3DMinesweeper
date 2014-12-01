@@ -44,6 +44,8 @@ MyFrameListener::MyFrameListener(RenderWindow* win, Camera* cam, OverlayManager 
 	s_previousMaterial = new std::string("");
 	s_previousCube = new std::string("");
 	executionBox = new mines::Box();
+	
+	clickDelay = Ogre::Timer();
 
 	//Game Logic Variables
 	initialized=false;
@@ -140,7 +142,8 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 	uint32 mask;
 
 	if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-		if (mbleft) { // Variables y codigo especifico si es izquierdo
+		if (mbleft && clickDelay.getMilliseconds() > 500) { // Variables y codigo especifico si es izquierdo
+			clickDelay = Ogre::Timer();
 			mask = CUBE1 | CUBE2;
 			CEGUI::System::getSingleton().injectMouseButtonDown(CEGUI::LeftButton);
 			CEGUI::System::getSingleton().injectMouseButtonUp(CEGUI::LeftButton);
