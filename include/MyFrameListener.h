@@ -75,11 +75,8 @@ public:
   void checkMatrix();  
   bool quit(const CEGUI::EventArgs &e);
   bool startGame(const CEGUI::EventArgs &e);
-<<<<<<< HEAD
   void createVictoryLayout();
   void createDefeatLayout();
-=======
   bool watchCredits(const CEGUI::EventArgs &e);
   std::vector<std::string> getRecords();
->>>>>>> a00b75890b43ad3d8a4b3d1220e471573ea198d5
 };
