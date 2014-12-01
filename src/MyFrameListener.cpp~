@@ -141,9 +141,9 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 
 	uint32 mask;
 
-	if (mbleft || mbright) {  // Boton izquierdo o derecho -------------
-		if (mbleft && clickDelay.getMilliseconds() > 2000) { // Variables y codigo especifico si es izquierdo
-			clickDelay = Ogre::Timer();
+	if ((mbleft || mbright) && clickDelay.getMilliseconds() > 500) {  // Boton izquierdo o derecho -------------
+		clickDelay = Ogre::Timer();
+		if (mbleft ) { // Variables y codigo especifico si es izquierdo
 			mask = CUBE1 | CUBE2;
 			CEGUI::System::getSingleton().injectMouseButtonDown(CEGUI::LeftButton);
 			CEGUI::System::getSingleton().injectMouseButtonUp(CEGUI::LeftButton);

@@ -3,20 +3,20 @@
   <Window Type="TaharezLook/FrameWindow" Name="FormatWin">
     <Property Name="Text" Value="Derrota"/>
     <Property Name="TitlebarEnabled" Value="True"/>
-    <Property Name="UnifiedAreaRect" Value="{{0.15,0},{0.40,0},{0.75,0},{0.60,0}}"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.40,0},{0.75,0},{0.60,0}}"/>
     <!-- Static Text -->
     <Window Type="TaharezLook/StaticText" Name="FormatWin/Text1">
-      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.10,0},{0.90,0},{0.30,0}}"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.10,0},{0.90,0},{0.40,0}}"/>
     </Window>
     <!-- Game Button -->
     <Window Type="TaharezLook/Button" Name="FormatWin/GameButton">
       <Property Name="Text" Value="Juego Nuevo" />
-      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.40,0},{0.40,0},{0.70,0}}"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.50,0},{0.40,0},{0.80,0}}"/>
     </Window>
     <!-- Exit Button -->
     <Window Type="TaharezLook/Button" Name="FormatWin/ExitButton">
       <Property Name="Text" Value="Cerrar" />
-      <Property Name="UnifiedAreaRect" Value="{{0.60,0},{0.40,0},{0.90,0},{0.70,0}}"/>
+      <Property Name="UnifiedAreaRect" Value="{{0.60,0},{0.50,0},{0.90,0},{0.80,0}}"/>
     </Window>
   </Window>
 </GUILayout>

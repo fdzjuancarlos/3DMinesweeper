@@ -3,7 +3,7 @@
   <Window Type="TaharezLook/FrameWindow" Name="FormatWin">
     <Property Name="Text" Value="Derrota"/>
     <Property Name="TitlebarEnabled" Value="True"/>
-    <Property Name="UnifiedAreaRect" Value="{{0.15,0},{0.40,0},{0.75,0},{0.60,0}}"/>
+    <Property Name="UnifiedAreaRect" Value="{{0.25,0},{0.35,0},{0.75,0},{0.55,0}}"/>
     <!-- Static Text -->
     <Window Type="TaharezLook/StaticText" Name="FormatWin/Text1">
       <Property Name="UnifiedAreaRect" Value="{{0.1,0},{0.10,0},{0.90,0},{0.40,0}}"/>
