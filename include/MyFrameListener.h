@@ -66,7 +66,7 @@ private:
 
   CEGUI::MouseButton convertMouseButton(OIS::MouseButtonID id);
   void keepRecord(int seconds, int discoveredBoxes);
-  std::vector<std::string> getRecords();
+
 public:
   MyFrameListener(RenderWindow* win, Camera* cam, 
 		  OverlayManager* om, SceneManager* sm, mines::Box** n_board);
@@ -76,4 +76,5 @@ public:
   bool quit(const CEGUI::EventArgs &e);
   bool startGame(const CEGUI::EventArgs &e);
   bool watchCredits(const CEGUI::EventArgs &e);
+  std::vector<std::string> getRecords();
 };
