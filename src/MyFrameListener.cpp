@@ -298,7 +298,9 @@ void MyFrameListener::checkMatrix(){
 				Entity* entity = static_cast<Entity*>(_sceneManager->getSceneNode(name)->getAttachedObject(0)); 
 			
 				std::ostringstream stringStream2;
-				if(board[i][j].getState() == 0){
+				if(board[i][j].getNoFlag() == true){
+			    		stringStream2 << "noflag";
+				}else if(board[i][j].getState() == 0){
 					if(board[i][j].getFlag() == true){
 						stringStream2 << "flag";
 			    		}else{
@@ -309,9 +311,6 @@ void MyFrameListener::checkMatrix(){
 					matrixToWin--;
 			  	}else{
 					stringStream2 << "mine";
-				}
-				if(board[i][j].getNoFlag() == true){
-			    		stringStream2 << "noflag";
 				}
 			std::string materialName = stringStream2.str();
 			entity->getSubEntity(0)->setMaterialName(materialName);
