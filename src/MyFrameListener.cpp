@@ -193,6 +193,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 						//mine::Box exec = mine::Box();
 			    			if(board[i][j].getValue() == -1){
 			      				executionBox->gameOver(board, i, j, boardSize);
+			      				keepRecord(seconds, boxesToWin);
 							
 			      				//restartGame();  //Descomentar para probar
 				    		}else{
@@ -314,10 +315,13 @@ void MyFrameListener::checkMatrix(){
 		}
 	}
 	
-	if(matrixToWin == 0 )
-		std::cout << "tenemos ganador" << std::endl;
-		//FIXME condicion de victoria a implementar
 	boxesToWin=matrixToWin;
+	if(matrixToWin == 0 ){
+		std::cout << "tenemos ganador" << std::endl;
+		keepRecord(seconds, boxesToWin);
+		restartGame();
+	}
+
 }
 
 void MyFrameListener::restartGame(){
