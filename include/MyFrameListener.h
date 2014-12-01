@@ -35,6 +35,7 @@ private:
   mines::Box* executionBox;
   mines::Box** board;
   Ogre::Timer timer;
+  Ogre::Timer clickDelay;
   unsigned long seconds;
   int boardSize;
   int flags;
