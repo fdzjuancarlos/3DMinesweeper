@@ -193,6 +193,7 @@ bool MyFrameListener::frameStarted(const FrameEvent& evt) {
 						//mine::Box exec = mine::Box();
 			    			if(board[i][j].getValue() == -1){
 			      				executionBox->gameOver(board, i, j, boardSize);
+							createDefeatLayout();
 							
 			      				//restartGame();  //Descomentar para probar
 				    		}else{
@@ -314,9 +315,11 @@ void MyFrameListener::checkMatrix(){
 		}
 	}
 	
-	if(matrixToWin == 0 )
+	if(matrixToWin == 0 ){
 		std::cout << "tenemos ganador" << std::endl;
 		//FIXME condicion de victoria a implementar
+		createVictoryLayout();
+	}
 	boxesToWin=matrixToWin;
 }
 
@@ -521,4 +524,84 @@ std::vector<std::string> MyFrameListener::split(const std::string &s, char delim
     std::vector<std::string> elems;
     split(s, delim, elems);
     return elems;
+}
+
+void MyFrameListener::createVictoryLayout(){
+	//CEGUI
+
+	CEGUI::WindowManager::getSingletonPtr()->destroyAllWindows();
+
+	//renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
+	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+
+	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
+	CEGUI::System::getSingleton().setDefaultFont("DejaVuSans-10");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook","MouseArrow");
+
+	//Sheet
+	CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+
+	//Config Window
+	CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("defeatWin.layout");
+
+	//Setting Text!
+	CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']¡Enhorabuena, has ganado!");
+
+	//Game Window
+	CEGUI::Window* gameButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/GameButton");
+	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame, this));
+
+	//Record Window
+	//CEGUI::Window* recordButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/RecordButton");
+	//recordButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyApp::createRecordLayout, this));
+
+	//Exit Window
+	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
+	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::quit, this));
+	
+	//Attaching buttons
+	sheet->addChildWindow(formatWin);
+	CEGUI::System::getSingleton().setGUISheet(sheet);
+}
+
+void MyFrameListener::createDefeatLayout(){
+	//CEGUI
+
+	CEGUI::WindowManager::getSingletonPtr()->destroyAllWindows();
+
+	//renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+	CEGUI::Imageset::setDefaultResourceGroup("Imagesets");
+	CEGUI::Font::setDefaultResourceGroup("Fonts");
+	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+
+	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
+	CEGUI::System::getSingleton().setDefaultFont("DejaVuSans-10");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook","MouseArrow");
+
+	//Sheet
+	CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+
+	//Config Window
+	CEGUI::Window* formatWin = CEGUI::WindowManager::getSingleton().loadWindowLayout("defeatWin.layout");
+
+	//Setting Text!
+	CEGUI::WindowManager::getSingleton().getWindow("FormatWin/Text1")->setText(" [vert-alignment='centre']¡Has perdido!");
+
+	//Game Window
+	CEGUI::Window* gameButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/GameButton");
+	gameButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::startGame, this));
+
+	//Exit Window
+	CEGUI::Window* exitButton = CEGUI::WindowManager::getSingleton().getWindow("FormatWin/ExitButton");
+	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MyFrameListener::quit, this));
+	
+	//Attaching buttons
+	sheet->addChildWindow(formatWin);
+	CEGUI::System::getSingleton().setGUISheet(sheet);
 }
